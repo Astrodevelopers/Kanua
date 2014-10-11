@@ -1,0 +1,9 @@
+{
+    "displayName" : "Solicitud",
+    "name" : "solicitud",
+    "templateName" : "solicitud",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/KanuaUML12.web/webresources/Solicitud",
+    "el" : "#main"
+}

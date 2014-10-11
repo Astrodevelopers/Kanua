@@ -1,0 +1,48 @@
+<script type="text/template" id="equipoList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Email</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(equipos, function(equipo) { %>
+    <tr>
+		<td><%= htmlEncode(equipo.getDisplay('name')) %></td>
+		<td><%= htmlEncode(equipo.getDisplay('email')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-equipo-edit',{id:<%= equipo.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-equipo-delete',{id:<%= equipo.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="equipo">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-equipoForm">
+    <% if(equipo.id) {%>
+    <input type="hidden" name="id" value="<%= equipo.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= equipo.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="email">Email</label>
+    	<input type="text" class="form-control" id="email" name="email" placeholder="Enter value" value="<%= equipo.get('email') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 

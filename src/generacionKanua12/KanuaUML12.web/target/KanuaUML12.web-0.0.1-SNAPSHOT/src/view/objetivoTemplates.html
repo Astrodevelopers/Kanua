@@ -1,0 +1,48 @@
+<script type="text/template" id="objetivoList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Descripcion</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(objetivos, function(objetivo) { %>
+    <tr>
+		<td><%= htmlEncode(objetivo.getDisplay('name')) %></td>
+		<td><%= htmlEncode(objetivo.getDisplay('descripcion')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-objetivo-edit',{id:<%= objetivo.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-objetivo-delete',{id:<%= objetivo.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="objetivo">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-objetivoForm">
+    <% if(objetivo.id) {%>
+    <input type="hidden" name="id" value="<%= objetivo.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= objetivo.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="descripcion">Descripcion</label>
+    	<input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Enter value" value="<%= objetivo.get('descripcion') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 

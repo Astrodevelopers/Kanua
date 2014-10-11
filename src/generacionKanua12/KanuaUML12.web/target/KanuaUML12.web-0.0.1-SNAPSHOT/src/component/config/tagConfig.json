@@ -1,0 +1,9 @@
+{
+    "displayName" : "Tag",
+    "name" : "tag",
+    "templateName" : "tag",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/KanuaUML12.web/webresources/Tag",
+    "el" : "#main"
+}

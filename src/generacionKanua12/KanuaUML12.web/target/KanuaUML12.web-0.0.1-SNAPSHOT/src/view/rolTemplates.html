@@ -1,0 +1,48 @@
+<script type="text/template" id="rolList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Informacion</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(rols, function(rol) { %>
+    <tr>
+		<td><%= htmlEncode(rol.getDisplay('name')) %></td>
+		<td><%= htmlEncode(rol.getDisplay('informacion')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-rol-edit',{id:<%= rol.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-rol-delete',{id:<%= rol.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="rol">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-rolForm">
+    <% if(rol.id) {%>
+    <input type="hidden" name="id" value="<%= rol.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= rol.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="informacion">Informacion</label>
+    	<input type="text" class="form-control" id="informacion" name="informacion" placeholder="Enter value" value="<%= rol.get('informacion') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 

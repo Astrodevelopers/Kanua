@@ -1,0 +1,11 @@
+{
+    "displayName" : "Taller",
+    "name" : "taller",
+    "templateName" : "taller",
+    "url" : "taller.html",
+    "server": "localhost:8080",
+    "server": "localhost:8080",
+    "context": "/KanuaUML12.web/webresources/TallerMaster",
+    
+    "el" : "#main"
+}

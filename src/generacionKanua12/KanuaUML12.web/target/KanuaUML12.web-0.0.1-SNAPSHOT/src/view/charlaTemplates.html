@@ -1,0 +1,86 @@
+<script type="text/template" id="charlaList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Titulo</th>
+		 <th>Informacion</th>
+		 <th>Link</th>
+		 <th>Fecha Evento</th>
+		 <th>Imagen</th>
+		 <th>Publicacion</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(charlas, function(charla) { %>
+    <tr>
+		<td><%= htmlEncode(charla.getDisplay('name')) %></td>
+		<td><%= htmlEncode(charla.getDisplay('titulo')) %></td>
+		<td><%= htmlEncode(charla.getDisplay('informacion')) %></td>
+		<td><%= htmlEncode(charla.getDisplay('link')) %></td>
+		<td><%= htmlEncode(charla.getDisplay('fechaEvento')) %></td>
+		<td><%= htmlEncode(charla.getDisplay('imagen')) %></td>
+		<td><%= htmlEncode(charla.getDisplay('publicacion')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-charla-edit',{id:<%= charla.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-charla-delete',{id:<%= charla.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="charla">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-charlaForm">
+    <% if(charla.id) {%>
+    <input type="hidden" name="id" value="<%= charla.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= charla.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="titulo">Titulo</label>
+    	<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Enter value" value="<%= charla.get('titulo') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="informacion">Informacion</label>
+    	<input type="text" class="form-control" id="informacion" name="informacion" placeholder="Enter value" value="<%= charla.get('informacion') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="link">Link</label>
+    	<input type="text" class="form-control" id="link" name="link" placeholder="Enter value" value="<%= charla.get('link') %>"/>	
+		</div>
+		<div class="form-group" >
+			<label for="fechaEvento">Fecha Evento</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="fechaEvento"  name="fechaEvento" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#fechaEvento').datepicker({autoclose:true});
+        	$('#fechaEvento').datepicker('setDate',App.Utils.Converter.date.toDate("<%= charla.get('fechaEvento') %>"));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+		<div class="form-group" >
+		<label for="imagen">Imagen</label>
+    	<input type="text" class="form-control" id="imagen" name="imagen" placeholder="Enter value" value="<%= charla.get('imagen') %>"/>	
+		</div>
+		<div class="form-group" >
+			<label for="publicacion">Publicacion</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="publicacion"  name="publicacion" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#publicacion').datepicker({autoclose:true});
+        	$('#publicacion').datepicker('setDate',App.Utils.Converter.date.toDate("<%= charla.get('publicacion') %>"));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+    </form>
+    </div>
+</script> 

@@ -1,0 +1,86 @@
+<script type="text/template" id="tallerList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Informacion</th>
+		 <th>Imagen</th>
+		 <th>Titulo</th>
+		 <th>Tema</th>
+		 <th>Fecha Evento</th>
+		 <th>Publicacion</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(tallers, function(taller) { %>
+    <tr>
+		<td><%= htmlEncode(taller.getDisplay('name')) %></td>
+		<td><%= htmlEncode(taller.getDisplay('informacion')) %></td>
+		<td><%= htmlEncode(taller.getDisplay('imagen')) %></td>
+		<td><%= htmlEncode(taller.getDisplay('titulo')) %></td>
+		<td><%= htmlEncode(taller.getDisplay('tema')) %></td>
+		<td><%= htmlEncode(taller.getDisplay('fechaEvento')) %></td>
+		<td><%= htmlEncode(taller.getDisplay('publicacion')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-taller-edit',{id:<%= taller.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-taller-delete',{id:<%= taller.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="taller">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-tallerForm">
+    <% if(taller.id) {%>
+    <input type="hidden" name="id" value="<%= taller.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= taller.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="informacion">Informacion</label>
+    	<input type="text" class="form-control" id="informacion" name="informacion" placeholder="Enter value" value="<%= taller.get('informacion') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="imagen">Imagen</label>
+    	<input type="text" class="form-control" id="imagen" name="imagen" placeholder="Enter value" value="<%= taller.get('imagen') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="titulo">Titulo</label>
+    	<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Enter value" value="<%= taller.get('titulo') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="tema">Tema</label>
+    	<input type="text" class="form-control" id="tema" name="tema" placeholder="Enter value" value="<%= taller.get('tema') %>"/>	
+		</div>
+		<div class="form-group" >
+			<label for="fechaEvento">Fecha Evento</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="fechaEvento"  name="fechaEvento" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#fechaEvento').datepicker({autoclose:true});
+        	$('#fechaEvento').datepicker('setDate',App.Utils.Converter.date.toDate("<%= taller.get('fechaEvento') %>"));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+		<div class="form-group" >
+			<label for="publicacion">Publicacion</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="publicacion"  name="publicacion" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#publicacion').datepicker({autoclose:true});
+        	$('#publicacion').datepicker('setDate',App.Utils.Converter.date.toDate("<%= taller.get('publicacion') %>"));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+    </form>
+    </div>
+</script> 

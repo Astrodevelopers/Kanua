@@ -1,0 +1,90 @@
+<script type="text/template" id="proyectoList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Tema</th>
+		 <th>Descripcion</th>
+		 <th>Estado</th>
+		 <th>Imagen</th>
+		 <th>Demo</th>
+		 <th>Lema</th>
+		 <th>Equipo_proyecto Id</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(proyectos, function(proyecto) { %>
+    <tr>
+		<td><%= htmlEncode(proyecto.getDisplay('name')) %></td>
+		<td><%= htmlEncode(proyecto.getDisplay('tema')) %></td>
+		<td><%= htmlEncode(proyecto.getDisplay('descripcion')) %></td>
+		<td><%= htmlEncode(proyecto.getDisplay('estado')) %></td>
+		<td><%= htmlEncode(proyecto.getDisplay('imagen')) %></td>
+		<td><%= htmlEncode(proyecto.getDisplay('demo')) %></td>
+		<td><%= htmlEncode(proyecto.getDisplay('lema')) %></td>
+		<td><%= htmlEncode(proyecto.getDisplay('equipo_proyectoId')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-proyecto-edit',{id:<%= proyecto.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-proyecto-delete',{id:<%= proyecto.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="proyecto">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-proyectoForm">
+    <% if(proyecto.id) {%>
+    <input type="hidden" name="id" value="<%= proyecto.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= proyecto.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="tema">Tema</label>
+    	<input type="text" class="form-control" id="tema" name="tema" placeholder="Enter value" value="<%= proyecto.get('tema') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="descripcion">Descripcion</label>
+    	<input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Enter value" value="<%= proyecto.get('descripcion') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="estado">Estado</label>
+    	<input type="text" class="form-control" id="estado" name="estado" placeholder="Enter value" value="<%= proyecto.get('estado') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="imagen">Imagen</label>
+    	<input type="text" class="form-control" id="imagen" name="imagen" placeholder="Enter value" value="<%= proyecto.get('imagen') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="demo">Demo</label>
+    	<input type="text" class="form-control" id="demo" name="demo" placeholder="Enter value" value="<%= proyecto.get('demo') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="lema">Lema</label>
+    	<input type="text" class="form-control" id="lema" name="lema" placeholder="Enter value" value="<%= proyecto.get('lema') %>"/>	
+		</div>
+		<div class="form-group" >
+ 
+			<label for="equipo_proyectoidId">Equipo_proyecto Id</label> 
+            <select class="form-control" id="equipo_proyectoId" name="equipo_proyectoId">
+			  <option value="">None</option>
+            <% equipo_proyecto.each(function(equipo_proyectoid) { %> 
+              <option value="<%=equipo_proyectoid.get('id')%>" <% if(proyecto.get('equipo_proyectoId')==equipo_proyectoid.get('id')) {%>selected<%}%> ><%=equipo_proyectoid.get('name')%></option>
+            <% }); %>                
+            </select>  
+		</div>
+    </form>
+    </div>
+</script> 

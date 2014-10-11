@@ -1,0 +1,78 @@
+<script type="text/template" id="solicitudList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Email Persona</th>
+		 <th>Hoja De Vida</th>
+		 <th>Comentario</th>
+		 <th>Nombre Apellido</th>
+		 <th>Rol_solicitud Id</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(solicituds, function(solicitud) { %>
+    <tr>
+		<td><%= htmlEncode(solicitud.getDisplay('name')) %></td>
+		<td><%= htmlEncode(solicitud.getDisplay('emailPersona')) %></td>
+		<td><%= htmlEncode(solicitud.getDisplay('hojaDeVida')) %></td>
+		<td><%= htmlEncode(solicitud.getDisplay('comentario')) %></td>
+		<td><%= htmlEncode(solicitud.getDisplay('nombreApellido')) %></td>
+		<td><%= htmlEncode(solicitud.getDisplay('rol_solicitudId')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-solicitud-edit',{id:<%= solicitud.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-solicitud-delete',{id:<%= solicitud.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="solicitud">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-solicitudForm">
+    <% if(solicitud.id) {%>
+    <input type="hidden" name="id" value="<%= solicitud.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= solicitud.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="emailPersona">Email Persona</label>
+    	<input type="text" class="form-control" id="emailPersona" name="emailPersona" placeholder="Enter value" value="<%= solicitud.get('emailPersona') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="hojaDeVida">Hoja De Vida</label>
+    	<input type="text" class="form-control" id="hojaDeVida" name="hojaDeVida" placeholder="Enter value" value="<%= solicitud.get('hojaDeVida') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="comentario">Comentario</label>
+    	<input type="text" class="form-control" id="comentario" name="comentario" placeholder="Enter value" value="<%= solicitud.get('comentario') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="nombreApellido">Nombre Apellido</label>
+    	<input type="text" class="form-control" id="nombreApellido" name="nombreApellido" placeholder="Enter value" value="<%= solicitud.get('nombreApellido') %>"/>	
+		</div>
+		<div class="form-group" >
+ 
+			<label for="rol_solicitudidId">Rol_solicitud Id</label> 
+            <select class="form-control" id="rol_solicitudId" name="rol_solicitudId">
+			  <option value="">None</option>
+            <% rol_solicitud.each(function(rol_solicitudid) { %> 
+              <option value="<%=rol_solicitudid.get('id')%>" <% if(solicitud.get('rol_solicitudId')==rol_solicitudid.get('id')) {%>selected<%}%> ><%=rol_solicitudid.get('name')%></option>
+            <% }); %>                
+            </select>  
+		</div>
+    </form>
+    </div>
+</script> 

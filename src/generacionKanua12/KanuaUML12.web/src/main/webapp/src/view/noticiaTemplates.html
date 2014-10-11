@@ -1,0 +1,76 @@
+<script type="text/template" id="noticiaList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Imagen</th>
+		 <th>Titulo</th>
+		 <th>Fecha</th>
+		 <th>Descripcion</th>
+		 <th>Tema</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(noticias, function(noticia) { %>
+    <tr>
+		<td><%= htmlEncode(noticia.getDisplay('name')) %></td>
+		<td><%= htmlEncode(noticia.getDisplay('imagen')) %></td>
+		<td><%= htmlEncode(noticia.getDisplay('titulo')) %></td>
+		<td><%= htmlEncode(noticia.getDisplay('fecha')) %></td>
+		<td><%= htmlEncode(noticia.getDisplay('descripcion')) %></td>
+		<td><%= htmlEncode(noticia.getDisplay('tema')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-noticia-edit',{id:<%= noticia.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-noticia-delete',{id:<%= noticia.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="noticia">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-noticiaForm">
+    <% if(noticia.id) {%>
+    <input type="hidden" name="id" value="<%= noticia.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= noticia.get('name') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="imagen">Imagen</label>
+    	<input type="text" class="form-control" id="imagen" name="imagen" placeholder="Enter value" value="<%= noticia.get('imagen') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="titulo">Titulo</label>
+    	<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Enter value" value="<%= noticia.get('titulo') %>"/>	
+		</div>
+		<div class="form-group" >
+			<label for="fecha">Fecha</label>
+    		<input type="text" data-converter="date" data-date-format="dd/mm/yyyy" class="form-control" id="fecha"  name="fecha" placeholder="Enter value" />
+    		<%= '<scr'+'ipt>' %>
+        	$('#fecha').datepicker({autoclose:true});
+        	$('#fecha').datepicker('setDate',App.Utils.Converter.date.toDate("<%= noticia.get('fecha') %>"));
+    		<%= '</scr'+'ipt>' %>
+		</div>
+		<div class="form-group" >
+		<label for="descripcion">Descripcion</label>
+    	<input type="text" class="form-control" id="descripcion" name="descripcion" placeholder="Enter value" value="<%= noticia.get('descripcion') %>"/>	
+		</div>
+		<div class="form-group" >
+		<label for="tema">Tema</label>
+    	<input type="text" class="form-control" id="tema" name="tema" placeholder="Enter value" value="<%= noticia.get('tema') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 

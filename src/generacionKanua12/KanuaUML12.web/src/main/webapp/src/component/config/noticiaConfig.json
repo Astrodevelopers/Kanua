@@ -1,0 +1,9 @@
+{
+    "displayName" : "Noticia",
+    "name" : "noticia",
+    "templateName" : "noticia",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/KanuaUML12.web/webresources/Noticia",
+    "el" : "#main"
+}

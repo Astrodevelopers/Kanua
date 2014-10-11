@@ -1,0 +1,9 @@
+{
+    "displayName" : "Charla",
+    "name" : "charla",
+    "templateName" : "charla",
+    "url" : "user.html",
+    "server": "localhost:8080",
+    "context": "/KanuaUML12.web/webresources/Charla",
+    "el" : "#main"
+}

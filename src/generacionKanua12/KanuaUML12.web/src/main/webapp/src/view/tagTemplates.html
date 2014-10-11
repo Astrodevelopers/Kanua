@@ -1,0 +1,42 @@
+<script type="text/template" id="tagList">
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(tags, function(tag) { %>
+    <tr>
+		<td><%= htmlEncode(tag.getDisplay('name')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-tag-edit',{id:<%= tag.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-tag-delete',{id:<%= tag.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
+    </div>
+</script>
+
+<script type="text/template" id="tag">
+    <div class="form-group">
+    <form role="form" id="<%= componentId %>-tagForm">
+    <% if(tag.id) {%>
+    <input type="hidden" name="id" value="<%= tag.id %>"/>
+    <% }%>
+		<div class="form-group" >
+		<label for="name">Name</label>
+    	<input type="text" class="form-control" id="name" name="name" placeholder="Enter value" value="<%= tag.get('name') %>"/>	
+		</div>
+    </form>
+    </div>
+</script> 
