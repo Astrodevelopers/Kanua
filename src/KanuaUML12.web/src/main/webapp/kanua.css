@@ -13,3 +13,27 @@
    background-color: #FAF0E6;
    border-bottom: #338585 solid 1px;
 }
+
+.celda-proyecto {
+  padding: 10px;
+  width: 220px;
+}
+
+.imagen-proyecto {
+  width: 200px;
+  height: 150px;
+  border: #D0D0D0 solid 1px;
+  cursor: pointer;
+}
+
+.nombre-proyecto {
+  height: 40px;
+  overflow: hidden;
+  line-height: 19px;
+  font-size: 19px;
+  font-weight: bold;
+  color: #338585;
+  text-align: center;
+  margin-top: 4px;
+  cursor: pointer;
+}
