@@ -1,44 +1,26 @@
+<link rel="stylesheet" href="kanua.css">
 <script type="text/template" id="proyectoList">
-    <div class="panel panel-default">
-    <!-- Default panel contents -->
-    <table class="table striped">
-    <thead>
-    <tr>
-		 <th>Name</th>
-		 <th>Tema</th>
-		 <th>Descripcion</th>
-		 <th>Estado</th>
-		 <th>Imagen</th>
-		 <th>Demo</th>
-		 <th>Lema</th>
-		 <th>Equipo_proyecto Id</th>
-    <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% _.each(proyectos, function(proyecto) { %>
-    <tr>
-		<td><%= htmlEncode(proyecto.getDisplay('name')) %></td>
-		<td><%= htmlEncode(proyecto.getDisplay('tema')) %></td>
-		<td><%= htmlEncode(proyecto.getDisplay('descripcion')) %></td>
-		<td><%= htmlEncode(proyecto.getDisplay('estado')) %></td>
-		<td><%= htmlEncode(proyecto.getDisplay('imagen')) %></td>
-		<td><%= htmlEncode(proyecto.getDisplay('demo')) %></td>
-		<td><%= htmlEncode(proyecto.getDisplay('lema')) %></td>
-		<td><%= htmlEncode(proyecto.getDisplay('equipo_proyectoId')) %></td>
-    <td>
-    <% if(showEdit) {%>
-    <a onclick="Backbone.trigger('<%= componentId %>-proyecto-edit',{id:<%= proyecto.id %>}); return false" >Edit</a> |
-	<% } %> 
-	<% if(showDelete) {%>
-    <a onclick="Backbone.trigger('<%= componentId %>-proyecto-delete',{id:<%= proyecto.id %>}); return false" >Delete</a> 
-	<% } %>    
-	</td>
-    </tr>
-    <% }); %>
-    </tbody>
-    </table>
-    </div>
+    <!-- Esta parte pone la malla de proyectos -->
+    <div class="row">
+        <% _.each(proyectos, function(proyecto) { %>
+            <div class="col-xs-1 celda-proyecto">
+            <!-- Aca se ponen las imagenes y nombres las cuales mandan un evento si se les hace click -->
+                <img onclick="Backbone.trigger('<%= componentId %>-proyecto-mostrar-info',{id:<%= proyecto.id %>}); return false" class="imagen-proyecto" src="<%= htmlEncode(proyecto.getDisplay('imagen')) %>"/>
+                <div onclick="Backbone.trigger('<%= componentId %>-proyecto-mostrar-info',{id:<%= proyecto.id %>}); return false" class="nombre-proyecto">
+                    <%= htmlEncode(proyecto.getDisplay('name')) %>
+                </div>
+                <center>
+                    <% if(showEdit) {%>
+                        <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-proyecto-edit',{id:<%= proyecto.id %>}); return false" >Editar</a>
+                    <% } %> 
+                    <% if(showDelete) {%>
+                        <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-proyecto-delete',{id:<%= proyecto.id %>}); return false" >Eliminar</a> 
+                    <% } %>  
+                </center>
+            </div>
+        <% }); %>
+    </div>        
+
 </script>
 
 <script type="text/template" id="proyecto">
@@ -88,3 +70,16 @@
     </form>
     </div>
 </script> 
+
+
+<script type="text/template" id="proyecto-mostrar-info">
+    <!-- Esta parte es lo que va a mostrar un proyecto, ya cuando alguien hizo click para verlo -->
+    <%= proyecto.get('name') %>
+    <%= proyecto.get('tema') %>
+    <%= proyecto.get('descripcion') %>
+    <%= proyecto.get('estado') %>
+    <%= proyecto.get('demo') %>
+    <%= proyecto.get('lema') %>
+    <%= proyecto.get('equipo_proyectoId') %>
+</script> 
+

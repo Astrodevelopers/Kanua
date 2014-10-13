@@ -15,6 +15,11 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
             var uComponent = new ProyectoComponent();
             uComponent.initialize();
             uComponent.render('main');
+            //Esto recibe el disparo de backbone y llama al controlador para que ejecute mostrarInfoProyecto
+            Backbone.on(uComponent.componentId + '-proyecto-mostrar-info', function(params) {
+                uComponent.componentController.mostrarInfoProyecto(params);
+            });
+            
             Backbone.on(uComponent.componentId + '-post-proyecto-create', function(params) {
                 self.renderChilds(params);
             });
