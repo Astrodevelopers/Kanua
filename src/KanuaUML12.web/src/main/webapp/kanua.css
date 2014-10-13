@@ -1,0 +1,15 @@
+.barra-menu {
+  color: #338585;
+}
+
+.barra-menu:hover {
+  color: #00A0A0;
+  font-weight: bold;
+}
+
+.encabezado {
+   width: 100%;
+   height: 55px;
+   background-color: #FAF0E6;
+   border-bottom: #338585 solid 1px;
+}
