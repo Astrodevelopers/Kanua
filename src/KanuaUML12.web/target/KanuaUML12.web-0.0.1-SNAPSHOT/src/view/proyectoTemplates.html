@@ -5,8 +5,8 @@
         <% _.each(proyectos, function(proyecto) { %>
             <div class="col-xs-1 celda-proyecto">
             <!-- Aca se ponen las imagenes y nombres las cuales mandan un evento si se les hace click -->
-                <img onclick="Backbone.trigger('<%= componentId %>-proyecto-mostrar-info',{id:<%= proyecto.id %>}); return false" class="imagen-proyecto" src="<%= htmlEncode(proyecto.getDisplay('imagen')) %>"/>
-                <div onclick="Backbone.trigger('<%= componentId %>-proyecto-mostrar-info',{id:<%= proyecto.id %>}); return false" class="nombre-proyecto">
+                <img onclick="Backbone.trigger('<%= componentId %>-proyecto-mostrar-info',{id:<%= proyecto.id %>, equipoId:<%= proyecto.get('equipo_proyectoId') %>}); return false" class="imagen-proyecto" src="<%= htmlEncode(proyecto.getDisplay('imagen')) %>"/>
+                <div onclick="Backbone.trigger('<%= componentId %>-proyecto-mostrar-info',{id:<%= proyecto.id %>, equipoId:<%= proyecto.get('equipo_proyectoId') %>}); return false" class="nombre-proyecto">
                     <%= htmlEncode(proyecto.getDisplay('name')) %>
                 </div>
                 <center>
@@ -74,12 +74,76 @@
 
 <script type="text/template" id="proyecto-mostrar-info">
     <!-- Esta parte es lo que va a mostrar un proyecto, ya cuando alguien hizo click para verlo -->
-    <%= proyecto.get('name') %>
-    <%= proyecto.get('tema') %>
-    <%= proyecto.get('descripcion') %>
-    <%= proyecto.get('estado') %>
-    <%= proyecto.get('demo') %>
-    <%= proyecto.get('lema') %>
-    <%= proyecto.get('equipo_proyectoId') %>
+    <!--
+   
+    <%= proyecto.get('equipo_proyectoId') %> -->
+    
+    <table width="100%">
+        <tr>
+            <td width="100%" colspan="2">
+                <div class="nombre-proyecto-info"><%= proyecto.get('name') %></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="60%">
+                <iframe width="100%" height="315px" frameborder="0" src="<%= proyecto.get('demo').replace('/watch?v=','/embed/') %>">
+                </iframe>
+                <div style="height: 100px; overflow-y: scroll;">
+                    <div style="color: #338585; font-size: 19px; font-weight: bold;">
+                        Descripción
+                    </div>
+                    <div>
+                        <%= proyecto.get('descripcion') %>
+                    </div>
+                    <span style="font-weight: bold; color: #338585;">
+                        Estado del proyecto: 
+                    </span>
+                    <span>
+                        <%= proyecto.get('estado') %>
+                    </span><br/>
+                    <span style="font-weight: bold; color: #338585;">
+                        Tema: 
+                    </span>
+                    <span>
+                        <%= proyecto.get('tema') %>
+                    </span><br/>
+                    <span style="font-weight: bold; color: #338585;">
+                        Lema: 
+                    </span>
+                    <span>
+                        <%= proyecto.get('lema') %>
+                    </span><br/>
+                </div>
+            </td>
+            <td width="40%" style="padding-left: 10px;">
+                
+                <% equipos.each(function(equipo) { %> 
+                    <% if(proyecto.get('equipo_proyectoId')==equipo.get('id')) {%>
+                        <center>
+                            <span style="font-weight: bold; color: #338585; font-size: 30px">
+                               Nombre Equipo:
+                             </span>
+                            <span style="font-weight: bold; color: #00A0A0; font-size: 30px">
+                                <%= equipo.get('name') %><br/>
+                            </span>
+                            <span style="font-weight: bold; color: #338585;">
+                                Correo Equipo: 
+                            </span>
+                            <%= equipo.get('email') %>
+                        </center>
+                    <% } %>
+                <% }); %>                
+            
+                <br/>
+                <div id="informacion-usuarios-equipo" style="border-top:solid black 1px;">
+                </div>
+                <br/>
+                <center>
+                <button type="button" class="btn btn-primary">Contactar</button>
+                <button type="button" class="btn btn-primary">Enviar solicitud</button>
+                </center>
+            </td>
+        </tr>
+    </table>
 </script> 
 
