@@ -37,3 +37,9 @@
   margin-top: 4px;
   cursor: pointer;
 }
+
+.nombre-proyecto-info {
+    color: #00A0A0;
+    font-size: 50px;
+    font-weight: bold;
+}
