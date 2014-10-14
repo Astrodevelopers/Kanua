@@ -35,14 +35,17 @@ define(['controller/_proyectoController','delegate/proyectoDelegate'], function(
             this.mostrarInfoProyectoTemplate = _.template($('#proyecto-mostrar-info').html());
         },
         //se define este metodo que es el que quita lo viejo y pone lo nuevo. Le manda la informacion a la plantilla
-        _renderMostrarInfoProyecto: function() {
+        _renderMostrarInfoProyecto: function(params) {
             var self = this;
+            var equipoId = params.equipoId;
             /*Aquí se utiliza el efecto gráfico backbone deslizar. “$el” hace referencia al <div id=”main”> ubicado en el index.html. Dentro de este div se despliegue la tabla.*/
             this.$el.slideUp("fast", function() {
                 /*Establece que en el <div> se despliegue el template de la variable “”. Como parámetros entran las variables establecidas dentro de los tags <%%> con sus valores como un objeto JSON. En este caso, la propiedad sports tendrá la lista que instanció “sportSearch” en la variable del bucle <% _.each(sports, function(sport) { %>*/
  
-                self.$el.html(self.mostrarInfoProyectoTemplate({proyecto: self.currentProyectoModel, componentId: self.componentId, equipo_proyecto: self.equipo_proyectoComponent}));
+                self.$el.html(self.mostrarInfoProyectoTemplate({proyecto: self.currentProyectoModel, componentId: self.componentId, equipos: self.equipo_proyectoComponent}));
                 self.$el.slideDown("fast");
+                Backbone.trigger(self.componentId + '-' + 'post-proyecto-mostrar-info', {equipoId: equipoId});
+                
             });
         },
         //esto es el metodo que obtiene la informacion del proyecto que se necesita actualmente para mostrar su informacion.
@@ -52,7 +55,7 @@ define(['controller/_proyectoController','delegate/proyectoDelegate'], function(
             if (this.proyectoModelList) {
                 this.currentProyectoModel = this.proyectoModelList.get(id);
                 this.currentProyectoModel.set('componentId',this.componentId); 
-                this._renderMostrarInfoProyecto();
+                this._renderMostrarInfoProyecto(params);
             }
             else {
                 var self = this;
@@ -61,7 +64,7 @@ define(['controller/_proyectoController','delegate/proyectoDelegate'], function(
                     data: data,
                     success: function() {
                         self.currentProyectoModel.set('componentId',self.componentId); 
-                        self._renderMostrarInfoProyecto();
+                        self._renderMostrarInfoProyecto(params);
                     },
                     error: function() {
                         Backbone.trigger(self.componentId + '-' + 'error', {event: 'proyecto-mostrar-info', view: self, id: id, data: data, error: error});
