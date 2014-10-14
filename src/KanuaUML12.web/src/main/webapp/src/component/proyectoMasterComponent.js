@@ -2,11 +2,14 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
  'component/tagComponent'
  ,
  'component/objetivoComponent'
- 
+ ,
+ 'model/equipoMasterModel'
  ],function(SelectionController, CacheModel, ProyectoMasterModel, CRUDComponent, TabController, ProyectoComponent,
  tag_proyectoComponent
  ,
  objetivo_proyectoComponent
+ ,
+ EquipoMasterModel
  ) {
     App.Component.ProyectoMasterComponent = App.Component.BasicComponent.extend({
         initialize: function() {
@@ -15,8 +18,39 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
             var uComponent = new ProyectoComponent();
             uComponent.initialize();
             uComponent.render('main');
+
+            Backbone.on(uComponent.componentId + '-post-proyecto-mostrar-info', function(params) {
+                configurationEquipoMaster = App.Utils.loadComponentConfiguration('equipoMaster');
+                App.Model.EquipoMasterModel.prototype.urlRoot = configurationEquipoMaster.context;
+                modelEquipoMaster = new App.Model.EquipoMasterModel({id: params.equipoId});
+                var options = {
+                    success: function() {
+                        cadena = '<div style="font-weight: bold; color: #338585; font-size: 14px;">Integrantes:</div>';
+                        cadena += '<table width="100%">';
+                        usuariosEquipo=modelEquipoMaster.get('listusuario_equipo');
+                        cadena += '<tr>';
+                        cadena += '<th>Nombre</th>';
+                        cadena += '<th>Correo</th>';
+                        cadena += '</tr>';
+                        for (var i = 0; i < usuariosEquipo.length; i++) {
+                           usuarioEquipo = usuariosEquipo[i];
+                           cadena += '<tr>';
+                           cadena += '<td>'+usuarioEquipo.name+'</td>';
+                           cadena += '<td>'+usuarioEquipo.email+'</td>';
+                           cadena += '</tr>';
+                        }
+                        cadena += '</table>';
+                        $('#informacion-usuarios-equipo').html(cadena);
+                    },
+                    error: function() {
+                    }
+                };
+                modelEquipoMaster.fetch(options);
+            });
+            
             //Esto recibe el disparo de backbone y llama al controlador para que ejecute mostrarInfoProyecto
             Backbone.on(uComponent.componentId + '-proyecto-mostrar-info', function(params) {
+                $('#'+uComponent.componentId+'-main-toolbar').html("");
                 uComponent.componentController.mostrarInfoProyecto(params);
             });
             
