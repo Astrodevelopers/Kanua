@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="kanua.css">
 <script type="text/template" id="proyectoList">
     <!-- Esta parte pone la malla de proyectos -->
+    <input type="text"  id="tagbusqueda" name="busca" placeholder="tag" value=""/>
+    <button onclick="Backbone.trigger('buscarProyectosPorTag',{}); return false" type="button" class="btn btn-info">Busca</button>
+
     <div class="row" style="height: 300px; overflow-y: scroll;">
         <% _.each(proyectos, function(proyecto) { %>
             <div id="celda-proyecto-<%= proyecto.id %>" class="col-xs-1 celda-proyecto">
@@ -21,9 +24,7 @@
         <% }); %>
     </div>
     
-    <input type="text" class="form-control" id="tagbusqueda" name="busca" placeholder="tag" value=""/>
-    <button onclick="Backbone.trigger('buscarProyectosPorTag',{}); return false" type="button" class="btn btn-primary">Busca</button>
-
+    
 </script>
 
 <script type="text/template" id="proyecto">
