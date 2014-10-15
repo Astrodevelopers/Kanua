@@ -36,4 +36,8 @@ import co.edu.uniandes.csw.astroDevelopers.proyecto.master.logic.api.IProyectoMa
 @Singleton
 public class ProyectoMasterMockLogicService extends _ProyectoMasterMockLogicService implements IProyectoMasterLogicService {
 	
+    public String buscarProyectosPorTag(String tag){
+        return "";
+    }
+    
 }
