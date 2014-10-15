@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="kanua.css">
 <script type="text/template" id="proyectoList">
     <!-- Esta parte pone la malla de proyectos -->
-    <div class="row">
+    <div class="row" style="height: 300px; overflow-y: scroll;">
         <% _.each(proyectos, function(proyecto) { %>
-            <div class="col-xs-1 celda-proyecto">
+            <div id="celda-proyecto-<%= proyecto.id %>" class="col-xs-1 celda-proyecto">
             <!-- Aca se ponen las imagenes y nombres las cuales mandan un evento si se les hace click -->
                 <img onclick="Backbone.trigger('<%= componentId %>-proyecto-mostrar-info',{id:<%= proyecto.id %>, equipoId:<%= proyecto.get('equipo_proyectoId') %>}); return false" class="imagen-proyecto" src="<%= htmlEncode(proyecto.getDisplay('imagen')) %>"/>
                 <div onclick="Backbone.trigger('<%= componentId %>-proyecto-mostrar-info',{id:<%= proyecto.id %>, equipoId:<%= proyecto.get('equipo_proyectoId') %>}); return false" class="nombre-proyecto">
@@ -19,7 +19,10 @@
                 </center>
             </div>
         <% }); %>
-    </div>        
+    </div>
+    
+    <input type="text" class="form-control" id="tagbusqueda" name="busca" placeholder="tag" value=""/>
+    <button onclick="Backbone.trigger('buscarProyectosPorTag',{}); return false" type="button" class="btn btn-primary">Busca</button>
 
 </script>
 

@@ -25,9 +25,9 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 modelEquipoMaster = new App.Model.EquipoMasterModel({id: params.equipoId});
                 var options = {
                     success: function() {
+                        usuariosEquipo=modelEquipoMaster.get('listusuario_equipo');
                         cadena = '<div style="font-weight: bold; color: #338585; font-size: 14px;">Integrantes:</div>';
                         cadena += '<table width="100%">';
-                        usuariosEquipo=modelEquipoMaster.get('listusuario_equipo');
                         cadena += '<tr>';
                         cadena += '<th>Nombre</th>';
                         cadena += '<th>Correo</th>';
@@ -48,6 +48,32 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 modelEquipoMaster.fetch(options);
             });
             
+            Backbone.on('buscarProyectosPorTag', function(params) {
+                listaProyectos=uComponent.componentController.proyectoModelList.models;
+                for (var j = 0; j < listaProyectos.length; j++) {
+                    proyecto=listaProyectos[j];
+                    $('#celda-proyecto-'+proyecto.id).hide();
+                }
+                // https://www.inkling.com/read/javascript-definitive-guide-david-flanagan-6th/chapter-18/getting-an-http-response
+                var tag=$('#tagbusqueda').val();
+                var request = new XMLHttpRequest();
+                request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/buscarProyectosPorTag?tag="+tag);
+                request.onreadystatechange = function() {
+                    // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp
+                    if (request.readyState === 4 && request.status === 200) {
+                        respuesta=request.responseText;
+                        ids=respuesta.split(',');
+                        for (u=0; u<ids.length; u++) {
+                           id=ids[u];
+                           if (id!="") {
+                               $('#celda-proyecto-'+id).show();
+                           }
+                        }
+                    }
+                };
+                request.send(null);
+            });            
+
             //Esto recibe el disparo de backbone y llama al controlador para que ejecute mostrarInfoProyecto
             Backbone.on(uComponent.componentId + '-proyecto-mostrar-info', function(params) {
                 $('#'+uComponent.componentId+'-main-toolbar').html("");
