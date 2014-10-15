@@ -41,4 +41,8 @@ import javax.enterprise.inject.Default;
 @LocalBean
 public class ProyectoMasterLogicService extends _ProyectoMasterLogicService implements IProyectoMasterLogicService {
 
+    public String buscarProyectosPorTag(String tag){
+        return proyectoMasterPersistance.buscarProyectosPorTag(tag);
+    }
+
 }
