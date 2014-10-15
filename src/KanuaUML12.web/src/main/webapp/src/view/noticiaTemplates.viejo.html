@@ -1,31 +1,41 @@
-<link rel="stylesheet" href="kanua.css">
 <script type="text/template" id="noticiaList">
-     <div class="row" style="height: 300px; overflow-y: scroll;">
-        <% _.each(noticias, function(noticia) { %>
-            <div id="celda-noticia-<%= noticia.id %>" class="col-xs-1 celda-proyecto">
-            <!-- Aca se ponen las imagenes y nombres las cuales mandan un evento si se les hace click -->
-                <img class="imagen-proyecto" src="<%= htmlEncode(noticia.getDisplay('imagen')) %>"/>
-                <div class="nombre-proyecto">
-                    <%= htmlEncode(noticia.getDisplay('name')) %>
-                </div>
-                <center>
-                    <% if(showEdit) {%>
-                        <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-noticia-edit',{id:<%= noticia.id %>}); return false" >Editar</a>
-                    <% } %> 
-                    <% if(showDelete) {%>
-                        <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-noticia-delete',{id:<%= noticia.id %>}); return false" >Eliminar</a> 
-                    <% } %>  
-                </center>
-            </div>
-        <% }); %>
+    <div class="panel panel-default">
+    <!-- Default panel contents -->
+    <table class="table striped">
+    <thead>
+    <tr>
+		 <th>Name</th>
+		 <th>Imagen</th>
+		 <th>Titulo</th>
+		 <th>Fecha</th>
+		 <th>Descripcion</th>
+		 <th>Tema</th>
+    <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% _.each(noticias, function(noticia) { %>
+    <tr>
+		<td><%= htmlEncode(noticia.getDisplay('name')) %></td>
+		<td><%= htmlEncode(noticia.getDisplay('imagen')) %></td>
+		<td><%= htmlEncode(noticia.getDisplay('titulo')) %></td>
+		<td><%= htmlEncode(noticia.getDisplay('fecha')) %></td>
+		<td><%= htmlEncode(noticia.getDisplay('descripcion')) %></td>
+		<td><%= htmlEncode(noticia.getDisplay('tema')) %></td>
+    <td>
+    <% if(showEdit) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-noticia-edit',{id:<%= noticia.id %>}); return false" >Edit</a> |
+	<% } %> 
+	<% if(showDelete) {%>
+    <a onclick="Backbone.trigger('<%= componentId %>-noticia-delete',{id:<%= noticia.id %>}); return false" >Delete</a> 
+	<% } %>    
+	</td>
+    </tr>
+    <% }); %>
+    </tbody>
+    </table>
     </div>
- </script>
- 
- 
- 
- 
- 
-    
+</script>
 
 <script type="text/template" id="noticia">
     <div class="form-group">
