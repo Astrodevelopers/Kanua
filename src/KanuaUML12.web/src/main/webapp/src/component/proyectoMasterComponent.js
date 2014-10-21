@@ -72,7 +72,20 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                     }
                 };
                 request.send(null);
-            });            
+            }); 
+            
+            Backbone.on('procesarContacto', function(params) {
+                var name = $('#nombre_contacto').val();
+                var email = $('#email_contacto').val();
+                var text = $('#styled').val(); 
+                var parameters = [name, email, text];
+                alert(parameters);
+            });
+
+            Backbone.on(uComponent.componentId + '-generar-contacto', function(params) {
+                $('#'+uComponent.componentId+'-main-toolbar').html("");
+                uComponent.componentController.generarContacto(params);
+            });
 
             //Esto recibe el disparo de backbone y llama al controlador para que ejecute mostrarInfoProyecto
             Backbone.on(uComponent.componentId + '-proyecto-mostrar-info', function(params) {
