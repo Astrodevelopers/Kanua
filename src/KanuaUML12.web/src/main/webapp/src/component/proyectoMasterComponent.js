@@ -77,10 +77,12 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
             Backbone.on('procesarContacto', function(params) {
                 var name = $('#nombre_contacto').val();
                 var email = $('#email_contacto').val();
-                var text = $('#styled').val();                
+                var text = $('#styled').val();
+                text = text.split(" ");
+                text = text.join("_");
+                text = text.slice(0, text.length - 2);
                 var url = "/KanuaUML12.web/webresources/ProyectoMaster"; // TODO
                 var parameters = "name=" + name + "&email=" + email + "&text=" + text;
-                alert(parameters);
                 
                 /**
                 http.open("POST", url, true);
