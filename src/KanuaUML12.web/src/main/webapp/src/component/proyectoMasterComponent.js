@@ -83,6 +83,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 text = text.slice(0, text.length - 2);
                 var url = "/KanuaUML12.web/webresources/ProyectoMaster"; // TODO
                 var parameters = "name=" + name + "&email=" + email + "&text=" + text;
+                alert(parameters);
                 
                 /**
                 http.open("POST", url, true);
