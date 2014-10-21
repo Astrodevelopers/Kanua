@@ -38,9 +38,9 @@ define(['controller/_proyectoController','delegate/proyectoDelegate'], function(
         _renderMostrarInfoProyecto: function(params) {
             var self = this;
             var equipoId = params.equipoId;
-            /*Aquí se utiliza el efecto gráfico backbone deslizar. “$el” hace referencia al <div id=”main”> ubicado en el index.html. Dentro de este div se despliegue la tabla.*/
+            /*Aquï¿½ se utiliza el efecto grï¿½fico backbone deslizar. ï¿½$elï¿½ hace referencia al <div id=ï¿½mainï¿½> ubicado en el index.html. Dentro de este div se despliegue la tabla.*/
             this.$el.slideUp("fast", function() {
-                /*Establece que en el <div> se despliegue el template de la variable “”. Como parámetros entran las variables establecidas dentro de los tags <%%> con sus valores como un objeto JSON. En este caso, la propiedad sports tendrá la lista que instanció “sportSearch” en la variable del bucle <% _.each(sports, function(sport) { %>*/
+                /*Establece que en el <div> se despliegue el template de la variable ï¿½ï¿½. Como parï¿½metros entran las variables establecidas dentro de los tags <%%> con sus valores como un objeto JSON. En este caso, la propiedad sports tendrï¿½ la lista que instanciï¿½ ï¿½sportSearchï¿½ en la variable del bucle <% _.each(sports, function(sport) { %>*/
  
                 self.$el.html(self.mostrarInfoProyectoTemplate({proyecto: self.currentProyectoModel, componentId: self.componentId, equipos: self.equipo_proyectoComponent}));
                 self.$el.slideDown("fast");
@@ -70,6 +70,33 @@ define(['controller/_proyectoController','delegate/proyectoDelegate'], function(
                         Backbone.trigger(self.componentId + '-' + 'error', {event: 'proyecto-mostrar-info', view: self, id: id, data: data, error: error});
                     }
                 });
+            }
+        },
+        
+        _renderGenerarContacto: function(params) {
+            var self = this;
+            var equipoId = params.equipoId;
+            /*Aquï¿½ se utiliza el efecto grï¿½fico backbone deslizar. ï¿½$elï¿½ hace referencia al <div id=ï¿½mainï¿½> ubicado en el index.html. Dentro de este div se despliegue la tabla.*/
+            this.$el.slideUp("fast", function() {
+                /*Establece que en el <div> se despliegue el template de la variable ï¿½ï¿½. Como parï¿½metros entran las variables establecidas dentro de los tags <%%> con sus valores como un objeto JSON. En este caso, la propiedad sports tendrï¿½ la lista que instanciï¿½ ï¿½sportSearchï¿½ en la variable del bucle <% _.each(sports, function(sport) { %>*/
+ 
+                self.$el.html(self.generarContactoTemplate({proyecto: self.currentProyectoModel, componentId: self.componentId, equipos: self.equipo_proyectoComponent}));
+                self.$el.slideDown("fast");
+                Backbone.trigger(self.componentId + '-' + '-generar-contacto', {equipoId: equipoId});
+                
+            });
+            
+        },
+        
+        
+        generarContacto: function(params) {
+            var id = params.id;
+            var data = params.data;
+            
+            if (this.proyectoModelList) {
+                this.currentProyectoModel = this.proyectoModelList.get(id);
+                this.currentProyectoModel.set('componentId',this.componentId); 
+                this._renderGenerarContacto(params);
             }
         }
     });
