@@ -94,7 +94,7 @@
                 </iframe>
                 <div style="height: 100px; overflow-y: scroll;">
                     <div style="color: #338585; font-size: 19px; font-weight: bold;">
-                        Descripci�n
+                        Descripci�n
                     </div>
                     <div>
                         <%= proyecto.get('descripcion') %>
@@ -143,7 +143,7 @@
                 </div>
                 <br/>
                 <center>
-                <button type="button" class="btn btn-primary">Contactar</button>
+                <button class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-generar-contacto',{id:<%= proyecto.id %>, equipoId:<%= proyecto.get('equipo_proyectoId') %>}); return false"> Contactar</button>
                 <button type="button" class="btn btn-primary">Enviar solicitud</button>
                 </center>
             </td>
@@ -151,3 +151,22 @@
     </table>
 </script> 
 
+<script type="text/template" id="generar-contacto">
+    <div align="center" class="nombre-proyecto-info"> Contacto </div>
+    <br>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Registration Form</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+      <form>
+	<input name="name" id = "nombre_contacto" placeholder="¿Cómo es tu nombre?" class="name" required />
+	<input name="emailaddress" id = "email_contacto" placeholder="¿Cuál es tu email?" class="email" required />
+        <textarea name="styled-textarea" id="styled" onfocus="this.value=''; setbg('#e5fff3');" onblur="setbg('white')">Escribe tu comentario aquí...</textarea>
+        <button onclick="Backbone.trigger('procesarContacto',{}); return false" type="button" class="btn btn-info">Busca</button>
+       </form>
+    </body>
+
+</script>
