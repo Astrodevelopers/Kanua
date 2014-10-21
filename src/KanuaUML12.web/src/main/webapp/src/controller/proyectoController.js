@@ -108,7 +108,7 @@ define(['controller/_proyectoController','delegate/proyectoDelegate'], function(
             this.$el.slideUp("fast", function() {
                 /*Establece que en el <div> se despliegue el template de la variable ��. Como par�metros entran las variables establecidas dentro de los tags <%%> con sus valores como un objeto JSON. En este caso, la propiedad sports tendr� la lista que instanci� �sportSearch� en la variable del bucle <% _.each(sports, function(sport) { %>*/
  
-                self.$el.html(self.generarContactoTemplate({proyecto: self.currentProyectoModel, componentId: self.componentId, equipos: self.equipo_proyectoComponent}));
+                self.$el.html(self.realizarSolicitudTemplate({proyecto: self.currentProyectoModel, componentId: self.componentId, equipos: self.equipo_proyectoComponent}));
                 self.$el.slideDown("fast");
                 Backbone.trigger(self.componentId + '-' + '-realizar-solicitud', {equipoId: equipoId});
                 
