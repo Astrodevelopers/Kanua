@@ -33,6 +33,7 @@ define(['controller/_proyectoController','delegate/proyectoDelegate'], function(
         postInit: function(options) {
             var self = this;
             this.mostrarInfoProyectoTemplate = _.template($('#proyecto-mostrar-info').html());
+            this.generarContactoTemplate = _.template($('#generar-contacto').html());
         },
         //se define este metodo que es el que quita lo viejo y pone lo nuevo. Le manda la informacion a la plantilla
         _renderMostrarInfoProyecto: function(params) {
@@ -86,8 +87,7 @@ define(['controller/_proyectoController','delegate/proyectoDelegate'], function(
                 
             });
             
-        },
-        
+        },        
         
         generarContacto: function(params) {
             var id = params.id;
