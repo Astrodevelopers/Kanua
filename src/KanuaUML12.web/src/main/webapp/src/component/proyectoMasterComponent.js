@@ -105,6 +105,11 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 $('#'+uComponent.componentId+'-main-toolbar').html("");
                 uComponent.componentController.generarContacto(params);
             });
+            
+            Backbone.on(uComponent.componentId + '-realizar-solicitud', function(params) {
+                $('#'+uComponent.componentId+'-main-toolbar').html("");
+                uComponent.componentController.realizarSolicitud(params);
+            });
 
             //Esto recibe el disparo de backbone y llama al controlador para que ejecute mostrarInfoProyecto
             Backbone.on(uComponent.componentId + '-proyecto-mostrar-info', function(params) {
