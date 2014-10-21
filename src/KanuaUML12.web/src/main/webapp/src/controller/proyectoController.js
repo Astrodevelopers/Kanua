@@ -34,6 +34,7 @@ define(['controller/_proyectoController','delegate/proyectoDelegate'], function(
             var self = this;
             this.mostrarInfoProyectoTemplate = _.template($('#proyecto-mostrar-info').html());
             this.generarContactoTemplate = _.template($('#generar-contacto').html());
+            this.realizarSolicitudTemplate = _.template($('#realizar-solicitud').html());
         },
         //se define este metodo que es el que quita lo viejo y pone lo nuevo. Le manda la informacion a la plantilla
         _renderMostrarInfoProyecto: function(params) {
@@ -98,7 +99,33 @@ define(['controller/_proyectoController','delegate/proyectoDelegate'], function(
                 this.currentProyectoModel.set('componentId',this.componentId); 
                 this._renderGenerarContacto(params);
             }
-        }
+        },
+        
+        _renderRealizarSolicitud: function(params) {
+            var self = this;
+            var equipoId = params.equipoId;
+            /*Aqu� se utiliza el efecto gr�fico backbone deslizar. �$el� hace referencia al <div id=�main�> ubicado en el index.html. Dentro de este div se despliegue la tabla.*/
+            this.$el.slideUp("fast", function() {
+                /*Establece que en el <div> se despliegue el template de la variable ��. Como par�metros entran las variables establecidas dentro de los tags <%%> con sus valores como un objeto JSON. En este caso, la propiedad sports tendr� la lista que instanci� �sportSearch� en la variable del bucle <% _.each(sports, function(sport) { %>*/
+ 
+                self.$el.html(self.generarContactoTemplate({proyecto: self.currentProyectoModel, componentId: self.componentId, equipos: self.equipo_proyectoComponent}));
+                self.$el.slideDown("fast");
+                Backbone.trigger(self.componentId + '-' + '-realizar-solicitud', {equipoId: equipoId});
+                
+            });
+            
+        },
+        
+        realizarSolicitud: function(params) {
+            var id = params.id;
+            var data = params.data;
+            
+            if (this.proyectoModelList) {
+                this.currentProyectoModel = this.proyectoModelList.get(id);
+                this.currentProyectoModel.set('componentId',this.componentId); 
+                this._renderRealizarSolicitud(params);
+            }
+        },
     });
     return App.Controller.ProyectoController;
 }); 
