@@ -23,24 +23,35 @@ and open the template in the editor.
 
         <!-- Custom styles for this template -->
         <link href="carousel.css" rel="stylesheet">
+        
+        <script>
+            loadComponents = [
+                {
+                    name: 'component/proyectoMasterComponent',
+                    render: false
+                }
+            ];
+        </script>
     </head>
     <body>
+        <div id="main" ></div>
+        
         <div class="marketing">
         <!-- Three columns of text below the carousel -->
         <div class="row">
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <img class="img-rounded" src="http://sistemas.uniandes.edu.co/ie/images/articulos/eventos/CASOSDEEMPRENDIMIENTOS.JPG" alt="Generic placeholder image" style="width: 140px; height: 140px;">
                 <h2>Casos de emprendimientos</h2>
                 <p>Si está interesado en iniciar un emprendimiento pero tiene dudas si el momento actual es el adecuado lo invitamos a la charla Casos de Emprendimientos Uniandinos.</p>
                 <p><a class="btn btn-default" href="#" role="button">Ver más &raquo;</a></p>
             </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <img class="img-rounded" src="http://sistemas.uniandes.edu.co/ie/images/articulos/eventos/2014-10PrototiparValidarVender.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
                 <h2>Taller: Prototipar, validar y vender</h2>
                 <p>Para que un emprendimiento sea exito requiere ventas; pero, ¿qué es lo vende, cuál es la necesidad del cliente que compra el producto? En este taller se presentarán técnicas para prototipar la oferta de valor y como venderla.</p>
                 <p><a class="btn btn-default" href="#" role="button">Ver más &raquo;</a></p>
             </div><!-- /.col-lg-4 -->
-            <div class="col-lg-4">
+            <div class="col-md-4">
                 <img class="img-rounded" src="http://sistemas.uniandes.edu.co/ie/images/articulos/eventos/afichePaper2.jpg" alt="Generic placeholder image" style="width: 140px; height: 140px;">
                 <h2>Design Thinking and Paper Prototyping</h2>
                 <p>Las ideas hay que diseñarlas y protiparlas para que sean una realidad.
@@ -94,5 +105,9 @@ and open the template in the editor.
         </div>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="./js/vendor/underscore-min.js"></script>
+        <script src="./js/vendor/backbone-min.js"></script>
+        <script src="./js/vendor/bootstrap-datepicker.js"></script>
+        <script data-main="src/main" src="./js/vendor/require.js"></script>
     </body>
 </html>

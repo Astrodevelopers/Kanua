@@ -27,6 +27,57 @@
     
 </script>
 
+<script type="text/template" id="proyectoCarousel">
+    <!-- Esta parte pone la malla de proyectos -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <% _.each(proyectos, function(proyecto) { %>
+                <div class="item">
+                    <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <img class="caimg img-rounded" src="<%= proyecto.image %>"/>
+                            <p><%= htmlEncode(proyecto.getDisplay('name')) %></p>
+                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Conoce nuestros proyectos</a></p>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div><!-- /.carousel -->
+    
+    
+    <div class="row" style="height: 300px; overflow-y: scroll;">
+        <% _.each(proyectos, function(proyecto) { %>
+            <div id="celda-proyecto-<%= proyecto.id %>" class="col-xs-1 celda-proyecto">
+            <!-- Aca se ponen las imagenes y nombres las cuales mandan un evento si se les hace click -->
+                <img onclick="Backbone.trigger('<%= componentId %>-proyecto-mostrar-info',{id:<%= proyecto.id %>, equipoId:<%= proyecto.get('equipo_proyectoId') %>}); return false" class="imagen-proyecto" src="<%= htmlEncode(proyecto.getDisplay('imagen')) %>"/>
+                <div onclick="Backbone.trigger('<%= componentId %>-proyecto-mostrar-info',{id:<%= proyecto.id %>, equipoId:<%= proyecto.get('equipo_proyectoId') %>}); return false" class="nombre-proyecto">
+                    <%= htmlEncode(proyecto.getDisplay('name')) %>
+                </div>
+                <center>
+                    <% if(showEdit) {%>
+                        <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-proyecto-edit',{id:<%= proyecto.id %>}); return false" >Editar</a>
+                    <% } %> 
+                    <% if(showDelete) {%>
+                        <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-proyecto-delete',{id:<%= proyecto.id %>}); return false" >Eliminar</a> 
+                    <% } %>  
+                </center>
+            </div>
+        <% }); %>
+    </div>
+    
+    
+</script>
+
 <script type="text/template" id="proyecto">
     <div class="form-group">
     <form role="form" id="<%= componentId %>-proyectoForm">
