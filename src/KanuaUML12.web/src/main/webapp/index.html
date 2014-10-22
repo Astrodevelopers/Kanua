@@ -30,9 +30,14 @@
         <script type="text/javascript">
             function redirectFrame(url) {
                 $('#container').attr('src', url);
-                $('#container').css('height', ($(window).height() - $('#header').height() - 30) + 'px');
             }
 
+            function iframeLoaded(iFrameID) {
+                if(iFrameID) {
+                      iFrameID.height = iFrameID.contentWindow.document.body.scrollHeight + "px";
+                }
+                $('#container').css('height', iFrameID.height);
+            }
         </script>
     </head>
     <!-- NAVBAR
@@ -97,7 +102,7 @@
 
         <div class="container">
         
-        <iframe id="container" src="paginaPrincipal.html" style="width: 100%; height: 100%; border: 0; margin: 0;"></iframe> 
+        <iframe id="container" onload="iframeLoaded(this)" scrolling="no" seamless="seamless" style="width: 100%; border: 0; margin: 0;"></iframe> 
 
         <!-- FOOTER -->
         <footer>
@@ -112,5 +117,10 @@
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script>
+            $( document ).ready(function() {
+                redirectFrame('paginaPrincipal.html');
+            });
+        </script>
     </body>
 </html>
