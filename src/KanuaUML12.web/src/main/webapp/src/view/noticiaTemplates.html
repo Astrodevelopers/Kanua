@@ -4,8 +4,8 @@
         <% _.each(noticias, function(noticia) { %>
             <div id="celda-noticia-<%= noticia.id %>" class="col-xs-1 celda-proyecto">
             <!-- Aca se ponen las imagenes y nombres las cuales mandan un evento si se les hace click -->
-                <img class="imagen-proyecto" src="<%= htmlEncode(noticia.getDisplay('imagen')) %>"/>
-                <div class="nombre-proyecto">
+                <img onclick="Backbone.trigger('<%=componentId %>-mostrar-noticia',{id:<%= noticia.id %>}); return false" class="imagen-proyecto" src="<%= htmlEncode(noticia.getDisplay('imagen')) %>"/>
+                <div onclick="Backbone.trigger('<%=componentId %>-mostrar-noticia',{id:<%= noticia.id %>}); return false" class="nombre-proyecto">
                     <%= htmlEncode(noticia.getDisplay('name')) %>
                 </div>
                 <center>
@@ -23,10 +23,6 @@
  
  
  
- 
- 
-    
-
 <script type="text/template" id="noticia">
     <div class="form-group">
     <form role="form" id="<%= componentId %>-noticiaForm">
@@ -64,3 +60,31 @@
     </form>
     </div>
 </script> 
+
+<script type="text/template" id="mostrar-noticia" >
+    
+   <table width="100%">
+        <tr>
+            <td width="100%" colspan="2">
+                <div class="nombre-noticia-info"><%= noticia.get('name') %></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="100%" colspan="2">
+                <div class="imagen-noticia-info"><%= noticia.get('imagen') %></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="100%" colspan="2">
+                <div>Descripcion</div>
+                <div class="descripcion-noticia-info"><%= noticia.get('descripcion') %></div>
+            </td>
+        </tr>
+        <tr>
+            <td width="100%" colspan="2">
+                <div>Cuando</div>
+                <div class="fecha-noticia-info"><%= noticia.get('fecha') %></div>
+            </td>
+        </tr>
+    </table>
+</script>   
