@@ -45,8 +45,8 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
         return proyectoMasterPersistance.buscarProyectosPorTag(tag);
     }
     
-    public void procesarContacto(String name, String email, String text, String id_equipo) {
-        System.out.println("Hello world");
+    public String procesarContacto(String name, String email, String text, String id_equipo) {
+        return "Hi";
     }
 
 }
