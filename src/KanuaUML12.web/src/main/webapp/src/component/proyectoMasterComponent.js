@@ -88,9 +88,8 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                     var id_equipo = params.equipoId;
                     var parameters = "name=" + name + "&email=" + email + "&text=" + text +"&id_equipo=" + id_equipo;
                     alert(parameters);
-                    /**
                     var request = new XMLHttpRequest();
-                    request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/buscarProyectosPorTag?tag="+tag);
+                    request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster//procesarContacto?" + parameters);
                     request.onreadystatechange = function() {
                         if (request.readyState === 4 && request.status === 200) {
                             respuesta=request.responseText;
@@ -104,7 +103,6 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                         }
                     };
                     request.send(null);
-                    **/
                 }
             });
 
