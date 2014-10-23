@@ -34,5 +34,7 @@ package co.edu.uniandes.csw.astroDevelopers.proyecto.master.logic.api;
 public interface IProyectoMasterLogicService extends _IProyectoMasterLogicService {
  
     public String buscarProyectosPorTag(String tag);
+    
+    public void procesarContacto(String name, String email, String text, String id_equipo);
         
 }
