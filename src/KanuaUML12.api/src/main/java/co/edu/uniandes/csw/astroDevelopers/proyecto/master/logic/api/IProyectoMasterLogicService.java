@@ -35,6 +35,6 @@ public interface IProyectoMasterLogicService extends _IProyectoMasterLogicServic
  
     public String buscarProyectosPorTag(String tag);
     
-    public void procesarContacto(String name, String email, String text, String id_equipo);
+    public String procesarContacto(String name, String email, String text, String id_equipo);
         
 }
