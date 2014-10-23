@@ -216,7 +216,7 @@
 	<input name="name" id = "nombre_contacto" placeholder="¿Cómo es tu nombre?" class="name" required />
 	<input name="emailaddress" id = "email_contacto" placeholder="¿Cuál es tu email?" class="email" required />
         <textarea name="styled-textarea" id="styled" onfocus="this.value=''; setbg('#e5fff3');" onblur="setbg('white')">Escribe tu comentario aquí...</textarea>
-        <button onclick="Backbone.trigger('procesarContacto',{}); return false" type="button" class="btn btn-info">Enviar</button>
+        <button onclick="Backbone.trigger('procesarContacto', {id:<%= proyecto.id %>, equipoId:<%= proyecto.get('equipo_proyectoId') %>}); return false" type="button" class="btn btn-info">Enviar</button>
        </form>
     </body>
 
@@ -239,7 +239,7 @@
         <input name="link" id = "link_cv" placeholder="Link hoja de vida en PDF" class="name" required />
         <label for="male">Rol de aplicación</label>
         
-        <select>
+        <select id="rol">
             <option value="des">Diseño</option>
             <option value="dev">Desarrollo</option>
             <option value="inv">Inversión</option>
@@ -249,8 +249,8 @@
         </select>
         <br>
         <br>
-        <textarea name="styled-textarea" id="styled" onfocus="this.value=''; setbg('#e5fff3');" onblur="setbg('white')">Comentario</textarea>
-        <button onclick="Backbone.trigger('procesarContacto',{}); return false" type="button" class="btn btn-info">Enviar</button>
+        <textarea name="styled-textarea" maxlength="100" id="styled" onfocus="this.value=''; setbg('#e5fff3');" onblur="setbg('white')">Comentario</textarea>
+        <button onclick="Backbone.trigger('procesarContacto',{id:<%= proyecto.id %>, equipoId:<%= proyecto.get('equipo_proyectoId') %>}); return false" type="button" class="btn btn-info">Enviar</button>
        </form>
     </body>
 
