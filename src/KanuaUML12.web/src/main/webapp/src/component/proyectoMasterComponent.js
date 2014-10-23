@@ -81,25 +81,31 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 text = text.split(" ");
                 text = text.join("_");
                 text = text.slice(0, text.length - 2);
-                var url = "/KanuaUML12.web/webresources/ProyectoMaster"; // TODO
-                var parameters = "name=" + name + "&email=" + email + "&text=" + text;
-                alert(parameters);
-                
-                /**
-                http.open("POST", url, true);
-
-                //Send the proper header information along with the request
-                http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                http.setRequestHeader("Content-length", params.length);
-                http.setRequestHeader("Connection", "close");
-
-                http.onreadystatechange = function() {//Call a function when the state changes.
-                        if(http.readyState == 4 && http.status == 200) {
-                                alert(http.responseText);
-                        }
+                if((text.length + 2) > 100) {
+                    alert("La longitud del comentario no debe exceder 100 caracters.");
                 }
-                http.send(params);
-                **/
+                else {
+                    var id_equipo = params.equipoId;
+                    var parameters = "name=" + name + "&email=" + email + "&text=" + text +"&id_equipo=" + id_equipo;
+                    alert(parameters);
+                    /**
+                    var request = new XMLHttpRequest();
+                    request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/buscarProyectosPorTag?tag="+tag);
+                    request.onreadystatechange = function() {
+                        if (request.readyState === 4 && request.status === 200) {
+                            respuesta=request.responseText;
+                            ids=respuesta.split(',');
+                            for (u=0; u<ids.length; u++) {
+                               id=ids[u];
+                               if (id!="") {
+                                   $('#celda-proyecto-'+id).show();
+                               }
+                            }
+                        }
+                    };
+                    request.send(null);
+                    **/
+                }
             });
 
             Backbone.on(uComponent.componentId + '-generar-contacto', function(params) {
