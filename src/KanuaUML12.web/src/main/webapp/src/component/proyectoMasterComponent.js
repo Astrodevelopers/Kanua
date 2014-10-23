@@ -89,10 +89,12 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                     var parameters = "name=" + name + "&email=" + email + "&text=" + text +"&id_equipo=" + id_equipo;
                     alert(parameters);
                     var request = new XMLHttpRequest();
-                    request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster//procesarContacto?" + parameters);
+                    request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/procesarContacto?" + parameters);
                     request.onreadystatechange = function() {
                         if (request.readyState === 4 && request.status === 200) {
                             respuesta=request.responseText;
+                            alert(respuesta);
+                            /**
                             ids=respuesta.split(',');
                             for (u=0; u<ids.length; u++) {
                                id=ids[u];
@@ -100,6 +102,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                                    $('#celda-proyecto-'+id).show();
                                }
                             }
+                            **/
                         }
                     };
                     request.send(null);
