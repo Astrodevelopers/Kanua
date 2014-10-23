@@ -40,8 +40,8 @@ public class ProyectoMasterMockLogicService extends _ProyectoMasterMockLogicServ
         return "";
     }
     
-    public void procesarContacto(String name, String email, String text, String id_equipo) {
-        
+    public String procesarContacto(String name, String email, String text, String id_equipo) {
+        return "";
     }
     
 }
