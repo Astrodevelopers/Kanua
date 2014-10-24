@@ -83,12 +83,33 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 var rol = $('#rol').val();
                 var comment = $('#styled').val();
                 var id_equipo = params.equipoId;
-                var debugMessage = name + '\n' + last_name + '\n' + 
+                var debugging = false;
+                if(debugging) {                
+                    var debugMessage = name + '\n' + last_name + '\n' + 
                         email + '\n' + link + '\n' + 
                         rol + '\n' + comment + '\n' + id_equipo;
+                    alert(debugMessage);
+                }
+                /**
+                var request = new XMLHttpRequest();
+                request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/buscarProyectosPorTag?tag="+tag);
+                request.onreadystatechange = function() {
+                    if (request.readyState === 4 && request.status === 200) {
+                        respuesta=request.responseText;
+                        ids=respuesta.split(',');
+                        for (u=0; u<ids.length; u++) {
+                           id=ids[u];
+                           if (id!="") {
+                               $('#celda-proyecto-'+id).show();
+                           }
+                        }
+                    }
+                };
+                request.send(null);
+                **/
                 
                 
-                alert(debugMessage);
+                
             });
             
             Backbone.on('procesarContacto', function(params) {
