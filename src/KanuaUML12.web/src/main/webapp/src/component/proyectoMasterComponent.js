@@ -74,6 +74,23 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 request.send(null);
             }); 
             
+            Backbone.on('realizarSolicitud', function(params) {
+                //alert(JSON.stringify(params));
+                var name = $('#nombre_contacto').val();
+                var last_name = $('#apellido_contacto').val();
+                var email = $('#email_contacto').val();
+                var link = $('#link_cv').val();
+                var rol = $('#rol').val();
+                var comment = $('#styled').val();
+                var id_equipo = params.equipoId;
+                var debugMessage = name + '\n' + last_name + '\n' + 
+                        email + '\n' + link + '\n' + 
+                        rol + '\n' + comment + '\n' + id_equipo;
+                
+                
+                alert(debugMessage);
+            });
+            
             Backbone.on('procesarContacto', function(params) {
                 var name = $('#nombre_contacto').val();
                 var email = $('#email_contacto').val();
