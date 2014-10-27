@@ -90,6 +90,9 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                         rol + '\n' + comment + '\n' + id_equipo;
                     alert(debugMessage);
                 }
+                else {
+                    alert("We did it!!!");
+                }
                 /**
                 var request = new XMLHttpRequest();
                 request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/buscarProyectosPorTag?tag="+tag);
