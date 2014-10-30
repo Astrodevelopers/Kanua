@@ -32,9 +32,33 @@ define(['model/_proyectoModel'], function() {
 
  	validate: function(attrs,options){
             var validationMessage = "";
-            if(!attrs.name){
-                validationMessage = "The name can't be empty.";
+            var nom=attrs.imagen.toString();
+            var form= nom.search(".jpg");
+            var demo= attrs.demo.toString();
+            var de= demo.search("youtube");
+            var png= nom.search(".png");
+            if (!attrs.imagen){
+                validationMessage+= "Debe tener una imagen, ";
             }
+            if (de==-1|| !attrs.demo)
+            {
+                validationMessage+= "Demo no valido o espacio vacio, ";
+            }
+            
+            if(!attrs.name){
+                validationMessage += "El nombre no puede ser vacio, ";
+            }
+            if(!attrs.tema){
+                validationMessage += "El tema no puede ser vacio, ";
+            }
+            if(!attrs.descripcion){
+                validationMessage += "La descripcion no puede ser vacio, ";
+            }
+            if(!attrs.lema){
+                validationMessage += "El estado no puede ser vacio, ";    
+            }
+           
+            
             if(validationMessage.length>0){
                return validationMessage;
             }
