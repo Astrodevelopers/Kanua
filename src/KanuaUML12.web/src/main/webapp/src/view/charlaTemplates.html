@@ -8,10 +8,30 @@
         <% _.each(charlas, function(charla) { %>
             <div id="celda-charla-<%= charla.id %>" class="col-xs-1 celda-charla">
             <!-- Aca se ponen las imagenes y nombres las cuales mandan un evento si se les hace click -->
-                <img onclick="Backbone.trigger('<%= componentId %>-charla-mostrar-info',{id:<%= charla.id %>}); return false" class="imagen-proyecto" src="<%= htmlEncode(charla.getDisplay('imagen')) %>"/>
-                <div onclick="Backbone.trigger('<%= componentId %>-charla-mostrar-info',{id:<%= charla.id %>}); return false" class="nombre-proyecto">
-                    <%= htmlEncode(charla.getDisplay('name')) %>
-                </div>
+            <div  class="nombre-charla">
+                       <%= htmlEncode(charla.getDisplay('name')) %>
+            </div>
+               <table>
+                <tr>
+                 
+                    <th style="padding:8px;">
+                       
+                        <img  class="imagen-charla" src="<%= htmlEncode(charla.getDisplay('imagen')) %>"/>
+                        <div  class="fecha-charla">
+                            <span class="fecha-charla-titulo">Fecha: </span>
+                            <%= htmlEncode(charla.getDisplay('fechaEvento')) %>
+                        </div>
+                    </th>
+                    <th class="descripcion-charla">
+                        <div >
+                            <div class="fecha-charla-titulo">Descripcion: </div>
+                            <div style="">
+                            <%= htmlEncode(charla.getDisplay('informacion')) %>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </table>
                 <center>
                     <% if(showEdit) {%>
                         <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-charla-edit',{id:<%= charla.id %>}); return false" >Editar</a>
