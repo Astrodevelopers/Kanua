@@ -34,17 +34,6 @@ define(['controller/_noticiaController','delegate/noticiaDelegate'], function() 
             var self= this;
             this.mostrarInfoNoticiaTemplate=_.template($('#mostrar-noticia').html());
         },
-        _renderMostrarInfoNoticia: function (params)
-        {
-            var self = this;
-            this.$el.slideUp("fast", function() {
-                /*Establece que en el <div> se despliegue el template de la variable ��. Como par�metros entran las variables establecidas dentro de los tags <%%> con sus valores como un objeto JSON. En este caso, la propiedad sports tendr� la lista que instanci� �sportSearch� en la variable del bucle <% _.each(sports, function(sport) { %>*/
- 
-                self.$el.html(self.mostrarInfoNoticiaTemplate({noticia: self.currentNoticiaModel, componentId: self.componentId}));
-                self.$el.slideDown("fast");
-                Backbone.trigger(self.componentId + '-' + 'post-mostrar-noticia');  
-            });
-        },
         mostrarInfoNoticia: function(params)
         {
             var id = params.id;
@@ -70,6 +59,17 @@ define(['controller/_noticiaController','delegate/noticiaDelegate'], function() 
                     }
                 });       
             }
+        },
+        _renderMostrarInfoNoticia: function (params)
+        {
+            var self = this;
+            this.$el.slideUp("fast", function() {
+                /*Establece que en el <div> se despliegue el template de la variable ??. Como par?metros entran las variables establecidas dentro de los tags <%%> con sus valores como un objeto JSON. En este caso, la propiedad sports tendr? la lista que instanci? ?sportSearch? en la variable del bucle <% _.each(sports, function(sport) { %>*/
+ 
+                self.$el.html(self.mostrarInfoNoticiaTemplate({noticia: self.currentNoticiaModel, componentId: self.componentId}));
+                self.$el.slideDown("fast");
+                //Backbone.trigger(self.componentId + '-' + 'post-mostrar-noticia', {equipoId: equipoId});  
+            });
         }
     });
     return App.Controller.NoticiaController;
