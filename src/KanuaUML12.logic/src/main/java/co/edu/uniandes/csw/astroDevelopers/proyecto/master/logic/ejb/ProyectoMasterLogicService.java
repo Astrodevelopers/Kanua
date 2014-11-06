@@ -48,5 +48,10 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
     public String procesarContacto(String name, String email, String text, String id_equipo) {
         return "Hi";
     }
+    
+    public boolean realizarSolicitud(String name, String lname, String email, String link, String rol, 
+            String comment, String id) {
+        return true;
+    }
 
 }
