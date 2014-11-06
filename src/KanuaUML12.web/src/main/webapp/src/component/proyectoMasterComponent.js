@@ -88,8 +88,10 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 var rol = $('#rol').val();
                 var comment = $('#styled').val();
                 var id_equipo = params.equipoId;
+                
                 var validator =true;
                 var validationMessage = "";
+                
                 if(name.trim().length == 0) {
                     validationMessage += " El nombre no puede ser vacio.";
                     validator = false;
@@ -113,7 +115,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                     validator = false;
                 }
                 
-                if(link.trim.length == 0) {
+                if(link.trim().length == 0) {
                     validationMessage += " El link no debe ser vacio.";
                     validator = false;
                 }
@@ -123,7 +125,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                     validator = false;
                 }
                 
-                if(comment.trim.length > 140) {
+                if(comment.trim().length > 140) {
                     validationMessage += " La longitud del comentario debe ser menor a 140.";
                     validator = false;
                 }
@@ -136,7 +138,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 
                     var request = new XMLHttpRequest();
                     request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/realizarSolicitud?name="+name + 
-                            "&lname="+last_name + "&link=" + link + "&rol=" + rol + "&comment=" + comment + 
+                            "&lname="+last_name + "&email=" + email + "&link=" + link + "&rol=" + rol + "&comment=" + comment + 
                             "&id=" + id_equipo);
                     request.onreadystatechange = function() {
                         // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp /
