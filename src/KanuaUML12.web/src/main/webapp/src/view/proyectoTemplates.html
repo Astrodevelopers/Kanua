@@ -203,6 +203,7 @@
 </script> 
 
 <script type="text/template" id="generar-contacto">
+
     <div align="center" class="nombre-proyecto-info"> Contacto </div>
     <br>
     <head>
@@ -253,5 +254,4 @@
         <button onclick="Backbone.trigger('realizarSolicitud',{id:<%= proyecto.id %>, equipoId:<%= proyecto.get('equipo_proyectoId') %>}); return false" type="button" class="btn btn-info">Enviar</button>
        </form>
     </body>
-
 </script>
