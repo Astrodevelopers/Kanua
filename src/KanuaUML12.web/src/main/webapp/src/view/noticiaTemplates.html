@@ -2,10 +2,10 @@
 <script type="text/template" id="noticiaList">
      <div class="row" style="height: 300px; overflow-y: scroll;">
         <% _.each(noticias, function(noticia) { %>
-            <div id="celda-proyecto-<%= noticia.id %>" class="col-xs-1 celda-proyecto">
+            <div id="celda-noticia-<%= noticia.id %>" class="col-xs-1 celda-proyecto">
             <!-- Aca se ponen las imagenes y nombres las cuales mandan un evento si se les hace click -->
-                <img onclick="Backbone.trigger('<%=componentId %>-mostrar-noticia',{id:<%= noticia.id %>}); return false" class="imagen-noticia" src="<%= htmlEncode(noticia.getDisplay('imagen')) %>"/>
-                <div onclick="Backbone.trigger('<%=componentId %>-mostrar-noticia',{id:<%= noticia.id %>}); return false" class="nombre-noticia">
+                <img onclick="Backbone.trigger('<%=componentId %>-mostrar-noticia',{id:<%= noticia.id %>}); return false" class="imagen-proyecto" src="<%= htmlEncode(noticia.getDisplay('imagen')) %>"/>
+                <div onclick="Backbone.trigger('<%=componentId %>-mostrar-noticia',{id:<%= noticia.id %>}); return false" class="nombre-proyecto">
                     <%= htmlEncode(noticia.getDisplay('name')) %>
                 </div>
                 <center>
