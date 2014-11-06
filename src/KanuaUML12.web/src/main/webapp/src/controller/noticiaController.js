@@ -42,7 +42,7 @@ define(['controller/_noticiaController','delegate/noticiaDelegate'], function() 
  
                 self.$el.html(self.mostrarInfoNoticiaTemplate({noticia: self.currentNoticiaModel, componentId: self.componentId}));
                 self.$el.slideDown("fast");
-                //Backbone.trigger(self.componentId + '-' + 'post-mostrar-noticia', {equipoId: equipoId});  
+                Backbone.trigger(self.componentId + '-' + 'post-mostrar-noticia');  
             });
         },
         mostrarInfoNoticia: function(params)
