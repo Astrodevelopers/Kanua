@@ -57,7 +57,7 @@ public class ProyectoMasterService extends _ProyectoMasterService {
     
     @GET
     @Path("/realizarSolicitud")
-    public void realizarSolicitud(@QueryParam("name") String name, @QueryParam("lname") String lname,
+    public boolean realizarSolicitud(@QueryParam("name") String name, @QueryParam("lname") String lname,
             @QueryParam("email") String email, @QueryParam("link") String link, @QueryParam("rol") String rol, 
             @QueryParam("comment") String comment, @QueryParam("id") String id) {
         System.out.println(name);
@@ -67,6 +67,7 @@ public class ProyectoMasterService extends _ProyectoMasterService {
         System.out.println(rol);
         System.out.println(comment);
         System.out.println(id);
+        return true;
     }
     
 }
