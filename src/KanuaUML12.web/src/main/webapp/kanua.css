@@ -43,3 +43,47 @@
     font-size: 50px;
     font-weight: bold;
 }
+.celda-charla {
+  padding: 15px;
+  width: 430px;
+}
+
+.imagen-charla {
+  width: 200px;
+  height: 300px;
+  border: #D0D0D0 solid 1px;
+  }
+
+.nombre-charla{
+  height: 40px;
+  overflow: hidden;
+  line-height: 19px;
+  font-size: 19px;
+  font-weight: bold;
+  color: #338585;
+  margin-top: 4px;
+}
+
+.fecha-charla{
+    height: 40px;
+  overflow: hidden;
+  line-height: 15px;
+  font-size: 15px;
+  font-weight: normal;
+  color: #338585;
+  margin-top: 4px;
+}
+.fecha-charla-titulo{
+    height: 40px;
+  overflow: hidden;
+  line-height: 15px;
+  font-size: 15px;
+  font-weight: bold;
+  color: #338585;
+  margin-top: 4px;
+}
+
+.descripcion-charla{
+    vertical-align:top;
+    text-align: justify;
+}
