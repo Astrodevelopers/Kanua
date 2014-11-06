@@ -1,44 +1,51 @@
+<link rel="stylesheet" href="kanua.css">
 <script type="text/template" id="tallerList">
-    <div class="panel panel-default">
-    <!-- Default panel contents -->
-    <table class="table striped">
-    <thead>
-    <tr>
-		 <th>Name</th>
-		 <th>Informacion</th>
-		 <th>Imagen</th>
-		 <th>Titulo</th>
-		 <th>Tema</th>
-		 <th>Fecha Evento</th>
-		 <th>Publicacion</th>
-    <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% _.each(tallers, function(taller) { %>
-    <tr>
-		<td><%= htmlEncode(taller.getDisplay('name')) %></td>
-		<td><%= htmlEncode(taller.getDisplay('informacion')) %></td>
-		<td><%= htmlEncode(taller.getDisplay('imagen')) %></td>
-		<td><%= htmlEncode(taller.getDisplay('titulo')) %></td>
-		<td><%= htmlEncode(taller.getDisplay('tema')) %></td>
-		<td><%= htmlEncode(taller.getDisplay('fechaEvento')) %></td>
-		<td><%= htmlEncode(taller.getDisplay('publicacion')) %></td>
-    <td>
-    <% if(showEdit) {%>
-    <a onclick="Backbone.trigger('<%= componentId %>-taller-edit',{id:<%= taller.id %>}); return false" >Edit</a> |
-	<% } %> 
-	<% if(showDelete) {%>
-    <a onclick="Backbone.trigger('<%= componentId %>-taller-delete',{id:<%= taller.id %>}); return false" >Delete</a> 
-	<% } %>    
-	</td>
-    </tr>
-    <% }); %>
-    </tbody>
-    </table>
-    </div>
-</script>
+    <!-- Esta parte pone la malla de taller -->
+    <input type="text"  id="tagTallerbusqueda" name="buscaTaller" placeholder="tag" value=""/>
+    <button onclick="Backbone.trigger('buscarTallerPorTag',{}); return false" type="button" class="btn btn-info">Busca</button>
 
+    <div class="row" style="height: 990px; overflow-y: scroll;">
+        <% _.each(tallers, function(taller) { %>
+            <div id="celda-taller-<%= taller.id %>" class="col-xs-1 celda-charla">
+            <!-- Aca se ponen las imagenes y nombres las cuales mandan un evento si se les hace click -->
+            <div  class="nombre-charla">
+                       <%= htmlEncode(taller.getDisplay('name')) %>
+            </div>
+               <table>
+                <tr>
+                 
+                    <th style="padding:8px;">
+                       
+                        <img  class="imagen-charla" src="<%= htmlEncode(taller.getDisplay('imagen')) %>"/>
+                        <div  class="fecha-charla">
+                            <span class="fecha-charla-titulo">Fecha: </span>
+                            <%= htmlEncode(taller.getDisplay('fechaEvento')) %>
+                        </div>
+                    </th>
+                    <th class="descripcion-charla">
+                        <div >
+                            <div class="fecha-charla-titulo">Descripcion: </div>
+                            <div >
+                            <%= htmlEncode(taller.getDisplay('informacion')) %>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+            </table>
+                <center>
+                    <% if(showEdit) {%>
+                        <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-taller-edit',{id:<%= taller.id %>}); return false" >Editar</a>
+                    <% } %> 
+                    <% if(showDelete) {%>
+                        <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-taller-delete',{id:<%= taller.id %>}); return false" >Eliminar</a> 
+                    <% } %>  
+                </center>
+            </div>
+        <% }); %>
+    </div>
+    
+ 
+</script>
 <script type="text/template" id="taller">
     <div class="form-group">
     <form role="form" id="<%= componentId %>-tallerForm">
