@@ -76,6 +76,11 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
             
             Backbone.on('realizarSolicitud', function(params) {
                 //alert(JSON.stringify(params));
+                if(typeof(String.prototype.trim) === "undefined") {
+                    String.prototype.trim = function() {
+                    return String(this).replace(/^\s+|\s+$/g, '');
+                };
+}
                 var name = $('#nombre_contacto').val();
                 var last_name = $('#apellido_contacto').val();
                 var email = $('#email_contacto').val();
@@ -83,33 +88,64 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 var rol = $('#rol').val();
                 var comment = $('#styled').val();
                 var id_equipo = params.equipoId;
-                var debugging = true;
-                if(debugging) {                
-                    var debugMessage = name + '\n' + last_name + '\n' + 
-                        email + '\n' + link + '\n' + 
-                        rol + '\n' + comment + '\n' + id_equipo;
-                    alert(debugMessage);
+                var validator =true;
+                var validationMessage = "";
+                if(name.trim().length == 0) {
+                    validationMessage += " El nombre no puede ser vacio.";
+                    validator = false;
                 }
+                if(last_name.trim().length == 0) {
+                    validationMessage += " El apellido no puede ser vacio.";
+                    validator = false;
+                }
+                function validateEmail(email) { 
+                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(email);
+                }
+                
+                if(!validateEmail(email)) {
+                    validationMessage += " EMAIL no valido.";
+                    validator = false;
+                }
+                
+                if(email.trim().length == 0) {                    
+                    validationMessage += " El email no puede ser vacio.";
+                    validator = false;
+                }
+                
+                if(link.trim.length == 0) {
+                    validationMessage += " El link no debe ser vacio.";
+                    validator = false;
+                }
+                
+                if(!/pdf.yt/.test(link)) {
+                    validationMessage += " El recurso debe estar en https://pdf.yt.";
+                    validator = false;
+                }
+                
+                if(comment.trim.length > 140) {
+                    validationMessage += " La longitud del comentario debe ser menor a 140.";
+                    validator = false;
+                }
+                
+                if(!validator) {
+                    alert(validationMessage);
+                }
+                
                 else {
-                    alert("We did it!!!");
-                }
-                /**
-                var request = new XMLHttpRequest();
-                request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/buscarProyectosPorTag?tag="+tag);
-                request.onreadystatechange = function() {
-                    if (request.readyState === 4 && request.status === 200) {
-                        respuesta=request.responseText;
-                        ids=respuesta.split(',');
-                        for (u=0; u<ids.length; u++) {
-                           id=ids[u];
-                           if (id!="") {
-                               $('#celda-proyecto-'+id).show();
-                           }
+                
+                    var request = new XMLHttpRequest();
+                    request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/realizarSolicitud?name="+name + 
+                            "&lname="+last_name + "&link=" + link + "&rol=" + rol + "&comment=" + comment + 
+                            "&id=" + id_equipo);
+                    request.onreadystatechange = function() {
+                        // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp /
+                        if (request.readyState === 4 && request.status === 200) {
+                            alert("Yeihhh");
                         }
-                    }
-                };
-                request.send(null);
-                **/
+                    };
+                    request.send(null);
+                }
                 
                 
                 
