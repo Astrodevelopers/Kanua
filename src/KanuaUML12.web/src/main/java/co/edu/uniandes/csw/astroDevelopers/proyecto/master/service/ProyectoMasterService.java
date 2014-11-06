@@ -52,7 +52,21 @@ public class ProyectoMasterService extends _ProyectoMasterService {
     @GET
     @Path("/buscarProyectosPorTag")
     public String buscarProyectosPorTag(@QueryParam("tag") String tag) {
-        return proyectoLogicService.buscarProyectosPorTag(tag);
+        return proyectoLogicService.buscarProyectosPorTag(tag);        
+    }
+    
+    @GET
+    @Path("/realizarSolicitud")
+    public void realizarSolicitud(@QueryParam("name") String name, @QueryParam("lname") String lname,
+            @QueryParam("email") String email, @QueryParam("link") String link, @QueryParam("rol") String rol, 
+            @QueryParam("comment") String comment, @QueryParam("id") String id) {
+        System.out.println(name);
+        System.out.println(lname);
+        System.out.println(email);
+        System.out.println(link);
+        System.out.println(rol);
+        System.out.println(comment);
+        System.out.println(id);
     }
     
 }
