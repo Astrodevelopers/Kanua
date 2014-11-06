@@ -83,7 +83,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 var rol = $('#rol').val();
                 var comment = $('#styled').val();
                 var id_equipo = params.equipoId;
-                var debugging = false;
+                var debugging = true;
                 if(debugging) {                
                     var debugMessage = name + '\n' + last_name + '\n' + 
                         email + '\n' + link + '\n' + 
