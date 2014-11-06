@@ -1,42 +1,30 @@
+<link rel="stylesheet" href="kanua.css">
 <script type="text/template" id="charlaList">
-    <div class="panel panel-default">
-    <!-- Default panel contents -->
-    <table class="table striped">
-    <thead>
-    <tr>
-		 <th>Name</th>
-		 <th>Titulo</th>
-		 <th>Informacion</th>
-		 <th>Link</th>
-		 <th>Fecha Evento</th>
-		 <th>Imagen</th>
-		 <th>Publicacion</th>
-    <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-    <% _.each(charlas, function(charla) { %>
-    <tr>
-		<td><%= htmlEncode(charla.getDisplay('name')) %></td>
-		<td><%= htmlEncode(charla.getDisplay('titulo')) %></td>
-		<td><%= htmlEncode(charla.getDisplay('informacion')) %></td>
-		<td><%= htmlEncode(charla.getDisplay('link')) %></td>
-		<td><%= htmlEncode(charla.getDisplay('fechaEvento')) %></td>
-		<td><%= htmlEncode(charla.getDisplay('imagen')) %></td>
-		<td><%= htmlEncode(charla.getDisplay('publicacion')) %></td>
-    <td>
-    <% if(showEdit) {%>
-    <a onclick="Backbone.trigger('<%= componentId %>-charla-edit',{id:<%= charla.id %>}); return false" >Edit</a> |
-	<% } %> 
-	<% if(showDelete) {%>
-    <a onclick="Backbone.trigger('<%= componentId %>-charla-delete',{id:<%= charla.id %>}); return false" >Delete</a> 
-	<% } %>    
-	</td>
-    </tr>
-    <% }); %>
-    </tbody>
-    </table>
+    <!-- Esta parte pone la malla de charla -->
+    <input type="text"  id="tagCharlabusqueda" name="busca" placeholder="tag" value=""/>
+    <button onclick="Backbone.trigger('buscarCharlaPorTag',{}); return false" type="button" class="btn btn-info">Busca</button>
+
+    <div class="row" style="height: 370px; overflow-y: scroll;">
+        <% _.each(charlas, function(charla) { %>
+            <div id="celda-charla-<%= charla.id %>" class="col-xs-1 celda-charla">
+            <!-- Aca se ponen las imagenes y nombres las cuales mandan un evento si se les hace click -->
+                <img onclick="Backbone.trigger('<%= componentId %>-charla-mostrar-info',{id:<%= charla.id %>}); return false" class="imagen-proyecto" src="<%= htmlEncode(charla.getDisplay('imagen')) %>"/>
+                <div onclick="Backbone.trigger('<%= componentId %>-charla-mostrar-info',{id:<%= charla.id %>}); return false" class="nombre-proyecto">
+                    <%= htmlEncode(charla.getDisplay('name')) %>
+                </div>
+                <center>
+                    <% if(showEdit) {%>
+                        <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-charla-edit',{id:<%= charla.id %>}); return false" >Editar</a>
+                    <% } %> 
+                    <% if(showDelete) {%>
+                        <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-charla-delete',{id:<%= charla.id %>}); return false" >Eliminar</a> 
+                    <% } %>  
+                </center>
+            </div>
+        <% }); %>
     </div>
+    
+ 
 </script>
 
 <script type="text/template" id="charla">
