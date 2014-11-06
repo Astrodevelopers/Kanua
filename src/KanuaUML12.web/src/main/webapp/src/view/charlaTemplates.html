@@ -4,7 +4,7 @@
     <input type="text"  id="tagCharlabusqueda" name="busca" placeholder="tag" value=""/>
     <button onclick="Backbone.trigger('buscarCharlaPorTag',{}); return false" type="button" class="btn btn-info">Busca</button>
 
-    <div class="row" style="height: 370px; overflow-y: scroll;">
+    <div class="row" style="height: 990px; overflow-y: scroll;">
         <% _.each(charlas, function(charla) { %>
             <div id="celda-charla-<%= charla.id %>" class="col-xs-1 celda-charla">
             <!-- Aca se ponen las imagenes y nombres las cuales mandan un evento si se les hace click -->
