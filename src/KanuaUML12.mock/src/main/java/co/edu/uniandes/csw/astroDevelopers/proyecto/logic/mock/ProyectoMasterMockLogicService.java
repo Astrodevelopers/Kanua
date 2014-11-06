@@ -44,4 +44,9 @@ public class ProyectoMasterMockLogicService extends _ProyectoMasterMockLogicServ
         return "";
     }
     
+    public boolean realizarSolicitud(String name, String lname, String email, String link, String rol, 
+            String comment, String id) {
+        return true;
+    }
+    
 }
