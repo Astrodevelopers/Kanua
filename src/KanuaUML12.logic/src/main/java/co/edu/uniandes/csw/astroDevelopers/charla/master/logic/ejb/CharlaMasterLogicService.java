@@ -41,4 +41,7 @@ import javax.enterprise.inject.Default;
 @LocalBean
 public class CharlaMasterLogicService extends _CharlaMasterLogicService implements ICharlaMasterLogicService {
 
+     public String buscarCharlaPorTag(String tag){
+       return charlaMasterPersistance.buscarCharlaPorTag(tag);
+    }
 }
