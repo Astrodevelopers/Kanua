@@ -35,10 +35,53 @@ import javax.ejb.Stateless;
 import co.edu.uniandes.csw.astroDevelopers.charla.master.persistence.api.ICharlaMasterPersistence;
 import javax.ejb.LocalBean;
 import javax.enterprise.inject.Default;
+import javax.persistence.Query;
+import co.edu.uniandes.csw.astroDevelopers.charla.persistence.converter.CharlaConverter;
+import co.edu.uniandes.csw.astroDevelopers.charla.logic.dto.CharlaDTO;
+import java.util.List;
 
 @Default
 @Stateless 
 @LocalBean
 public class CharlaMasterPersistence extends _CharlaMasterPersistence  implements ICharlaMasterPersistence {
 
+        public String buscarCharlaPorTag(String tag) {
+        // https://access.redhat.com/documentation/en-US/JBoss_Enterprise_Application_Platform/5/html/RESTEasy_Reference_Guide/Using__Path_and__GET___POST__etc..html
+        // Query q = entityManager.createQuery("select u from ProyectoEntity u inner join Proyectotag_proyectoEntity s on s.proyectoId=u.id inner join TagEntity t on t.id=s.tag_proyectoId where t.name=:valortag");
+        // q.setParameter("valortag",tag);
+        String tags[]=tag.split("\\;");
+        String condicion="";
+        for (int i=0; i<tags.length; i++)
+        {
+            if (!condicion.isEmpty())
+            {
+                condicion+=" OR ";
+            }
+            condicion+="t.name=:valortag"+i;
+        }
+        Query q=null;
+        if (tag.isEmpty())
+        {
+            q = entityManager.createQuery("select u from CharlaEntity u");
+        }
+        else
+        {
+            q = entityManager.createQuery("select u from CharlaEntity u inner join Charlatag_charlaEntity s on s.charlaId=u.id inner join TagEntity t on t.id=s.tag_charlaId where "+condicion);
+            for(int j=0; j<tags.length; j++)
+            {
+                q.setParameter("valortag"+j,tags[j]);
+            }
+        }
+        List<CharlaDTO> charlas=CharlaConverter.entity2PersistenceDTOList(q.getResultList());
+        String ids="";
+        for(CharlaDTO charla:charlas)
+        {
+            if(!ids.isEmpty())
+            {
+                ids+=",";
+            }
+            ids+=charla.getId();
+        }
+        return ids;
+    }
 }
