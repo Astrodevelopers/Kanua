@@ -35,5 +35,8 @@ import javax.inject.Singleton;
 import co.edu.uniandes.csw.astroDevelopers.charla.master.logic.api.ICharlaMasterLogicService;
 @Singleton
 public class CharlaMasterMockLogicService extends _CharlaMasterMockLogicService implements ICharlaMasterLogicService {
-	
+
+    public String buscarCharlaPorTag(String tag){
+        return "";
+    }	
 }
