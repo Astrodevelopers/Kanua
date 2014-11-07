@@ -33,6 +33,8 @@ package co.edu.uniandes.csw.astroDevelopers.charla.master.service;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.ws.rs.GET;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -44,5 +46,9 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class CharlaMasterService extends _CharlaMasterService {
 
-
+@GET
+    @Path("/buscarCharlaPorTag")
+    public String buscarCharlaPorTag(@QueryParam("tag") String tag) {
+        return charlaLogicService.buscarCharlaPorTag(tag);        
+    }
 }
