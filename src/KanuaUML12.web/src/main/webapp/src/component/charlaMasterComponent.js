@@ -11,6 +11,40 @@ define(['controller/selectionController', 'model/cacheModel', 'model/charlaMaste
             var uComponent = new CharlaComponent();
             uComponent.initialize();
             uComponent.render('main');
+            
+            
+            Backbone.on('buscarCharlaPorTag', function(params) {
+                listaCharlas=uComponent.componentController.charlaModelList.models;
+                for (var j = 0; j < listaCharlas.length; j++) {
+                    charla=listaCharlas[j];
+                    $('#celda-charla-'+charla.id).hide();
+                }
+                // https://www.inkling.com/read/javascript-definitive-guide-david-flanagan-6th/chapter-18/getting-an-http-response
+                var tag=$('#tagCharlabusqueda').val();
+                var request = new XMLHttpRequest();
+                request.open("GET", "/KanuaUML12.web/webresources/CharlaMaster/buscarCharlaPorTag?tag="+tag);
+                request.onreadystatechange = function() {
+                    // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp
+                    if (request.readyState === 4 && request.status === 200) {
+                        respuesta=request.responseText;
+                        ids=respuesta.split(',');
+                        for (u=0; u<ids.length; u++) {
+                           id=ids[u];
+                           if (id!="") {
+                               $('#celda-charla-'+id).show();
+                           }
+                        }
+                    }
+                };
+                request.send(null);
+            }); 
+            
+            
+            
+            
+            
+            
+            
             Backbone.on(uComponent.componentId + '-post-charla-create', function(params) {
                 self.renderChilds(params);
             });
