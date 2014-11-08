@@ -84,4 +84,11 @@ public class ProyectoMasterPersistence extends _ProyectoMasterPersistence  imple
         return ids;
     }
     
+    public String procesarContacto(String name, String email, String text, String id_equipo) {
+        String ans = "Hola mundo";
+        return ans;
+    }
+    
+    
+    
 }
