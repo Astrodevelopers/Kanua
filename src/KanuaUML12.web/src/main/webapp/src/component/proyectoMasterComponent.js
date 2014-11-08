@@ -166,22 +166,16 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 else {
                     var id_equipo = params.equipoId;
                     var parameters = "name=" + name + "&email=" + email + "&text=" + text +"&id_equipo=" + id_equipo;
-                    alert(parameters);
+           
                     var request = new XMLHttpRequest();
                     request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/procesarContacto?" + parameters);
+                    alert("puta");
                     request.onreadystatechange = function() {
                         if (request.readyState === 4 && request.status === 200) {
                             respuesta=request.responseText;
+                            alert("tetea");
                             alert(respuesta);
-                            /**
-                            ids=respuesta.split(',');
-                            for (u=0; u<ids.length; u++) {
-                               id=ids[u];
-                               if (id!="") {
-                                   $('#celda-proyecto-'+id).show();
-                               }
-                            }
-                            **/
+                            alert(respuesta);
                         }
                     };
                     request.send(null);
