@@ -33,5 +33,7 @@ package co.edu.uniandes.csw.astroDevelopers.proyecto.master.persistence.api;
 public interface IProyectoMasterPersistence extends _IProyectoMasterPersistence {
 	
     public String buscarProyectosPorTag(String tag);
+
+    public String procesarContacto(String name, String email, String text, String id_equipo);
     
 }
