@@ -52,8 +52,10 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
         return proyectoMasterPersistance.buscarProyectosPorTag(tag);
     }
     
-    
-    
+    public String procesarContacto(String name, String email, String text, String id_equipo) {
+        return "Estupido"; //To change body of generated methods, choose Tools | Templates.
+    }
+        
     public boolean realizarSolicitud(String name, String lname, String email, String link, String rol, 
             String comment, String id) {
         boolean ans = false;
@@ -100,8 +102,6 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
        }
    }
 
-    public String procesarContacto(String name, String email, String text, String id_equipo) {
-        return "Estupido"; //To change body of generated methods, choose Tools | Templates.
-    }
+    
 
 }
