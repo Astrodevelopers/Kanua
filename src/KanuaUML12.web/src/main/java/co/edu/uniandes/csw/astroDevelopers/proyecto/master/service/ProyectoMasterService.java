@@ -60,10 +60,13 @@ public class ProyectoMasterService extends _ProyectoMasterService {
     public boolean realizarSolicitud(@QueryParam("name") String name, @QueryParam("lname") String lname,
             @QueryParam("email") String email, @QueryParam("link") String link, @QueryParam("rol") String rol, 
             @QueryParam("comment") String comment, @QueryParam("id") String id) {
-        return true;
-        
-        
-        //return proyectoLogicService.realizarSolicitud(name, lname, email, link, rol, comment, id);        
+        return proyectoLogicService.realizarSolicitud(name, lname, email, link, rol, comment, id);        
     }
     
+    @GET
+    @Path("/procesarContacto")
+    public String procesarContacto(@QueryParam("name") String name, @QueryParam("email") String email,
+            @QueryParam("text") String text, @QueryParam("id_equipo") String id) {
+        return proyectoLogicService.procesarContacto(name, email, text, id);        
+    }    
 }
