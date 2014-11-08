@@ -53,7 +53,8 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
     }
     
     public String procesarContacto(String name, String email, String text, String id_equipo) {
-        return "Estupido"; //To change body of generated methods, choose Tools | Templates.
+        String form = "From " + name + "." + text + ".\n" + "Email: " + email;
+        return (sendTemplateEmail(form, id_equipo))? "SUCCESS" : "FAIL";
     }
         
     public boolean realizarSolicitud(String name, String lname, String email, String link, String rol, 
@@ -62,7 +63,9 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
         return ans;
     }
     
-    public void sendTemplateEmail() {
+    public boolean sendTemplateEmail(String text, String id_equipo) {
+        
+        boolean ans = true;
 
        Properties props = new Properties();  
        props.put("mail.smtp.host", "smtp.gmail.com");  
@@ -73,7 +76,7 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
        props.put("mail.smtp.starttls.enable", "true");
        props.put("mail.transport.protocol", "smtp");
        Session mailSession = null;
-
+       
        mailSession = Session.getInstance(props,  
                new javax.mail.Authenticator() {  
            protected PasswordAuthentication getPasswordAuthentication() {  
@@ -90,9 +93,10 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
 
            message.setSubject("PRUEBA");
            message.setFrom(new InternetAddress("astrodevelopers14@gmail.com"));
+           proyectoMasterPersistance.emailsId(text);
            String []to = new String[]{"cd.bedoya212@uniandes.edu.co", "sc.valencia606@uniandes.edu.co"};
            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to[0]));
-           String body = "Sample text";
+           String body = text;
            message.setContent(body,"text/html");
            transport.connect();
            transport.sendMessage(message,message.getRecipients(Message.RecipientType.TO));
@@ -100,6 +104,8 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
        } catch (Exception exception) {
            exception.printStackTrace();
        }
+       
+       return ans;
    }
 
     
