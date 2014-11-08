@@ -173,7 +173,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                     request.onreadystatechange = function() {
                         if (request.readyState === 4 && request.status === 200) {
                             respuesta=request.responseText;
-                            alert("tetea");
+                            alert("te");
                             alert(respuesta);
                             alert(respuesta);
                         }
