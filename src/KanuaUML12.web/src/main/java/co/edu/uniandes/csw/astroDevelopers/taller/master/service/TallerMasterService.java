@@ -37,12 +37,21 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import co.edu.uniandes.csw.astroDevelopers.taller.master.logic.dto.TallerMasterDTO;
+import javax.ws.rs.GET;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.QueryParam;
 
 @Path("/TallerMaster")
 @Stateless
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TallerMasterService extends _TallerMasterService {
+     @GET
+    @Path("/buscarTallersPorTag")
+    public String buscarTallersPorTag(@QueryParam("tag") String tag) {
+        return tallerLogicService.buscarTallersPorTag(tag);
+    }
 
 
 }
