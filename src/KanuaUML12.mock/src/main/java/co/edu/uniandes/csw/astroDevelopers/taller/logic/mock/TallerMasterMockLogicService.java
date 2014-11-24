@@ -35,5 +35,7 @@ import javax.inject.Singleton;
 import co.edu.uniandes.csw.astroDevelopers.taller.master.logic.api.ITallerMasterLogicService;
 @Singleton
 public class TallerMasterMockLogicService extends _TallerMasterMockLogicService implements ITallerMasterLogicService {
-	
+    public String buscarTallersPorTag(String tag){
+        return "";
+    }
 }
