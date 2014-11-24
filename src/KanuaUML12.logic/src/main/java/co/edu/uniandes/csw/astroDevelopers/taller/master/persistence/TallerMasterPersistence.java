@@ -35,10 +35,53 @@ import javax.ejb.Stateless;
 import co.edu.uniandes.csw.astroDevelopers.taller.master.persistence.api.ITallerMasterPersistence;
 import javax.ejb.LocalBean;
 import javax.enterprise.inject.Default;
+import java.util.List;
+import co.edu.uniandes.csw.astroDevelopers.taller.persistence.converter.TallerConverter;
+import co.edu.uniandes.csw.astroDevelopers.taller.logic.dto.TallerDTO;
+import javax.persistence.Query;
 
 @Default
 @Stateless 
 @LocalBean
 public class TallerMasterPersistence extends _TallerMasterPersistence  implements ITallerMasterPersistence {
+    public String buscarTallersPorTag(String tag) {
+        // https://access.redhat.com/documentation/en-US/JBoss_Enterprise_Application_Platform/5/html/RESTEasy_Reference_Guide/Using__Path_and__GET___POST__etc..html
+        // Query q = entityManager.createQuery("select u from ProyectoEntity u inner join Proyectotag_proyectoEntity s on s.proyectoId=u.id inner join TagEntity t on t.id=s.tag_proyectoId where t.name=:valortag");
+        // q.setParameter("valortag",tag);
+        String tags[]=tag.split("\\;");
+        String condicion="";
+        for (int i=0; i<tags.length; i++)
+        {
+            if (!condicion.isEmpty())
+            {
+                condicion+=" OR ";
+            }
+            condicion+="t.name=:valortag"+i;
+        }
+        Query q=null;
+        if (tag.isEmpty())
+        {
+            q = entityManager.createQuery("select u from TallerEntity u");
+        }
+        else
+        {
+            q = entityManager.createQuery("select u from TallerEntity u inner join Tallertag_tallerEntity s on s.tallerId=u.id inner join TagEntity t on t.id=s.tag_tallerId where "+condicion);
+            for(int j=0; j<tags.length; j++)
+            {
+                q.setParameter("valortag"+j,tags[j]);
+            }
+        }
+        List<TallerDTO> tallers=TallerConverter.entity2PersistenceDTOList(q.getResultList());
+        String ids="";
+        for(TallerDTO taller:tallers)
+        {
+            if(!ids.isEmpty())
+            {
+                ids+=",";
+            }
+            ids+=taller.getId();
+        }
+        return ids;
+    }
 
 }
