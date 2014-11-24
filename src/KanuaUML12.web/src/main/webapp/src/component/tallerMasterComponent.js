@@ -27,6 +27,33 @@ define(['controller/selectionController', 'model/cacheModel', 'model/tallerMaste
             Backbone.on('taller-master-model-error', function(error) {
                 Backbone.trigger(uComponent.componentId + '-' + 'error', {event: 'taller-master-save', view: self, message: error});
             });
+            
+            Backbone.on('buscarTallersPorTag', function(params) {
+                listaTallers=uComponent.componentController.tallerModelList.models;
+                for (var j = 0; j < listaTallers.length; j++) {
+                    taller=listaTallers[j];
+                    $('#celda-taller-'+taller.id).hide();
+                }
+                // https://www.inkling.com/read/javascript-definitive-guide-david-flanagan-6th/chapter-18/getting-an-http-response
+                var tag=$('#tagbusquedaTaller').val();
+                var request = new XMLHttpRequest();
+                request.open("GET", "/KanuaUML12.web/webresources/TallerMaster/buscarTallersPorTag?tag="+tag);
+                request.onreadystatechange = function() {
+                    // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp
+                    if (request.readyState === 4 && request.status === 200) {
+                        respuesta=request.responseText;
+                        ids=respuesta.split(',');
+                        for (u=0; u<ids.length; u++) {
+                           id=ids[u];
+                           if (id!="") {
+                               $('#celda-taller-'+id).show();
+                           }
+                        }
+                    }
+                };
+                request.send(null);
+            });
+            
             Backbone.on(uComponent.componentId + '-instead-taller-save', function(params) {
                 self.model.set('tallerEntity', params.model);
                 if (params.model) {
