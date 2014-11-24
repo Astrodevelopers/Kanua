@@ -40,5 +40,7 @@ import javax.enterprise.inject.Default;
 @Stateless
 @LocalBean
 public class TallerMasterLogicService extends _TallerMasterLogicService implements ITallerMasterLogicService {
-
+    public String buscarTallersPorTag(String tag){
+        return tallerMasterPersistance.buscarTallersPorTag(tag);
+    }
 }
