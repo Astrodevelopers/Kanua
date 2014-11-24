@@ -1,8 +1,8 @@
 <link rel="stylesheet" href="kanua.css">
 <script type="text/template" id="tallerList">
     <!-- Esta parte pone la malla de taller -->
-    <input type="text"  id="tagTallerbusqueda" name="buscaTaller" placeholder="tag" value=""/>
-    <button onclick="Backbone.trigger('buscarTallerPorTag',{}); return false" type="button" class="btn btn-info">Busca</button>
+    <input type="text"  id="tagbusquedaTaller" name="buscaTaller" placeholder="tag" value=""/>
+    <button onclick="Backbone.trigger('buscarTallersPorTag',{}); return false" type="button" class="btn btn-info">Busca</button>
 
     <div class="row" style="height: 990px; overflow-y: scroll;">
         <% _.each(tallers, function(taller) { %>
@@ -43,6 +43,7 @@
             </div>
         <% }); %>
     </div>
+   
     
  
 </script>
