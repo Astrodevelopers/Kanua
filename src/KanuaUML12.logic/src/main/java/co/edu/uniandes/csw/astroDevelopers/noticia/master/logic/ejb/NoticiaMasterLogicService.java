@@ -40,5 +40,7 @@ import javax.enterprise.inject.Default;
 @Stateless
 @LocalBean
 public class NoticiaMasterLogicService extends _NoticiaMasterLogicService implements INoticiaMasterLogicService {
-
+    public String buscarNoticiasPorTitulo(String titulo){
+        return noticiaMasterPersistance.buscarNoticiasPorTitulo(titulo);
+    }
 }
