@@ -33,6 +33,8 @@ package co.edu.uniandes.csw.astroDevelopers.proyecto.master.logic.ejb;
 
 import co.edu.uniandes.csw.astroDevelopers.proyecto.master.logic.api.IProyectoMasterLogicService;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -53,8 +55,15 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
     }
     
     public String procesarContacto(String name, String email, String text, String id_equipo) {
-        String form = "From " + name + "." + text + ".\n" + "Email: " + email;
-        return (sendTemplateEmail(form, id_equipo))? "SUCCESS" : "FAIL";
+        try {
+            String form = "From: " + name + ".";
+            form += '\n' + "Text: " + text + ".";
+            form += '\n' + "Email: " + email + ".";
+            sendTemplateEmail(form, id_equipo);
+            return "SUCCESS";
+        } catch (Exception e) {
+            return "FAIL";
+        }
     }
         
     public boolean realizarSolicitud(String name, String lname, String email, String link, String rol, 
@@ -63,51 +72,40 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
         return ans;
     }
     
-    public boolean sendTemplateEmail(String text, String id_equipo) {
+    public boolean sendTemplateEmail(String text, String id_equipo) throws Exception {
         
-        boolean ans = true;
-
-       Properties props = new Properties();  
-       props.put("mail.smtp.host", "smtp.gmail.com");  
-       props.put("mail.smtp.auth", "true");  
-       props.put("mail.debug", "true");  
-       props.put("mail.smtp.port", 25);  
-       props.put("mail.smtp.socketFactory.port", 25);  
-       props.put("mail.smtp.starttls.enable", "true");
-       props.put("mail.transport.protocol", "smtp");
-       Session mailSession = null;
-       
-       mailSession = Session.getInstance(props,  
-               new javax.mail.Authenticator() {  
-           protected PasswordAuthentication getPasswordAuthentication() {  
-               return new PasswordAuthentication("astrodevelopers14", "Astrodevelopers2014");  
-           }  
-       });  
-
-
-       try {
-
-           Transport transport = mailSession.getTransport();
-
-           MimeMessage message = new MimeMessage(mailSession);
-
-           message.setSubject("PRUEBA");
-           message.setFrom(new InternetAddress("astrodevelopers14@gmail.com"));
-           proyectoMasterPersistance.emailsId(text);
-           String []to = new String[]{"cd.bedoya212@uniandes.edu.co", "sc.valencia606@uniandes.edu.co"};
-           message.addRecipient(Message.RecipientType.TO, new InternetAddress(to[0]));
-           String body = text;
-           message.setContent(body,"text/html");
-           transport.connect();
-           transport.sendMessage(message,message.getRecipients(Message.RecipientType.TO));
-           transport.close();
-       } catch (Exception exception) {
-           exception.printStackTrace();
-       }
-       
-       return ans;
-   }
-
-    
-
+        text = text.replaceAll("_", " ");
+        
+        
+        Properties props = new Properties();
+        // Nombre del host de correo, es smtp.gmail.com
+        props.setProperty("mail.smtp.host", "smtp.gmail.com");
+        // TLS si está disponible
+        props.setProperty("mail.smtp.starttls.enable", "true");
+        // Puerto de gmail para envio de correos
+        props.setProperty("mail.smtp.port","587");
+        // Nombre del usuario
+        props.setProperty("mail.smtp.user", "astrodevelopers14@gmail.com");
+        // Si requiere o no usuario y password para conectarse.
+        props.setProperty("mail.smtp.auth", "true");
+        Session session = Session.getDefaultInstance(props);
+        session.setDebug(true);
+        MimeMessage message = new MimeMessage(session);
+        // Quien envia el correo
+        message.setFrom(new InternetAddress("astrodevelopers14@gmail.com"));
+        
+        // A quien va dirigido 
+        
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress("sc.valencia606@uniandes.edu.co"));
+        
+        message.setSubject("Contacto Kanua");
+        message.setText(text);
+        Transport t = session.getTransport("smtp");
+        t.connect("astrodevelopers14@gmail.com","Astrodevelopers2014");
+        t.sendMessage(message,message.getAllRecipients());
+        t.close();
+        
+        return true;
+   
+}
 }
