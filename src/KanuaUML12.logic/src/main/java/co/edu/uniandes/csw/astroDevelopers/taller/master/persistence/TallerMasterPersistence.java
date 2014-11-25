@@ -34,7 +34,7 @@ import co.edu.uniandes.csw.astroDevelopers.taller.logic.dto.TallerDTO;
 import co.edu.uniandes.csw.astroDevelopers.taller.master.persistence.api.ITallerMasterPersistence;
 import co.edu.uniandes.csw.astroDevelopers.taller.persistence.converter.TallerConverter;
 import co.edu.uniandes.csw.astroDevelopers.usuario.logic.dto.UsuarioDTO;
-import co.edu.uniandes.csw.astroDevelopers.usuario.persistence.converter.UsuarioConverter;
+import co.edu.uniandes.csw.astroDevelopers.usuario.persistence.UsuarioPersistence;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -88,14 +88,26 @@ public class TallerMasterPersistence extends _TallerMasterPersistence  implement
     
     public String inscribirTaller(String email) {
         /*
-            Ver que usuario tiene ese email!!!
-            Ver el ID del usuario!!
-            Insertar a la tabla
+        Ver que usuario tiene ese email!!!
+        Ver el ID del usuario!!
+        Insertar a la tabla        
         */
         
-        Query q=null;
-        q = entityManager.createQuery("select u from USUARIOENTITY u");
-        return q.toString();
+        //Query q = entityManager.createQuery("select u from TallerEntity u inner join TallerusuarioEntity s on s.tallerId=u.id");
+        /*
+        Query q = entityManager.createQuery("select u from TallerusuarioEntity u");
+        q.setParameter("email", "%"+email+"%");
+        List<TallerDTO> talleres = TallerConverter.entity2PersistenceDTOList(q.getResultList());
+        if(talleres.size() != 0) {
+            return "Ya se encuentra inscrito";
+        }
+                */
+        
+        String ans = "";
+        
+        UsuarioDTO results = (UsuarioDTO) entityManager.createQuery("SELECT t FROM UsuarioEntity t where t.email = :value1")
+                        .setParameter("value1", email).getSingleResult();
+        return results.toString();
     }
 
 }
