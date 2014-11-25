@@ -35,5 +35,7 @@ import javax.inject.Singleton;
 import co.edu.uniandes.csw.astroDevelopers.noticia.master.logic.api.INoticiaMasterLogicService;
 @Singleton
 public class NoticiaMasterMockLogicService extends _NoticiaMasterMockLogicService implements INoticiaMasterLogicService {
-	
+	public String buscarNoticiasPorTitulo(String titulo){
+        return "";
+    }
 }
