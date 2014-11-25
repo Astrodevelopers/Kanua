@@ -43,9 +43,14 @@
     font-size: 50px;
     font-weight: bold;
 }
+.celda-noticia {
+  padding: 25px;
+  width: 890px;
+}
+
 .celda-charla {
   padding: 15px;
-  width: 430px;
+  width: 470px;
 }
 
 .imagen-charla {
@@ -54,6 +59,11 @@
   border: #D0D0D0 solid 1px;
   }
 
+  .imagen-noticia {
+  width: 380px;
+  height: 280px;
+  border: #D0D0D0 solid 1px;
+  }
 .nombre-charla{
   height: 40px;
   overflow: hidden;
