@@ -47,8 +47,7 @@ public class UsuarioService extends _UsuarioService {
     @GET
     @Path("/buscarUsuarioPorEmail")
     public String buscarUsuarioPorEmail(@QueryParam("email") String email) {
-        return email;
-        //return usuarioLogicService.buscarUsuarioPorEmail(email);        
+        return usuarioLogicService.buscarUsuarioPorEmail(email);        
     }
 
 }
