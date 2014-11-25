@@ -24,7 +24,8 @@
                     </th>
                     <th class="descripcion-charla">
                         <div >
-                            <div class="fecha-charla-titulo">Descripcion: </div>
+                            <div class="fecha-charla-titulo">Descripcionista: </div>
+                            
                             <div style="">
                             <%= htmlEncode(charla.getDisplay('informacion')) %>
                             </div>
@@ -38,10 +39,13 @@
                     <% } %> 
                     <% if(showDelete) {%>
                         <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-charla-delete',{id:<%= charla.id %>}); return false" >Eliminar</a> 
-                    <% } %>  
+                    <% } %> 
+                        <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-charla-delete',{id:<%= charla.id %>}); return false" >Información</a>
+                    
                 </center>
             </div>
         <% }); %>
+    
     </div>
     
  
