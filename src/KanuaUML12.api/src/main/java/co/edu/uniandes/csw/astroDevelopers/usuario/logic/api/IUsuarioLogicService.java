@@ -32,4 +32,6 @@ package co.edu.uniandes.csw.astroDevelopers.usuario.logic.api;
 
 public interface IUsuarioLogicService extends _IUsuarioLogicService {
 
+    public String buscarUsuarioPorEmail(String email);
+
 }
