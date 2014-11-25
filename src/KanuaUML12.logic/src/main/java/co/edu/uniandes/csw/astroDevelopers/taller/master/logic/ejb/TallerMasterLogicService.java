@@ -46,5 +46,6 @@ public class TallerMasterLogicService extends _TallerMasterLogicService implemen
     
     public String inscribirTaller(String email) {
         return tallerMasterPersistance.inscribirTaller(email);
+        
     }
 }
