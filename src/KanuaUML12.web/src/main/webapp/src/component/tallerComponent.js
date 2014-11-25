@@ -32,7 +32,11 @@ define(['component/_CRUDComponent', 'controller/toolbarController', 'model/toolb
         name: 'taller',
         model: App.Model.TallerModel,
         listModel: App.Model.TallerList,
-        controller : App.Controller.TallerController
+        controller : App.Controller.TallerController,
+        postInit: function(){
+             this.toolbarModel.set('showPrint', false);
+            this.toolbarModel.set('showSearch', false);
+         }
     });
     return App.Component.TallerComponent;
 });
