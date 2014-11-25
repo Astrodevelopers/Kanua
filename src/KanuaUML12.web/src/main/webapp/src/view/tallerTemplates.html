@@ -12,6 +12,7 @@
                        <%= htmlEncode(taller.getDisplay('name')) %>
             </div>
                <table>
+                
                 <tr>
                  
                     <th style="padding:8px;">
@@ -25,12 +26,19 @@
                     <th class="descripcion-charla">
                         <div >
                             <div class="fecha-charla-titulo">Descripcion: </div>
-                            <div >
+                            <div style="height: 280px; overflow-y: scroll;">
                             <%= htmlEncode(taller.getDisplay('informacion')) %>
                             </div>
                         </div>
                     </th>
                 </tr>
+                <tr>
+                <th>
+                    <button onclick="Backbone.trigger('inscribirseTaller',{}); return false" type="button" class="btn btn-info">Inscribirse</button>
+                </th>
+                </tr> 
+               
+       
             </table>
                 <center>
                     <% if(showEdit) {%>
