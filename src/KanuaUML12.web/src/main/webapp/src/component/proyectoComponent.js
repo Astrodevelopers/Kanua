@@ -32,7 +32,11 @@ define(['component/_CRUDComponent', 'controller/toolbarController', 'model/toolb
         name: 'proyecto',
         model: App.Model.ProyectoModel,
         listModel: App.Model.ProyectoList,
-        controller : App.Controller.ProyectoController
+        controller : App.Controller.ProyectoController,
+        postInit: function(){
+             this.toolbarModel.set('showPrint', false);
+            this.toolbarModel.set('showSearch', false);
+         }
     });
     return App.Component.ProyectoComponent;
 });
