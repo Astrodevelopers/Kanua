@@ -31,9 +31,35 @@ define(['model/_charlaModel'], function() {
     App.Model.CharlaModel = App.Model._CharlaModel.extend({
 
  	validate: function(attrs,options){
+            var ln=attrs.link.toString();
+            var en= ln.search("http://");
             var validationMessage = "";
             if(!attrs.name){
-                validationMessage = "The name can't be empty.";
+                validationMessage = "El nombre no puede ser vacio. ";
+            }
+            if(!attrs.titulo)
+            {
+                validationMessage+= "El titulo no puede ser vacio. ";
+            }
+            if (!attrs.informacion)
+            {
+                validationMessage+= "Debe tener informacion. ";
+            }
+            if(en=-1||!attrs.link)
+            {
+                validationMessage+= "Link vacio o no valido. ";
+            }
+            if (!attrs.fechaEvento)
+            {
+                validationMessage+="Fecha no definida. ";
+            }
+            if(!attrs.imagen)
+            {
+                validationMessage+="Imagen no puede ser vacia. "
+            }
+            if(!attrs.publicacion)
+            {
+                validationMessage+= "Fecha no definida. "
             }
             if(validationMessage.length>0){
                return validationMessage;
