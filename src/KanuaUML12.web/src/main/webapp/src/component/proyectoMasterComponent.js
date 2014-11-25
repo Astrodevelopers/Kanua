@@ -159,7 +159,6 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 var text = $('#styled').val();
                 text = text.split(" ");
                 text = text.join("_");
-                text = text.slice(0, text.length - 2);
                 if((text.length + 2) > 100) {
                     alert("La longitud del comentario no debe exceder 100 caracters.");
                 }
@@ -169,12 +168,10 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
            
                     var request = new XMLHttpRequest();
                     request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/procesarContacto?" + parameters);
-                    alert("puta");
+         
                     request.onreadystatechange = function() {
                         if (request.readyState === 4 && request.status === 200) {
                             respuesta=request.responseText;
-                            alert("te");
-                            alert(respuesta);
                             alert(respuesta);
                         }
                     };
