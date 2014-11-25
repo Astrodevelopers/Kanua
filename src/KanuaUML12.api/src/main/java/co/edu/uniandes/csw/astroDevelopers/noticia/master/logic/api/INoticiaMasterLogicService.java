@@ -33,5 +33,5 @@ package co.edu.uniandes.csw.astroDevelopers.noticia.master.logic.api;
 
 public interface INoticiaMasterLogicService extends _INoticiaMasterLogicService {
 
-        
+        public String buscarNoticiasPorTitulo(String titulo);
 }
