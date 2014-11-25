@@ -32,7 +32,11 @@ define(['component/_CRUDComponent', 'controller/toolbarController', 'model/toolb
         name: 'noticia',
         model: App.Model.NoticiaModel,
         listModel: App.Model.NoticiaList,
-        controller : App.Controller.NoticiaController
+        controller : App.Controller.NoticiaController,
+        postInit: function(){
+             this.toolbarModel.set('showPrint', false);
+            this.toolbarModel.set('showSearch', false);
+         }
     });
     return App.Component.NoticiaComponent;
 });
