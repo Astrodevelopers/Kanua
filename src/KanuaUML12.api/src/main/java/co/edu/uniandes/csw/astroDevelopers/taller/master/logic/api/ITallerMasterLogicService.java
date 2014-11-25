@@ -33,5 +33,7 @@ package co.edu.uniandes.csw.astroDevelopers.taller.master.logic.api;
 
 public interface ITallerMasterLogicService extends _ITallerMasterLogicService {
 
-      public String buscarTallersPorTag(String tag);  
+      public String buscarTallersPorTag(String tag); 
+      
+      public String inscribirTaller(String email);
 }
