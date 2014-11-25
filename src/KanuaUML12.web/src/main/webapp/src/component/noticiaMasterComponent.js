@@ -17,6 +17,33 @@ define(['controller/selectionController', 'model/cacheModel', 'model/noticiaMast
             Backbone.on(uComponent.componentId + '-post-noticia-edit', function(params) {
                 self.renderChilds(params);
             });
+            
+             Backbone.on('buscarNoticiasPorTitulo', function(params) {
+                listaNoticias=uComponent.componentController.noticiaModelList.models;
+                for (var j = 0; j < listaNoticias.length; j++) {
+                    noticia=listaNoticias[j];
+                    $('#celda-noticia-'+noticia.id).hide();
+                }
+                // https://www.inkling.com/read/javascript-definitive-guide-david-flanagan-6th/chapter-18/getting-an-http-response
+                var titulo=$('#titulobusquedaNoticia').val();
+                var request = new XMLHttpRequest();
+                request.open("GET", "/KanuaUML12.web/webresources/NoticiaMaster/buscarNoticiasPorTitulo?titulo="+titulo);
+                request.onreadystatechange = function() {
+                    // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp
+                    if (request.readyState === 4 && request.status === 200) {
+                        respuesta=request.responseText;
+                        ids=respuesta.split(',');
+                        for (u=0; u<ids.length; u++) {
+                           id=ids[u];
+                           if (id!="") {
+                               $('#celda-noticia-'+id).show();
+                           }
+                        }
+                    }
+                };
+                request.send(null);
+            }); 
+            
             Backbone.on(uComponent.componentId + '-pre-noticia-list', function() {
                 self.hideChilds();
             });
