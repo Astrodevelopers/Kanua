@@ -15,6 +15,27 @@ define(['controller/selectionController', 'model/cacheModel', 'model/tallerMaste
             var uComponent = new TallerComponent();
             uComponent.initialize();
             uComponent.render('main');
+            
+            Backbone.on(uComponent.componentId + '-inscribirse', function(params) {
+                var id_current = params.id;
+                $('#'+uComponent.componentId+'-main-toolbar').html("");
+                uComponent.componentController.realizarInscripcion(params);
+            });
+            
+            Backbone.on('realizarInscripcion', function(params) {
+                //alert(JSON.stringify(params));
+                
+                
+                // DATA
+                var name = $('#nombre_contacto').val();
+                var last_name = $('#apellido_contacto').val();
+                var email = $('#email_contacto').val();
+                
+                alert(name + ", " + last_name + ", " + email);
+                
+                
+            });
+            
             Backbone.on(uComponent.componentId + '-post-taller-create', function(params) {
                 self.renderChilds(params);
             });
