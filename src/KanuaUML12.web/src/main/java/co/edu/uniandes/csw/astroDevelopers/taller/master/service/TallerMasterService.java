@@ -60,5 +60,4 @@ public class TallerMasterService extends _TallerMasterService {
         return tallerLogicService.inscribirTaller(email);
     }
 
-
 }
