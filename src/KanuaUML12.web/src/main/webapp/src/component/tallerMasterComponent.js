@@ -65,6 +65,19 @@ define(['controller/selectionController', 'model/cacheModel', 'model/tallerMaste
                 
                 else {
                     var request = new XMLHttpRequest();
+                    
+                    // Obtener ID
+                    request.open("GET", "/KanuaUML12.web/webresources/Usuario/buscarUsuarioPorEmail?email="+email);
+                    request.onreadystatechange = function() {
+                        // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp /
+                        if (request.readyState === 4 && request.status === 200) {
+                            alert(request.responseText);
+                        }
+                    };
+                    
+                    request.send(null);
+                    /*
+                    // PasarID 
                     request.open("GET", "/KanuaUML12.web/webresources/TallerMaster/inscribirTaller?email="+email);
                     request.onreadystatechange = function() {
                         // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp /
@@ -73,6 +86,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/tallerMaste
                         }
                     };
                     request.send(null);
+                    */
                 }         
                 
             });
