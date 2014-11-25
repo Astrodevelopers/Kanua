@@ -47,10 +47,17 @@ import javax.ws.rs.QueryParam;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class TallerMasterService extends _TallerMasterService {
-     @GET
+    
+    @GET
     @Path("/buscarTallersPorTag")
     public String buscarTallersPorTag(@QueryParam("tag") String tag) {
         return tallerLogicService.buscarTallersPorTag(tag);
+    }
+    
+    @GET
+    @Path("/inscribirTaller")
+    public String inscribirTaller(@QueryParam("email") String email) {
+        return tallerLogicService.inscribirTaller(email);
     }
 
 
