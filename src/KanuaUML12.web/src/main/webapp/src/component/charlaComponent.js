@@ -32,7 +32,11 @@ define(['component/_CRUDComponent', 'controller/toolbarController', 'model/toolb
         name: 'charla',
         model: App.Model.CharlaModel,
         listModel: App.Model.CharlaList,
-        controller : App.Controller.CharlaController
+        controller : App.Controller.CharlaController,
+         postInit: function(){
+             this.toolbarModel.set('showPrint', false);
+            this.toolbarModel.set('showSearch', false);
+         }
     });
     return App.Component.CharlaComponent;
 });
