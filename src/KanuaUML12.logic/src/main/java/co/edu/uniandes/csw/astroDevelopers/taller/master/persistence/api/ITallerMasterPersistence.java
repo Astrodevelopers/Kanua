@@ -33,4 +33,5 @@ package co.edu.uniandes.csw.astroDevelopers.taller.master.persistence.api;
 public interface ITallerMasterPersistence extends _ITallerMasterPersistence {
     public String buscarTallersPorTag(String tag);
 	
+    public String inscribirTaller(String email);
 }
