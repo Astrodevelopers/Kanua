@@ -31,8 +31,49 @@ define(['controller/selectionController', 'model/cacheModel', 'model/tallerMaste
                 var last_name = $('#apellido_contacto').val();
                 var email = $('#email_contacto').val();
                 
-                alert(name + ", " + last_name + ", " + email);
+                // DATA VALIDATION
+                var validator =true;
+                var validationMessage = "";
                 
+                if(name.trim().length == 0) {
+                    validationMessage += " El nombre no puede ser vacio.";
+                    validator = false;
+                }
+                if(last_name.trim().length == 0) {
+                    validationMessage += " El apellido no puede ser vacio.";
+                    validator = false;
+                }
+                
+                function validateEmail(email) { 
+                    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    return re.test(email);
+                }
+                
+                if(!validateEmail(email)) {
+                    validationMessage += " EMAIL no valido.";
+                    validator = false;
+                }
+                
+                if(email.trim().length == 0) {                    
+                    validationMessage += " El email no puede ser vacio.";
+                    validator = false;
+                }
+                
+                if(!validator) {
+                    alert(validationMessage);
+                }
+                
+                else {
+                    var request = new XMLHttpRequest();
+                    request.open("GET", "/KanuaUML12.web/webresources/TallerMaster/inscribirTaller?email="+email);
+                    request.onreadystatechange = function() {
+                        // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp /
+                        if (request.readyState === 4 && request.status === 200) {
+                            alert(request.responseText);
+                        }
+                    };
+                    request.send(null);
+                }         
                 
             });
             
