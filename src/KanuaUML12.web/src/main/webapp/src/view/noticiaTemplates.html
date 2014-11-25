@@ -1,13 +1,36 @@
 <link rel="stylesheet" href="kanua.css">
 <script type="text/template" id="noticiaList">
-     <div class="row" style="height: 300px; overflow-y: scroll;">
+    <input type="text"  id="tagbusquedaNoticia" name="buscaNoticia" placeholder="tag" value=""/>
+    <button onclick="Backbone.trigger('buscarNoticiasPorTag',{}); return false" type="button" class="btn btn-info">Busca</button>
+
+     <div class="row" style="height: 990px; overflow-y: scroll;">
         <% _.each(noticias, function(noticia) { %>
-            <div id="celda-noticia-<%= noticia.id %>" class="col-xs-1 celda-proyecto">
-            <!-- Aca se ponen las imagenes y nombres las cuales mandan un evento si se les hace click -->
-                <img onclick="Backbone.trigger('<%=componentId %>-mostrar-noticia',{id:<%= noticia.id %>}); return false" class="imagen-proyecto" src="<%= htmlEncode(noticia.getDisplay('imagen')) %>"/>
-                <div onclick="Backbone.trigger('<%=componentId %>-mostrar-noticia',{id:<%= noticia.id %>}); return false" class="nombre-proyecto">
-                    <%= htmlEncode(noticia.getDisplay('name')) %>
-                </div>
+            <div id="celda-noticia-<%= noticia.id %>" class="col-xs-1 celda-noticia">
+            <div  class="nombre-charla">
+                       <%= htmlEncode(noticia.getDisplay('name')) %>
+            </div>
+               <table>
+                <tr>
+                 
+                    <th style="padding:8px;">
+                       
+                        <img  class="imagen-noticia" src="<%= htmlEncode(noticia.getDisplay('imagen')) %>"/>
+                        <div  class="fecha-charla">
+                            <span class="fecha-charla-titulo">Fecha: </span>
+                            <%= htmlEncode(noticia.getDisplay('fecha')) %>
+                        </div>
+                    </th>
+                    <th class="descripcion-charla">
+                        <div >
+                            <div class="fecha-charla-titulo">Descripcion: </div>
+                            <div style="height: 260px; overflow-y: scroll;">
+                            <%= htmlEncode(noticia.getDisplay('descripcion')) %>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+                
+            </table>
                 <center>
                     <% if(showEdit) {%>
                         <a class="btn btn-primary" onclick="Backbone.trigger('<%= componentId %>-noticia-edit',{id:<%= noticia.id %>}); return false" >Editar</a>
