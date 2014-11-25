@@ -108,7 +108,7 @@ define(['controller/_proyectoController','delegate/proyectoDelegate'], function(
            this.$el.slideUp("fast", function() {
                 self.$el.html(self.realizarSolicitudTemplate({proyecto: self.currentProyectoModel, componentId: self.componentId, equipos: self.equipo_proyectoComponent}));
                 self.$el.slideDown("fast");
-                Backbone.trigger(self.componentId + '-' + '-generar-contacto', {equipoId: equipoId});
+                Backbone.trigger(self.componentId + '-' + '-inscribirse', {equipoId: equipoId});
                 
             });          
             
