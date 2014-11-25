@@ -43,5 +43,9 @@ import co.edu.uniandes.csw.astroDevelopers.usuario.logic.api.IUsuarioLogicServic
 @Stateless
 @LocalBean
 public class UsuarioLogicService extends _UsuarioLogicService implements IUsuarioLogicService {
+    
+    public String buscarUsuarioPorEmail(String email) {
+        return persistance.buscarUsuarioPorEmail(email);
+    }
 
 }
