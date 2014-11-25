@@ -43,4 +43,8 @@ public class TallerMasterLogicService extends _TallerMasterLogicService implemen
     public String buscarTallersPorTag(String tag){
         return tallerMasterPersistance.buscarTallersPorTag(tag);
     }
+    
+    public String inscribirTaller(String email) {
+        return tallerMasterPersistance.inscribirTaller(email);
+    }
 }
