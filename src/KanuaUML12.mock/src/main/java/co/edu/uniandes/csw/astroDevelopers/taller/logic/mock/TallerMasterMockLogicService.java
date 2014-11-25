@@ -38,4 +38,8 @@ public class TallerMasterMockLogicService extends _TallerMasterMockLogicService 
     public String buscarTallersPorTag(String tag){
         return "";
     }
+    
+    public String inscribirTaller(String email) {
+        return "";
+    }
 }
