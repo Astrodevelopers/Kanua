@@ -35,5 +35,6 @@ import javax.inject.Singleton;
 import co.edu.uniandes.csw.astroDevelopers.solicitud.logic.api.ISolicitudLogicService;
 @Singleton
 public class SolicitudMockLogicService extends _SolicitudMockLogicService implements ISolicitudLogicService {
+    //
 	
 }
