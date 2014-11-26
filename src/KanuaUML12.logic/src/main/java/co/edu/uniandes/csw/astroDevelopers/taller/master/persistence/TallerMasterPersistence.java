@@ -32,6 +32,7 @@ package co.edu.uniandes.csw.astroDevelopers.taller.master.persistence;
 
 import co.edu.uniandes.csw.astroDevelopers.taller.logic.dto.TallerDTO;
 import co.edu.uniandes.csw.astroDevelopers.taller.master.persistence.api.ITallerMasterPersistence;
+import co.edu.uniandes.csw.astroDevelopers.taller.master.persistence.entity.TallerusuarioEntity;
 import co.edu.uniandes.csw.astroDevelopers.taller.persistence.converter.TallerConverter;
 import co.edu.uniandes.csw.astroDevelopers.usuario.logic.dto.UsuarioDTO;
 import co.edu.uniandes.csw.astroDevelopers.usuario.persistence.UsuarioPersistence;
@@ -103,11 +104,43 @@ public class TallerMasterPersistence extends _TallerMasterPersistence  implement
         }
                 */
         
+        String[] parse = email.split(":");
         String ans = "";
+        for(String itm : parse) {
+            ans += itm;
+        }
         
-        UsuarioDTO results = (UsuarioDTO) entityManager.createQuery("SELECT t FROM UsuarioEntity t where t.email = :value1")
-                        .setParameter("value1", email).getSingleResult();
-        return results.toString();
+        Long id_usuario = Long.parseLong(parse[0]);
+        Long id_taller = Long.parseLong(parse[1]);
+        
+        TallerusuarioEntity asociacion = new TallerusuarioEntity(id_taller, id_usuario);
+        
+        try {
+            
+            List<UsuarioDTO> users_in_event = getTallerusuarioEntityList(id_taller);
+            
+            boolean flag = true;
+            
+            for(UsuarioDTO user : users_in_event) {
+                if(user.getId() == id_usuario) {
+                    flag = false;
+                    break;
+                }
+            }
+            
+            if(flag) {            
+                createTallerusuarioEntity(asociacion);
+                ans = "Inscripción realizada con éxito";
+            }
+            else {
+                ans = "Usted ya está registrado";
+            }
+            
+        }
+        catch(Exception e) {
+            ans = "Error en la solicitud";
+        }        
+        return ans;
     }
 
 }
