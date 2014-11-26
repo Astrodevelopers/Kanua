@@ -54,6 +54,11 @@ define(['controller/selectionController', 'model/cacheModel', 'model/tallerMaste
                     validator = false;
                 }
                 
+                if(!/uniandes.edu.co/.test(email)) {
+                    validationMessage += " EMAIL debe ser uniandes.";
+                    validator = false;                    
+                }
+                
                 if(email.trim().length == 0) {                    
                     validationMessage += " El email no puede ser vacio.";
                     validator = false;
@@ -64,30 +69,90 @@ define(['controller/selectionController', 'model/cacheModel', 'model/tallerMaste
                 }
                 
                 else {
+                    var id_usuario = "-1";
+                    var available = true;
                     var request = new XMLHttpRequest();
-                    
-                    // Obtener ID
-                    request.open("GET", "/KanuaUML12.web/webresources/Usuario/buscarUsuarioPorEmail?email="+email);
-                    request.onreadystatechange = function() {
-                        // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp /
-                        if (request.readyState === 4 && request.status === 200) {
-                            alert(request.responseText);
-                        }
+                    request.open('GET', "/KanuaUML12.web/webresources/Usuario/buscarUsuarioPorEmail?email="+email   , false);  // `false` makes the request synchronous
+                    request.send(null);
+
+                    if (request.status === 200) {
+                      id_usuario = request.responseText;
+                    }
+                    var xhr = new XMLHttpRequest();
+                    xhr.ontimeout = function () {
+                        console.error("The request for " + url + " timed out.");
                     };
                     
-                    request.send(null);
+                    //alert(id_usuario);
+                    
+                    if(id_usuario == "-1") {
+                        alert("El usuario " + email + " no se encuentra registrado en el sistema");
+                    }
+                    
+                    else {
+                        var request = new XMLHttpRequest();
+                        var parameter = id_usuario + ":" + params.id;
+                        request.open("GET", "/KanuaUML12.web/webresources/TallerMaster/inscribirTaller?email="+parameter);
+                        request.onreadystatechange = function() {
+                            // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp /
+                            if (request.readyState === 4 && request.status === 200) {
+                                alert(request.responseText);
+                            }
+                        };
+                        request.send(null);
+                        
+                    }
+                }
+                
+                /*
+                    request.onreadystatechange = function() {
+                        if (request.readyState === 4 && request.status === 200) {
+                            alert("REQUEST: " + request.responseText);
+                            if(request.responseText == "-1") {
+                                available = false;
+                            }
+                            else {
+                                while(id_usuario == "-1") {
+                                    id_usuario = request.responseText;
+                                    alert("ID: " + id_usuario);
+                                }
+                            }                        
+                                
+                        }
+                        else {
+                            id_usuario = "-400";
+                            
+                        }
+                    };
+                    while(id_usuario == "-1") {
+                        id_usuario = request.responseText;
+                        alert("ID: " + id_usuario);
+                    }
+                    if(available) {
+                        id_usuario = request.responseText;
+                        request.send(null);
+                        alert("ID: " + id_usuario);
+                        if(id_usuario == "-1") {}
+                        /*
+                        // PasarID 
+                        request.open("GET", "/KanuaUML12.web/webresources/TallerMaster/inscribirTaller?email="+email);
+                        request.onreadystatechange = function() {
+                            // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp /
+                            if (request.readyState === 4 && request.status === 200) {
+                                alert(request.responseText);
+                            }
+                        };
+                        request.send(null);
+                        */                        
+                    //}
                     /*
-                    // PasarID 
-                    request.open("GET", "/KanuaUML12.web/webresources/TallerMaster/inscribirTaller?email="+email);
-                    request.onreadystatechange = function() {
-                        // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp /
-                        if (request.readyState === 4 && request.status === 200) {
-                            alert(request.responseText);
-                        }
-                    };
-                    request.send(null);
-                    */
-                }         
+                     * 
+                    else {
+                        alert("Usuario no registrado");
+                    }
+                    
+                }
+                */
                 
             });
             
