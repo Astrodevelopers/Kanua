@@ -48,10 +48,23 @@ import java.util.*;
 
 import co.edu.uniandes.csw.astroDevelopers.charla.logic.dto.CharlaDTO;
 import co.edu.uniandes.csw.astroDevelopers.charla.logic.api.ICharlaLogicService;
+import co.edu.uniandes.csw.astroDevelopers.charla.master.logic.api.ICharlaMasterLogicService;
+import co.edu.uniandes.csw.astroDevelopers.charla.master.persistence.api.ICharlaMasterPersistence;
+import co.edu.uniandes.csw.astroDevelopers.charla.master.persistence.CharlaMasterPersistence;
+import co.edu.uniandes.csw.astroDevelopers.charla.master.logic.ejb.CharlaMasterLogicService;
+import co.edu.uniandes.csw.astroDevelopers.charla.master.logic.dto.CharlaMasterDTO;
 import co.edu.uniandes.csw.astroDevelopers.charla.persistence.CharlaPersistence;
 import co.edu.uniandes.csw.astroDevelopers.charla.persistence.api.ICharlaPersistence;
 import co.edu.uniandes.csw.astroDevelopers.charla.persistence.entity.CharlaEntity;
 import co.edu.uniandes.csw.astroDevelopers.charla.persistence.converter.CharlaConverter;
+import co.edu.uniandes.csw.astroDevelopers.tag.logic.api.ITagLogicService;
+import co.edu.uniandes.csw.astroDevelopers.tag.persistence.TagPersistence;
+import co.edu.uniandes.csw.astroDevelopers.tag.persistence.api.ITagPersistence;
+import co.edu.uniandes.csw.astroDevelopers.tag.persistence.entity.TagEntity;
+import co.edu.uniandes.csw.astroDevelopers.tag.persistence.converter.TagConverter;
+import co.edu.uniandes.csw.astroDevelopers.tag.logic.dto.TagDTO;
+import co.edu.uniandes.csw.astroDevelopers.tag.logic.ejb.TagLogicService;
+import co.edu.uniandes.csw.astroDevelopers.charla.master.persistence.entity.Charlatag_charlaEntity;
 import static co.edu.uniandes.csw.astroDevelopers.util._TestUtil.*;
 
 @RunWith(Arquillian.class)
@@ -67,7 +80,22 @@ public class CharlaLogicServiceTest {
 				.addPackage(CharlaPersistence.class.getPackage())
 				.addPackage(CharlaEntity.class.getPackage())
 				.addPackage(ICharlaPersistence.class.getPackage())
+                                .addPackage(ICharlaMasterLogicService.class.getPackage())
+                                .addPackage(ICharlaMasterPersistence.class.getPackage())
+                                .addPackage(CharlaMasterPersistence.class.getPackage())
+                                .addPackage(CharlaMasterLogicService.class.getPackage())
+                                .addPackage(TagLogicService.class.getPackage())
+				.addPackage(ITagLogicService.class.getPackage())
+				.addPackage(TagPersistence.class.getPackage())
+				.addPackage(TagEntity.class.getPackage())
+				.addPackage(ITagPersistence.class.getPackage())
+                .addPackage(TagDTO.class.getPackage())
+                .addPackage(Charlatag_charlaEntity.class.getPackage())
+                .addPackage(TagConverter.class.getPackage())
+                .addPackage(TagEntity.class.getPackage())
                 .addPackage(CharlaDTO.class.getPackage())
+                .addPackage(CharlaMasterDTO.class.getPackage())  
+                .addPackage(TagDTO.class.getPackage())
                 .addPackage(CharlaConverter.class.getPackage())
                 .addPackage(CharlaEntity.class.getPackage())
 				.addAsResource("META-INF/persistence.xml", "META-INF/persistence.xml")
@@ -79,6 +107,18 @@ public class CharlaLogicServiceTest {
 	
 	@Inject
 	private ICharlaPersistence charlaPersistence;	
+        
+        	@Inject
+	private ITagLogicService tagLogicService;
+        
+        @PersistenceContext
+	private EntityManager em;
+        
+        @Inject
+	private ICharlaMasterPersistence charlaMasterPersistence;
+        
+        @Inject
+        protected ICharlaMasterLogicService charlaMasterLogicService;
 
 	@Before
 	public void configTest() {
@@ -141,6 +181,127 @@ public class CharlaLogicServiceTest {
 		Assert.assertEquals(ldto.getPublicacion(), pdto.getPublicacion());	
 	}
 	
+        @Test
+	public void buscarCharlaTest(){
+            
+            CharlaDTO ldto=new CharlaDTO();
+		ldto.setName(generateRandom(String.class));
+		ldto.setTitulo(generateRandom(String.class));
+		ldto.setInformacion(generateRandom(String.class));
+		ldto.setLink(generateRandom(String.class));
+		ldto.setFechaEvento(generateRandomDate());
+		ldto.setImagen(generateRandom(String.class));
+		ldto.setPublicacion(generateRandomDate());
+		CharlaDTO result=charlaLogicService.createCharla(ldto);
+                
+		TagDTO tag1=new TagDTO();
+                tag1.setName("clau");
+                TagDTO resultag=tagLogicService.createTag(tag1);
+                
+		Assert.assertNotNull(result);
+                Assert.assertNotNull(resultag);
+                
+		String resultado1=charlaMasterLogicService.buscarCharlaPorTag("holaholaholahola");
+                Assert.assertEquals("",resultado1);
+                Charlatag_charlaEntity chtag=new Charlatag_charlaEntity(result.getId(),resultag.getId());
+                System.out.println("000***********************************  ");
+                charlaMasterPersistence.createCharlatag_charlaEntity(chtag);
+		System.out.println("111***********************************  "+chtag.getCharlaId());
+                
+                String resultado=charlaMasterLogicService.buscarCharlaPorTag("clau");
+               // Assert.assertEquals("",resultado);
+                System.out.println("222***********************************  "+resultado);
+                Assert.assertEquals(resultado, chtag.getCharlaId()+"");
+                
+        
+        
+	}
+        
+	@Test
+        public void buscarCharlaForTest(){
+            for(int i=0; i<20; i++)
+            {
+                CharlaDTO ldto=new CharlaDTO();
+		ldto.setName(generateRandom(String.class));
+		ldto.setTitulo(generateRandom(String.class));
+		ldto.setInformacion(generateRandom(String.class));
+		ldto.setLink(generateRandom(String.class));
+		ldto.setFechaEvento(generateRandomDate());
+		ldto.setImagen(generateRandom(String.class));
+		ldto.setPublicacion(generateRandomDate());
+		CharlaDTO result=charlaLogicService.createCharla(ldto);
+                
+		TagDTO tag1=new TagDTO();
+                tag1.setName("clau"+i);
+                TagDTO resultag=tagLogicService.createTag(tag1);
+                
+		Assert.assertNotNull(result);
+                Assert.assertNotNull(resultag);
+                
+		String resultado1=charlaMasterLogicService.buscarCharlaPorTag("holaholaholahola"+i);
+                Assert.assertEquals("",resultado1);
+                Charlatag_charlaEntity chtag=new Charlatag_charlaEntity(result.getId(),resultag.getId());
+                System.out.println("000***********************************  ");
+                charlaMasterPersistence.createCharlatag_charlaEntity(chtag);
+		System.out.println("111***********************************  "+chtag.getCharlaId());
+                
+                String resultado=charlaMasterLogicService.buscarCharlaPorTag("clau"+i);
+               // Assert.assertEquals("",resultado);
+                System.out.println("222***********************************  "+resultado);
+                Assert.assertEquals(resultado, chtag.getCharlaId()+"");
+            }
+        }
+        
+        @Test
+        public void buscarCharlasTest(){
+            
+                CharlaDTO ldto=new CharlaDTO();
+		ldto.setName(generateRandom(String.class));
+		ldto.setTitulo(generateRandom(String.class));
+		ldto.setInformacion(generateRandom(String.class));
+		ldto.setLink(generateRandom(String.class));
+		ldto.setFechaEvento(generateRandomDate());
+		ldto.setImagen(generateRandom(String.class));
+		ldto.setPublicacion(generateRandomDate());
+                CharlaDTO ldto2=new CharlaDTO();
+		ldto2.setName(generateRandom(String.class));
+		ldto2.setTitulo(generateRandom(String.class));
+		ldto2.setInformacion(generateRandom(String.class));
+		ldto2.setLink(generateRandom(String.class));
+		ldto2.setFechaEvento(generateRandomDate());
+		ldto2.setImagen(generateRandom(String.class));
+		ldto2.setPublicacion(generateRandomDate());
+		CharlaDTO result1=charlaLogicService.createCharla(ldto);
+                CharlaDTO result2=charlaLogicService.createCharla(ldto2);
+            
+		TagDTO tag1=new TagDTO();
+                TagDTO tag2=new TagDTO();
+                
+                tag1.setName("clau");
+                tag2.setName("dani");
+                TagDTO resultag1=tagLogicService.createTag(tag1);
+                TagDTO resultag2=tagLogicService.createTag(tag2);
+		Assert.assertNotNull(result1);
+                Assert.assertNotNull(result2);
+                Assert.assertNotNull(resultag1);
+                Assert.assertNotNull(resultag2);
+            
+		String resultado1=charlaMasterLogicService.buscarCharlaPorTag("holahola");
+                Assert.assertEquals("",resultado1);
+                Charlatag_charlaEntity chtag1=new Charlatag_charlaEntity(result1.getId(),resultag1.getId());
+                Charlatag_charlaEntity chtag2=new Charlatag_charlaEntity(result2.getId(),resultag2.getId());
+                System.out.println("000***********************************  ");
+                charlaMasterPersistence.createCharlatag_charlaEntity(chtag1);
+                charlaMasterPersistence.createCharlatag_charlaEntity(chtag2);
+                
+                String resultado=charlaMasterLogicService.buscarCharlaPorTag("clau;dani");
+               // Assert.assertEquals("",resultado);
+                System.out.println("222***********************************  "+resultado);
+                
+            
+            
+        }
+        
 	@Test
 	public void getCharlasTest(){
 		List<CharlaDTO> list=charlaLogicService.getCharlas();
