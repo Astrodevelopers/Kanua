@@ -2,7 +2,7 @@
 <script type="text/template" id="charlaList">
     <!-- Esta parte pone la malla de charla -->
     <input type="text"  id="tagCharlabusqueda" name="busca" placeholder="tag1;tag2" value=""/>
-    <button onclick="Backbone.trigger('buscarCharlaPorTag',{}); return false" type="button" class="btn btn-info">Busca</button>
+    <button onclick="Backbone.trigger('buscarCharlaPorTag',{}); return false" type="button" id="botonBuscarCharla" class="btn btn-info">Busca</button>
 
     <div class="row" style="height: 990px; overflow-y: scroll;">
         <% _.each(charlas, function(charla) { %>
