@@ -57,7 +57,7 @@ public class ProyectoMasterService extends _ProyectoMasterService {
     
     @GET
     @Path("/realizarSolicitud")
-    public boolean realizarSolicitud(@QueryParam("name") String name, @QueryParam("lname") String lname,
+    public String realizarSolicitud(@QueryParam("name") String name, @QueryParam("lname") String lname,
             @QueryParam("email") String email, @QueryParam("link") String link, @QueryParam("rol") String rol, 
             @QueryParam("comment") String comment, @QueryParam("id") String id) {
         return proyectoLogicService.realizarSolicitud(name, lname, email, link, rol, comment, id);        

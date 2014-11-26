@@ -52,5 +52,11 @@ public class NoticiaMasterService extends _NoticiaMasterService {
     public String buscarNoticiasPorTitulo(@QueryParam("titulo") String titulo) {
         return noticiaLogicService.buscarNoticiasPorTitulo(titulo);
     }
+    
+    @GET
+    @Path("/buscarNoticias")
+    public String buscarNoticias(@QueryParam("tag") String tag) {
+        return noticiaLogicService.buscarNoticias(tag);
+    }
 
 }
