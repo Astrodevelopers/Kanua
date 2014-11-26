@@ -31,13 +31,34 @@ define(['model/_tallerModel'], function() {
     App.Model.TallerModel = App.Model._TallerModel.extend({
 
  	validate: function(attrs,options){
+            var ln= attrs.imagen.toString();
+            var en= ln.search("http://");
             var validationMessage = "";
             if(!attrs.name){
-                validationMessage = "The name can't be empty.";
+                validationMessage = "El nombre no puede ser vacio. ";
             }
+            if(!attrs.informacion)
+            {
+                validationMessage+= "La informacion no puede ser vacia. ";
+            }
+            if(en===-1||!attrs.imagen)
+            {
+                validationMessage+= "La imagen no puede ser vacia o no es valida. ";
+            }
+            if(!attrs.tema)
+            {
+                validationMessage+= "El tema no puede ser vacio. ";
+                
+            }
+            if(!attrs.titulo)
+            {
+                validationMessage+= "El titulo no puede ser vacio. ";
+            }
+            
             if(validationMessage.length>0){
                return validationMessage;
             }
+            
         }
 
     });
