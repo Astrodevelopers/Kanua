@@ -28,8 +28,10 @@ app.controller('mc',  function($scope, $http, $log, $location) {
     }
     
     $scope.getCosas = function() {
-        $http.get('/KanuaUML12.web/webresources/BuscarNoticias').success(function (data) {
+        $http.get('/KanuaUML12.web/webresources/NoticiaMaster/buscarNoticias').success(function (data) {
             $scope.busquedas = data;
+            
+        }).error(function(data) {
             $log.log(data);
         });
     };
