@@ -142,5 +142,7 @@ public class TallerMasterPersistence extends _TallerMasterPersistence  implement
         }        
         return ans;
     }
+    
+    
 
 }
