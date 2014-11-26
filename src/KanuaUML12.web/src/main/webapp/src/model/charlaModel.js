@@ -45,7 +45,7 @@ define(['model/_charlaModel'], function() {
             {
                 validationMessage+= "Debe tener informacion. ";
             }
-            if(en=-1||!attrs.link)
+            if(en===-1||!attrs.link)
             {
                 validationMessage+= "Link vacio o no valido. ";
             }
@@ -55,7 +55,7 @@ define(['model/_charlaModel'], function() {
             }
             if(!attrs.imagen)
             {
-                validationMessage+="Imagen no puede ser vacia. "
+                validationMessage+="Imagen no puede ser vacia. ";
             }
             if(!attrs.publicacion)
             {
