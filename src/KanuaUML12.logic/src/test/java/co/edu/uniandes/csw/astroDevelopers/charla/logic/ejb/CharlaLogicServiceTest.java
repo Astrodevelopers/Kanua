@@ -295,8 +295,10 @@ public class CharlaLogicServiceTest {
                 charlaMasterPersistence.createCharlatag_charlaEntity(chtag2);
                 
                 String resultado=charlaMasterLogicService.buscarCharlaPorTag("clau;dani");
-               // Assert.assertEquals("",resultado);
-                System.out.println("222***********************************  "+resultado);
+                //System.out.println("222222222***********************************  "+resultado+"+++++++ "+result1.getId()+""+result2.getId());
+                
+                Assert.assertEquals(result1.getId()+","+result2.getId(),resultado);
+                //System.out.println("222222222***********************************  "+resultado+"+++++++ "+result1.getId()+""+result2.getId());
                 
             
             
