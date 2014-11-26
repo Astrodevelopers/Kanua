@@ -32,12 +32,12 @@ define(['model/_noticiaModel'], function() {
 
  	validate: function(attrs,options){
              var nom=attrs.imagen.toString();
-             var url= nom.search("http://");
+             var url= nom.search("http:");
             var validationMessage = "";
             if(!attrs.name){
                 validationMessage = "El nombre no puede ser vacio. ";
             }  
-            if (url=-1||!attrs.imagen)
+            if (0>nom.indexOf("http:")||!attrs.imagen)
             {
                 validationMessage+="Imagen no valida o vacio. ";
                 
