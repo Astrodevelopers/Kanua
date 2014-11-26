@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html ng-app="kanua" lang="en">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,7 +43,7 @@
     </head>
     <!-- NAVBAR
     ================================================== -->
-    <body>
+    <body ng-controller="mc">
         <div class="navbar-wrapper">
             <div class="container">
 
@@ -105,8 +105,17 @@
 
         <div class="container">
         
-        <iframe id="container" onload="iframeLoaded(this)" scrolling="no" seamless="seamless" style="width: 100%; border: 0; margin: 0;"></iframe> 
+        <iframe ng-show="{{ifr}}" id="container" onload="iframeLoaded(this)" scrolling="no" seamless="seamless" style="width: 100%; border: 0; margin: 0;"></iframe> 
 
+        <div class="container" ng-show="{{!ifr}}">
+            <h1>Busqueda: {{query}}</h1>
+            <hr>
+            <div class="row" ng-repeat="busqueda in busquedas">
+                <div class="col-md-2 col-md-offset-1"><strong>{{busqueda.name}}: </strong></div><div class="col-md-9">{{busqueda.content}}</div>
+            </div>
+            <hr class="featurette-divider">
+        </div>
+        
         <!-- FOOTER -->
         <footer>
             <p class="pull-right"><a href="#">Back to top</a></p>
