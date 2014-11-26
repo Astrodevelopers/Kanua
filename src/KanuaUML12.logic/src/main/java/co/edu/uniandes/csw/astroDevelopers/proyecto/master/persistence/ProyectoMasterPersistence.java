@@ -33,8 +33,12 @@ package co.edu.uniandes.csw.astroDevelopers.proyecto.master.persistence;
 import co.edu.uniandes.csw.astroDevelopers.proyecto.logic.dto.ProyectoDTO;
 import co.edu.uniandes.csw.astroDevelopers.proyecto.master.persistence.api.IProyectoMasterPersistence;
 import co.edu.uniandes.csw.astroDevelopers.proyecto.persistence.converter.ProyectoConverter;
+import co.edu.uniandes.csw.astroDevelopers.solicitud.logic.dto.SolicitudDTO;
+import co.edu.uniandes.csw.astroDevelopers.solicitud.persistence.SolicitudPersistence;
+import co.edu.uniandes.csw.astroDevelopers.solicitud.persistence.entity.SolicitudEntity;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Default;
@@ -90,6 +94,89 @@ public class ProyectoMasterPersistence extends _ProyectoMasterPersistence  imple
         Query q=null;
         q = entityManager.createQuery("select u.email from EquipoEntity u where u.id = :value").setParameter("value", Long.parseLong(id_equipo));
         return q.getSingleResult().toString();
+    }
+    
+    public String realizarSolicitud(String name, String lname, String email, String link, String rol, 
+            String comment, String id) {
+        
+        /*
+        long range = 1234567L;
+        Random r = new Random();
+        long number1 = (long)(r.nextDouble()*range);
+        
+        SolicitudEntity se = new SolicitudEntity();
+        SolicitudDTO sdto = new SolicitudDTO();
+        
+        sdto.setComentario(comment);
+        sdto.setEmailPersona(email);
+        sdto.setHojaDeVida(link);
+        sdto.setId(number1);
+        sdto.setName(name);
+        sdto.setNombreApellido(lname);
+        sdto.setRol_solicitudId(Long.parseLong(id));
+        
+        SolicitudPersistence aux = new SolicitudPersistence();
+        aux.createSolicitud(sdto);
+                */
+        
+        
+        
+        
+        return "El variopinto de mil colores";
+    }
+    
+    public String proyectoSearch(String value) {
+        
+        String ans = "[";
+        
+        //"select u from ProyectoEntity u inner join Proyectotag_proyectoEntity s 
+        // on s.proyectoId=u.id inner join TagEntity t on t.id=s.tag_proyectoId
+        
+        Query q = entityManager.createQuery("select u from ProyectoEntity u inner join Proyectotag_proyectoEntity s "
+                + "on s.proyectoId = u.id inner join TagEntity t "
+                + "on t.id = s.tag_proyectoId"
+                + " where t.name like :value or "
+                + "u.descripcion like :value or u.name like :value");
+        
+        q.setParameter("value", "%"+value+"%");
+        
+        List<ProyectoDTO> proyectos = ProyectoConverter.entity2PersistenceDTOList(q.getResultList());
+        
+        for(ProyectoDTO ne : proyectos) {
+            
+            ans += "{";
+            
+            ans += "\"Demo\": ";
+            String des = ne.getDemo();
+            ans += des + ", ";            
+            
+            ans += "\"Description\": ";
+            String dte = ne.getDescripcion();
+            ans += dte + ", ";
+            
+            ans += "\"Estado\": ";
+            String img = ne.getEstado().toString();
+            ans += img + ", ";
+            
+            ans += "\"Image\": ";
+            String nme = ne.getImagen();
+            ans += nme + ", ";
+            
+            ans += "\"Name\": ";
+            String tma = ne.getName();
+            ans += tma + ", ";
+            
+            ans += "\"Topic\": ";
+            String tlo = ne.getTema();
+            ans += tlo + ", ";
+            
+            ans += "}, "; 
+            
+        }
+        
+        ans += "], ";
+        return ans;
+       
     }
     
     

@@ -36,4 +36,7 @@ public interface IProyectoMasterPersistence extends _IProyectoMasterPersistence 
 
     public String emailId(String id_equipo);
     
+    public String realizarSolicitud(String name, String lname, String email, String link, String rol, 
+            String comment, String id);
+    
 }
