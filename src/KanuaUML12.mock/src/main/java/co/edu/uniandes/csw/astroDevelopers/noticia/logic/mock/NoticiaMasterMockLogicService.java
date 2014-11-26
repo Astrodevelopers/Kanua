@@ -38,4 +38,8 @@ public class NoticiaMasterMockLogicService extends _NoticiaMasterMockLogicServic
 	public String buscarNoticiasPorTitulo(String titulo){
         return "";
     }
+
+    public String buscarNoticias(String tag) {
+        return ""; //To change body of generated methods, choose Tools | Templates.
+    }
 }
