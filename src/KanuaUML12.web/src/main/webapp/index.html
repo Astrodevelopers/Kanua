@@ -29,6 +29,7 @@
 
         <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.22/angular.min.js"></script>
         <script type="text/javascript">
+            var busqOF = true;
             function redirectFrame(url) {
                 $('#container').attr('src', url);
             }
@@ -89,9 +90,9 @@
                             <div class="pull-right">
                                 <form class="navbar-form" id="busqg" role="search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="Buscar" name="q">
+                                        <input type="text" ng-model="query" class="form-control" placeholder="Buscar" name="q">
                                         <div class="input-group-btn">
-                                            <button class="btn btn-default" onclick="$('#busqg').submit();" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                                            <button class="btn btn-default" type="submit" ng-click="actualizar()"><i class="glyphicon glyphicon-search"></i></button>
                                         </div>
                                     </div>
                                 </form>
@@ -105,9 +106,9 @@
 
         <div class="container">
         
-        <iframe ng-show="{{ifr}}" id="container" onload="iframeLoaded(this)" scrolling="no" seamless="seamless" style="width: 100%; border: 0; margin: 0;"></iframe> 
+        <iframe ng-show="ifr" id="container" onload="iframeLoaded(this)" scrolling="no" seamless="seamless" style="width: 100%; border: 0; margin: 0;"></iframe> 
 
-        <div class="container" ng-show="{{!ifr}}">
+        <div class="container" ng-hide="ifr">
             <h1>Busqueda: {{query}}</h1>
             <hr>
             <div class="row" ng-repeat="busqueda in busquedas">
