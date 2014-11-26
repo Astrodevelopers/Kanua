@@ -143,7 +143,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                     request.onreadystatechange = function() {
                         // http://www.w3schools.com/ajax/ajax_xmlhttprequest_onreadystatechange.asp /
                         if (request.readyState === 4 && request.status === 200) {
-                            alert("Yeihhh");
+                            alert(request.responseText);
                         }
                     };
                     request.send(null);
