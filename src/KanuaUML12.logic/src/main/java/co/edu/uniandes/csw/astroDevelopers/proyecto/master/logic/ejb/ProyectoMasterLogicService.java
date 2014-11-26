@@ -60,9 +60,9 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
             form += '\n' + "Text: " + text + ".";
             form += '\n' + "Email: " + email + ".";
             sendTemplateEmail(form, id_equipo);
-            return "SUCCESS";
+            return "Proceso exitoso";
         } catch (Exception e) {
-            return "FAIL";
+            return "Falló al enviar el correo";
         }
     }
         
@@ -96,7 +96,10 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
         
         // A quien va dirigido 
         
-        message.addRecipient(Message.RecipientType.TO, new InternetAddress("sc.valencia606@uniandes.edu.co"));
+        String email = proyectoMasterPersistance.emailId(id_equipo);
+        
+        
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
         
         message.setSubject("Contacto Kanua");
         message.setText(text);

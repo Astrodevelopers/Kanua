@@ -34,6 +34,6 @@ public interface IProyectoMasterPersistence extends _IProyectoMasterPersistence 
 	
     public String buscarProyectosPorTag(String tag);
 
-    public String[] emailsId(String id_equipo);
+    public String emailId(String id_equipo);
     
 }

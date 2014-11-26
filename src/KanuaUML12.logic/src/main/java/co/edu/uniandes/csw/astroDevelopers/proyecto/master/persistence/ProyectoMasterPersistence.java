@@ -85,14 +85,11 @@ public class ProyectoMasterPersistence extends _ProyectoMasterPersistence  imple
         return ids;
     }
     
-    public String[] emailsId(String id_equipo) {
+    public String emailId(String id_equipo) {
         ArrayList<String> ans = new ArrayList<String>();
         Query q=null;
-        q = entityManager.createQuery("SELECT * FROM equipousuario_equipoentity WHERE equipoid = " + id_equipo);
-        for(Object o : q.getResultList()) {
-            System.out.println(o);
-        }
-        return (String[]) ans.toArray();
+        q = entityManager.createQuery("select u.email from EquipoEntity u where u.id = :value").setParameter("value", Long.parseLong(id_equipo));
+        return q.getSingleResult().toString();
     }
     
     
