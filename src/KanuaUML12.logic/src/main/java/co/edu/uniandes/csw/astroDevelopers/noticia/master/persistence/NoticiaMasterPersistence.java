@@ -38,12 +38,14 @@ import javax.enterprise.inject.Default;
 import java.util.List;
 import co.edu.uniandes.csw.astroDevelopers.noticia.persistence.converter.NoticiaConverter;
 import co.edu.uniandes.csw.astroDevelopers.noticia.logic.dto.NoticiaDTO;
+import co.edu.uniandes.csw.astroDevelopers.noticia.persistence.entity.NoticiaEntity;
 import javax.persistence.Query;
 
 @Default
 @Stateless 
 @LocalBean
 public class NoticiaMasterPersistence extends _NoticiaMasterPersistence  implements INoticiaMasterPersistence {
+    
     public String buscarNoticiasPorTitulo(String titulo) {
         // https://access.redhat.com/documentation/en-US/JBoss_Enterprise_Application_Platform/5/html/RESTEasy_Reference_Guide/Using__Path_and__GET___POST__etc..html
         // Query q = entityManager.createQuery("select u from ProyectoEntity u inner join Proyectotag_proyectoEntity s on s.proyectoId=u.id inner join TagEntity t on t.id=s.tag_proyectoId where t.name=:valortag");
@@ -82,5 +84,53 @@ public class NoticiaMasterPersistence extends _NoticiaMasterPersistence  impleme
             ids+=noticia.getId();
         }
         return ids;
+    }
+    
+    public String noticiaSearch(String value) {
+        
+        String[] tags = value.split(";");
+        String condicion = "";
+        
+        
+        for (int i=0; i < tags.length; i++) {
+            if (!condicion.isEmpty()) {
+                condicion+=" OR ";
+            }
+            
+            condicion += "u.descripcion like :value" + i;
+            condicion += "OR u.name like :value" + i;
+            condicion += "OR u.titulo like :value" + i;
+        }
+        
+        String ans = "[";
+        
+        Query q = entityManager.createQuery("SELECT u FROM NoticiaEntity u WHERE " + condicion);
+        for(int i = 0; i < tags.length; i++)
+            q.setParameter("value" + i, "%"+tags[i]+"%");
+        
+        List<NoticiaEntity> list = NoticiaConverter.persistenceDTO2EntityList(q.getResultList());
+        
+        for(NoticiaEntity ne : list) {
+            
+            ans += "{";
+            
+            ans += "\"Description\": ";
+            String des = ne.getDescripcion();
+            ans += des + ", "; 
+            
+            ans += "\"Image\": ";
+            String img = ne.getImagen();
+            ans += img + ", ";
+            
+            ans += "\"Name\": ";
+            String nme = ne.getName();
+            ans += nme;
+            
+            ans += "}, "; 
+            
+        }
+        
+        ans += "], ";
+        return ans;
     }
 }

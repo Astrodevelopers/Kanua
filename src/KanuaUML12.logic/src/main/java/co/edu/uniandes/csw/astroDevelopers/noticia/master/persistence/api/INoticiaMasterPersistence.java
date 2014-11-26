@@ -32,5 +32,6 @@ package co.edu.uniandes.csw.astroDevelopers.noticia.master.persistence.api;
 
 public interface INoticiaMasterPersistence extends _INoticiaMasterPersistence {
     public String buscarNoticiasPorTitulo(String titulo);
+    public String noticiaSearch(String value);
 	
 }

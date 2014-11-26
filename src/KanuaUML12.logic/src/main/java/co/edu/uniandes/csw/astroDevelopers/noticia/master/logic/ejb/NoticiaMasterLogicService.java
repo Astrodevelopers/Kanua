@@ -43,4 +43,8 @@ public class NoticiaMasterLogicService extends _NoticiaMasterLogicService implem
     public String buscarNoticiasPorTitulo(String titulo){
         return noticiaMasterPersistance.buscarNoticiasPorTitulo(titulo);
     }
+
+    public String buscarNoticias(String tag) {
+        return noticiaMasterPersistance.noticiaSearch(tag);
+    }
 }
