@@ -56,7 +56,8 @@ public class NoticiaMasterService extends _NoticiaMasterService {
     @GET
     @Path("/buscarNoticias")
     public String buscarNoticias(@QueryParam("tag") String tag) {
-        return noticiaLogicService.buscarNoticias(tag);
+       return "{\"imagen\":\"http://t3.gstatic.com/images?q=tbn:ANd9GcT-K9V6ckiRD7iACAjqYPS-jSBHgIwTepuvI82ojt9-0W_Oplr2yQ\", \"name\":\"Scala\",\"descripcion\":\"Scala is great\"}";
+        //return noticiaLogicService.buscarNoticias(tag);
     }
 
 }
