@@ -88,21 +88,6 @@ public class TallerMasterPersistence extends _TallerMasterPersistence  implement
     }
     
     public String inscribirTaller(String email) {
-        /*
-        Ver que usuario tiene ese email!!!
-        Ver el ID del usuario!!
-        Insertar a la tabla        
-        */
-        
-        //Query q = entityManager.createQuery("select u from TallerEntity u inner join TallerusuarioEntity s on s.tallerId=u.id");
-        /*
-        Query q = entityManager.createQuery("select u from TallerusuarioEntity u");
-        q.setParameter("email", "%"+email+"%");
-        List<TallerDTO> talleres = TallerConverter.entity2PersistenceDTOList(q.getResultList());
-        if(talleres.size() != 0) {
-            return "Ya se encuentra inscrito";
-        }
-                */
         
         String[] parse = email.split(":");
         String ans = "";
