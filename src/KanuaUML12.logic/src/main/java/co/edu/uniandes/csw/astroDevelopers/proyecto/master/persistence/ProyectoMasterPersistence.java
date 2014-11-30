@@ -98,31 +98,11 @@ public class ProyectoMasterPersistence extends _ProyectoMasterPersistence  imple
     
     public String realizarSolicitud(String name, String lname, String email, String link, String rol, 
             String comment, String id) {
-        
-        /*
+       
         long range = 1234567L;
         Random r = new Random();
         long number1 = (long)(r.nextDouble()*range);
-        
-        SolicitudEntity se = new SolicitudEntity();
-        SolicitudDTO sdto = new SolicitudDTO();
-        
-        sdto.setComentario(comment);
-        sdto.setEmailPersona(email);
-        sdto.setHojaDeVida(link);
-        sdto.setId(number1);
-        sdto.setName(name);
-        sdto.setNombreApellido(lname);
-        sdto.setRol_solicitudId(Long.parseLong(id));
-        
-        SolicitudPersistence aux = new SolicitudPersistence();
-        aux.createSolicitud(sdto);
-                */
-        
-        
-        
-        
-        return "El variopinto de mil colores";
+        return number1 + "";
     }
     
     public String proyectoSearch(String value) {
