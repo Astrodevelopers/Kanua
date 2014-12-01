@@ -178,7 +178,7 @@ def main():
 	for itm in database:
 		itm_id = random.randint(0, 1000)
 		itm_desc = itm['description']
-		itm_desc = (itm_desc[:250] + '..') if len(itm_desc) > 250 else itm_desc
+		itm_desc = (itm_desc[:40] + '..') if len(itm_desc) > 40 else itm_desc
 		itm_dte = get_date()
 		itm_img = itm['image']
 		itm_nme = itm['name']

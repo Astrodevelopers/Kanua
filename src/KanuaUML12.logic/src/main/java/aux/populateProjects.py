@@ -116,8 +116,8 @@ def main():
 	for itm in database:
 		itm_id = random.randint(0, 1000)
 		itm_demo = itm['demo']
-		itm_desc = itm['desc']
-		itm_desc = (itm_desc[:250] + '..') if len(itm_desc) > 250 else itm_desc
+		itm_desc = itm['desc'].replace('"', '')
+		itm_desc = (itm_desc[:40] + '..') if len(itm_desc) > 40 else itm_desc
 		itm_tem = 0
 		itm_ste =  random.choice(states)
 		itm_img = itm['img']

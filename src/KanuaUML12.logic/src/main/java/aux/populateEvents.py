@@ -99,7 +99,7 @@ def main():
 		itm_dte = get_date()
 		itm_img = itm['image']
 		itm_ifo = itm['info']
-		itm_ifo = (itm_ifo[:250] + '..') if len(itm_ifo) > 250 else itm_ifo
+		itm_ifo = (itm_ifo[:40] + '..') if len(itm_ifo) > 40 else itm_ifo
 		itm_lnk = itm['link']
 		itm_nme = itm['name']
 		itm_pub = get_date()
