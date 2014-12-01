@@ -32,4 +32,6 @@ package co.edu.uniandes.csw.astroDevelopers.solicitud.logic.api;
 
 public interface ISolicitudLogicService extends _ISolicitudLogicService {
 
+    public String crearSolicitud(String name, String lname, String email, String link, String rol, String comment);
+
 }
