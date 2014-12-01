@@ -37,13 +37,16 @@ public class TallerTest {
  
 @Test
 public void testbarra() throws Exception
-{
+{    Thread.sleep(2000);
     driver.findElement(By.linkText("Talleres")).click();
-     Thread.sleep(2000);
+     Thread.sleep(5000);
 }
     @Test
-    public void testCreateEquipo() throws Exception {
+    public void testCreate() throws Exception {
  
+        Thread.sleep(2000);
+    driver.findElement(By.linkText("Talleres")).click();
+     Thread.sleep(2000);
         driver.get(baseUrl+"/KanuaUML12.web/tallerMaster.html");
       //  driver.findElement(By.linkText("Proyectos")).click();
         /**
@@ -125,7 +128,7 @@ public void testbarra() throws Exception
     }
     
     @Test
-        public void testUpdateSport() throws Exception {
+        public void testUpdate() throws Exception {
             driver.get(baseUrl+"/KanuaUML12.web/tallerMaster.html");
         //    driver.findElement(By.linkText("Proyectos")).click();
             //Se hace clic en  el vinculo "Edit" del primer elemento de la lista de sports (el elemento que se creó en la anterior prueba)
@@ -234,7 +237,7 @@ public void testbarra() throws Exception
              Thread.sleep(4000);
         }
         @Test
-    public void testDeleteSport() throws Exception {
+    public void testDelete() throws Exception {
         /**
          * Se hace clic en el vinculo "Delete" del primer elemento de la lista
          * de sports

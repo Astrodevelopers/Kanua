@@ -43,6 +43,8 @@ public void testbarra()
     @Test
     public void testCreateEquipo() throws Exception {
  
+         driver.findElement(By.linkText("Noticias")).click();
+         Thread.sleep(1000);
         driver.get(baseUrl+"/KanuaUML12.web/noticiaMaster.html");
       //  driver.findElement(By.linkText("Proyectos")).click();
         /**
@@ -249,7 +251,7 @@ public void testbarra()
          * Se hace clic en el vinculo "Delete" del primer elemento de la lista
          * de sports
          */
-        driver.get(baseUrl+"/KanuaUML12.web/proyectoMaster.html");
+        driver.get(baseUrl+"/KanuaUML12.web/noticiaMaster.html");
         driver.findElement(By.linkText("Eliminar")).click();
         Thread.sleep(2000);
         /**

@@ -43,9 +43,9 @@ public void testbarra()
 }
     @Test
     public void testCreateEquipo() throws Exception {
- 
+ driver.findElement(By.linkText("Proyectos")).click();  Thread.sleep(1000);
         driver.get(baseUrl+"/KanuaUML12.web/proyectoMaster.html");
-      //  driver.findElement(By.linkText("Proyectos")).click();
+       
         /**
          * Comando que realiza click sobre el boton "create" del toolbar. La
          * función 'find' encuentra el control y posteriormente hace clic en el
