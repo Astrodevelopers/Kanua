@@ -36,6 +36,10 @@ import co.edu.uniandes.csw.astroDevelopers.proyecto.persistence.converter.Proyec
 import co.edu.uniandes.csw.astroDevelopers.solicitud.logic.dto.SolicitudDTO;
 import co.edu.uniandes.csw.astroDevelopers.solicitud.persistence.SolicitudPersistence;
 import co.edu.uniandes.csw.astroDevelopers.solicitud.persistence.entity.SolicitudEntity;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -98,11 +102,50 @@ public class ProyectoMasterPersistence extends _ProyectoMasterPersistence  imple
     
     public String realizarSolicitud(String name, String lname, String email, String link, String rol, 
             String comment, String id) {
-       
-        long range = 1234567L;
-        Random r = new Random();
-        long number1 = (long)(r.nextDouble()*range);
-        return number1 + "";
+        //jdbc:derby://localhost:1527/sun-appserv-samples
+        String dbURL = "jdbc:derby://localhost:1527/jdbcISIS4719;create=true;user=APP;password=APP";
+        Connection conn = null;
+        Statement stmt = null;
+                
+        try
+        {
+            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
+            //Get a connection
+            conn = DriverManager.getConnection(dbURL);
+            long range = 1234567L;
+            Random r = new Random();
+            long id_item = (long)(r.nextDouble()*range);
+            
+            stmt = conn.createStatement();
+            stmt.execute(
+                    "INSERT INTO " + "SOLICITUDENTITY" + " VALUES "
+                            + "(" 
+                                    + id_item + ",'" + 
+                                    comment + "','" + 
+                                    email + "','" + 
+                                    link + "','" + 
+                                    name + "','" + 
+                                    lname + "','" +
+                                    rol + "','" + 
+                            "')");
+            stmt.close();
+            if (stmt != null)
+            {
+                stmt.close();
+            }
+            if (conn != null)
+            {
+                DriverManager.getConnection(dbURL + ";shutdown=true");
+                conn.close();
+            }   
+        }
+        catch (Exception except)
+        {
+            except.printStackTrace();
+        }
+        
+        return "OK";      
+        
     }
     
     public ArrayList<String> proyectoSearch(String tag) {
