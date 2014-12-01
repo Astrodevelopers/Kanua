@@ -33,5 +33,7 @@ package co.edu.uniandes.csw.astroDevelopers.equipo.master.logic.api;
 
 public interface IEquipoMasterLogicService extends _IEquipoMasterLogicService {
 
+    public String registrarSolicitud(String id_s, String id_e);
+
         
 }
