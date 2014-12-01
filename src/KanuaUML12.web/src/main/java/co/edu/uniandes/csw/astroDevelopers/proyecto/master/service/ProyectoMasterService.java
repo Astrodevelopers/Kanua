@@ -68,5 +68,11 @@ public class ProyectoMasterService extends _ProyectoMasterService {
     public String procesarContacto(@QueryParam("name") String name, @QueryParam("email") String email,
             @QueryParam("text") String text, @QueryParam("id_equipo") String id) {
         return proyectoLogicService.procesarContacto(name, email, text, id);        
-    }    
+    }
+    
+    @GET
+    @Path("/buscarProyectos")
+    public String buscarProyectos(@QueryParam("tag") String tag) {
+        return proyectoLogicService.buscarProyectos(tag);        
+    }
 }
