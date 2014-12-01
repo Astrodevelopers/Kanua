@@ -39,4 +39,8 @@ public class CharlaMasterMockLogicService extends _CharlaMasterMockLogicService 
     public String buscarCharlaPorTag(String tag){
         return "";
     }	
+
+    public String buscarCharlas(String tag) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
