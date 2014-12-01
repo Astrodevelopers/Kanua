@@ -54,6 +54,6 @@ public class NoticiaMasterLogicService extends _NoticiaMasterLogicService implem
         if(news.size()!= 0)
             return new String(wordList.deleteCharAt(wordList.length() - 1)); 
         else
-            return "";
+            return "[]";
     }
 }
