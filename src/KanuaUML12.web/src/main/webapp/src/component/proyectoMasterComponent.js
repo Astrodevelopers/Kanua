@@ -135,6 +135,64 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                 }
                 
                 else {
+                    
+                    /*
+                     * des">Diseño</option>
+                        <option value="dev">Desarrollo</option>
+                        <option value="inv">Inversión</option>
+                        <option value="mng">Administración</option>
+                        <option value="pub">Publicidad</option>
+                        <option value="com"
+            
+                     */
+                    
+                    if(rol == 'des')
+                        rol = 1;
+                    else if(rol == 'inv')
+                        rol = 2;
+                    else if(rol == 'mng')
+                        rol = 3;
+                    else if(rol == 'pub')
+                        rol = 4;
+                    else
+                        rol = 5;
+                    
+                    var id_solicitud = "";
+                    
+                    var request = new XMLHttpRequest();
+                    request.open('GET', '/KanuaUML12.web/webresources/Solicitud/crearSolicitud?name='+ name + 
+                            "&lname="+last_name + "&email=" + email + "&link=" + link + "&rol=" + rol + 
+                            "&comment=" + comment, false);  // `false` makes the request synchronous
+                    request.send(null);
+                    if (request.status === 200) {
+                        id_solicitud = request.responseText;
+                    }
+                    else
+                        alert('Error en la solicitud');
+                    var xhr = new XMLHttpRequest();
+                    xhr.ontimeout = function () {
+                        console.error("The request for " + url + " timed out.");
+                    };
+                    
+                    if(id_solicitud == "")
+                        alert("El proyecto no tiene equipo");
+                    else {
+                    
+                        var request = new XMLHttpRequest();
+                        request.open('GET', '/KanuaUML12.web/webresources/EquipoMaster/registrarSolicitud?id_s=' + 
+                                id_solicitud + '&id_e=' + id_equipo, false);  // `false` makes the request synchronous
+                        request.send(null);
+                        if (request.status === 200) {
+                            alert(request.responseText);
+                        }
+                        else
+                            alert('Error en la solicitud');
+                        var xhr = new XMLHttpRequest();
+                        xhr.ontimeout = function () {
+                            console.error("The request for " + url + " timed out.");
+                        };
+                    }
+                    /*
                 
                     var request = new XMLHttpRequest();
                     request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/realizarSolicitud?name="+name + 
@@ -147,6 +205,7 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                         }
                     };
                     request.send(null);
+                    */
                 }
                 
                 
