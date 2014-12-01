@@ -38,6 +38,7 @@ import javax.enterprise.inject.Default;
 import javax.persistence.Query;
 import co.edu.uniandes.csw.astroDevelopers.charla.persistence.converter.CharlaConverter;
 import co.edu.uniandes.csw.astroDevelopers.charla.logic.dto.CharlaDTO;
+import java.util.ArrayList;
 import java.util.List;
 
 @Default
@@ -84,63 +85,44 @@ public class CharlaMasterPersistence extends _CharlaMasterPersistence  implement
         }
         return ids;
     }
+
+    public ArrayList<String> charlaSearch(String tag) {
+        ArrayList<String> toReturn = new ArrayList<String>();
         
-    public String charlaSearch(String value) {
-        
-        String ans = "[";
-        
-        //"select u from ProyectoEntity u inner join Proyectotag_proyectoEntity s 
-        // on s.proyectoId=u.id inner join TagEntity t on t.id=s.tag_proyectoId
-        
-        Query q = entityManager.createQuery("select u from CharlaEntity u inner join Charlatag_charlaEntity s "
-                + "on s.charlaId=u.id inner join TagEntity t "
-                + "on t.id=s.tag_charlaId "
+        Query q = entityManager.createQuery("select u from CharlaEntity u "
                 + "where u.informacion like :value "
                 + "or u.name like :value "
-                + "or titulo like :value");
+                + "or u.titulo like :value");
         
-        q.setParameter("value", "%"+value+"%");
+        q.setParameter("value", "%"+tag+"%");
         
         List<CharlaDTO> charlas = CharlaConverter.entity2PersistenceDTOList(q.getResultList());
+        for(int i = 0; i < 10; i++)
+            System.out.println(charlas.size());
         
         for(CharlaDTO ne : charlas) {
-            
+            String ans = "";
             ans += "{";
             
-            ans += "\"Date\": ";
-            String des = ne.getFechaEvento();
-            ans += des + ", ";            
+            ans += "\"descripcion\": ";
+            String des = "\"" + ne.getInformacion() + "\"";
+            ans += des + ", "; 
             
-            ans += "\"Image\": ";
-            String dte = ne.getImagen();
-            ans += dte + ", ";
-            
-            ans += "\"Info\": ";
-            String img = ne.getInformacion();
+            ans += "\"imagen\": ";
+            String img = "\"" + ne.getImagen()+ "\"";
             ans += img + ", ";
             
-            ans += "\"Link\": ";
-            String nme = ne.getLink();
-            ans += nme + ", ";
+            ans += "\"name\": ";
+            String nme = "\"" + ne.getName()+ "\"";
+            ans += nme;  
             
-            ans += "\"Name\": ";
-            String tma = ne.getName();
-            ans += tma + ", ";
+            ans += "}";
             
-            ans += "\"Title\": ";
-            String tlo = ne.getTitulo();
-            ans += tlo + ", ";
-            
-            ans += "\"Publication\": ";
-            String pub = ne.getPublicacion();
-            ans += pub + ", ";
-            
-            ans += "}, "; 
+            toReturn.add(ans);
             
         }
         
-        ans += "], ";
-        return ans;
-       
+        return toReturn;
+        
     }
 }
