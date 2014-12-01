@@ -47,7 +47,33 @@ app.controller('mc', function($scope, $http, $log, $location) {
             console.error("The request for " + url + " timed out.");
         };
         // Proyectos
+        var request = new XMLHttpRequest();
+        request.open('GET', '/KanuaUML12.web/webresources/ProyectoMaster/buscarProyectos?tag=' + $scope.query, false);  // `false` makes the request synchronous
+        request.send(null);
+        if (request.status === 200) {
+            alert(request.responseText);
+            ans = ans.concat(JSON.parse(request.responseText));
+        }
+        else
+            alert('Error en la solicitud');
+        var xhr = new XMLHttpRequest();
+        xhr.ontimeout = function () {
+            console.error("The request for " + url + " timed out.");
+        };
         // Charlas
+        var request = new XMLHttpRequest();
+        request.open('GET', '/KanuaUML12.web/webresources/CharlaMaster/buscarCharlas?tag=' + $scope.query, false);  // `false` makes the request synchronous
+        request.send(null);
+        if (request.status === 200) {
+            alert(request.responseText);
+            ans = ans.concat(JSON.parse(request.responseText));
+        }
+        else
+            alert('Error en la solicitud');
+        var xhr = new XMLHttpRequest();
+        xhr.ontimeout = function () {
+            console.error("The request for " + url + " timed out.");
+        };
         // Talleres
         $scope.busquedas = ans;
     };
