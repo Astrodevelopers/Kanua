@@ -35,5 +35,9 @@ import javax.inject.Singleton;
 import co.edu.uniandes.csw.astroDevelopers.equipo.master.logic.api.IEquipoMasterLogicService;
 @Singleton
 public class EquipoMasterMockLogicService extends _EquipoMasterMockLogicService implements IEquipoMasterLogicService {
+
+    public String registrarSolicitud(String id_s, String id_e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 	
 }
