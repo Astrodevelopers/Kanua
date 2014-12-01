@@ -129,14 +129,12 @@ define(['controller/selectionController', 'model/cacheModel', 'model/proyectoMas
                     validationMessage += " La longitud del comentario debe ser menor a 140.";
                     validator = false;
                 }
-                alert(validator);
+                
                 if(!validator) {
                     alert(validationMessage);
                 }
                 
                 else {
-                    
-                    alert("arsd");
                 
                     var request = new XMLHttpRequest();
                     request.open("GET", "/KanuaUML12.web/webresources/ProyectoMaster/realizarSolicitud?name="+name + 
