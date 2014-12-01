@@ -43,5 +43,9 @@ import co.edu.uniandes.csw.astroDevelopers.solicitud.logic.api.ISolicitudLogicSe
 @Stateless
 @LocalBean
 public class SolicitudLogicService extends _SolicitudLogicService implements ISolicitudLogicService {
+    
+    public String crearSolicitud(String name, String lname, String email, String link, String rol, String comment) {
+        return persistance.crearSolicitud(name, lname, email, link, rol, comment);
+    }
 
 }
