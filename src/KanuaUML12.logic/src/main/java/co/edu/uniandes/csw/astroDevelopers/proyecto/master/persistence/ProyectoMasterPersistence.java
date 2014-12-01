@@ -129,7 +129,7 @@ public class ProyectoMasterPersistence extends _ProyectoMasterPersistence  imple
         
         Query q = entityManager.createQuery("select u from ProyectoEntity u "
                 + " where u.name like :value or "
-                + "u.descripcion like :value or u.name like :value");
+                + "u.descripcion like :value or u.lema like :value");
         
         q.setParameter("value", "%"+tag+"%");
         
