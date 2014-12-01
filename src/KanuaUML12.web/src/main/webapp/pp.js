@@ -32,11 +32,23 @@ app.controller('mc', function($scope, $http, $log, $location) {
     };
 
     $scope.getCosas = function() {
-        $http.get('/KanuaUML12.web/webresources/NoticiaMaster/buscarNoticias?tag=' + $scope.query).success(function(data) {
-            $scope.busquedas = data;
-        }).error(function(data) {
+        var ans = [];
+        // Noticias
+        var request = new XMLHttpRequest();
+        request.open('GET', '/KanuaUML12.web/webresources/NoticiaMaster/buscarNoticias?tag=' + $scope.query, false);  // `false` makes the request synchronous
+        request.send(null);
+        if (request.status === 200) {
+            ans = ans.concat(JSON.parse(request.responseText));
+        }
+        else
             alert('Error en la solicitud');
-            $log.log(data);
-        });
+        var xhr = new XMLHttpRequest();
+        xhr.ontimeout = function () {
+            console.error("The request for " + url + " timed out.");
+        };
+        // Proyectos
+        // Charlas
+        // Talleres
+        $scope.busquedas = ans;
     };
 })
