@@ -34,8 +34,10 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 @Path("/EquipoMaster")
@@ -43,6 +45,12 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class EquipoMasterService extends _EquipoMasterService {
+    
+    @GET
+    @Path("/registrarSolicitud")
+    public String crearSolicitud(@QueryParam("id_s") String id_s, @QueryParam("id_e") String id_e) {
+        return equipoLogicService.registrarSolicitud(id_s, id_e);        
+    }
 
 
 }

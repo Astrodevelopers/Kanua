@@ -34,8 +34,10 @@ import java.util.List;
 
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 @Path("/Solicitud")
@@ -43,6 +45,14 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class SolicitudService extends _SolicitudService {
+    
+    @GET
+    @Path("/crearSolicitud")
+    public String crearSolicitud(@QueryParam("name") String name, @QueryParam("lname") String lname,
+            @QueryParam("email") String email, @QueryParam("link") String link, @QueryParam("rol") String rol, 
+            @QueryParam("comment") String comment) {
+        return solicitudLogicService.crearSolicitud(name, lname, email, link, rol, comment);        
+    }
 
 
 }
