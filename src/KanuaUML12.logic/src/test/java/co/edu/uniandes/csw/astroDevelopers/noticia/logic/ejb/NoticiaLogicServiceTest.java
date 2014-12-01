@@ -275,4 +275,48 @@ public class NoticiaLogicServiceTest {
             }
 	}
         
+        @Test
+	public void searchNoticiaTest1(){
+            for(int i=0;i<30;i++)
+            {
+            NoticiaDTO ldto=new NoticiaDTO();
+		ldto.setName("hola"+i);
+                ldto.setDescripcion("hola1"+i);
+                ldto.setFecha(generateRandomDate());
+                ldto.setImagen("hola2"+i);
+                ldto.setTema("hola3"+i);
+                ldto.setTitulo("hola4"+i);
+                NoticiaDTO result=noticiaLogicService.createNoticia(ldto);
+		
+		Assert.assertNotNull(result);
+                
+		String resultado1=noticiaMasterLogicService.buscarNoticias("hola" + i);
+                Assert.assertTrue(resultado1.length() != 0);
+                String resultado2=noticiaMasterLogicService.buscarNoticiasPorTitulo("cucucucucu");
+                Assert.assertTrue(resultado1.length() != 0);
+            }
+	}
+        
+        @Test
+	public void searchNoticiaTest2(){
+            for(int i=0;i<30;i++)
+            {
+            NoticiaDTO ldto=new NoticiaDTO();
+		ldto.setName("hola"+i);
+                ldto.setDescripcion("hola1"+i);
+                ldto.setFecha(generateRandomDate());
+                ldto.setImagen("hola2"+i);
+                ldto.setTema("hola3"+i);
+                ldto.setTitulo("hola4"+i);
+                NoticiaDTO result=noticiaLogicService.createNoticia(ldto);
+		
+		Assert.assertNotNull(result);
+                
+		String resultado1=noticiaMasterLogicService.buscarNoticias("");
+                Assert.assertTrue(resultado1.length() != 0);
+                String resultado2=noticiaMasterLogicService.buscarNoticiasPorTitulo("cucucucucu");
+                Assert.assertTrue(resultado1.length() != 0);
+            }
+	}
+        
 }
