@@ -33,6 +33,7 @@ package co.edu.uniandes.csw.astroDevelopers.equipo.master.persistence;
 import javax.ejb.Stateless;
 
 import co.edu.uniandes.csw.astroDevelopers.equipo.master.persistence.api.IEquipoMasterPersistence;
+import co.edu.uniandes.csw.astroDevelopers.equipo.master.persistence.entity.Equiposolicitud_proyectoEntity;
 import javax.ejb.LocalBean;
 import javax.enterprise.inject.Default;
 
@@ -40,5 +41,13 @@ import javax.enterprise.inject.Default;
 @Stateless 
 @LocalBean
 public class EquipoMasterPersistence extends _EquipoMasterPersistence  implements IEquipoMasterPersistence {
+
+    public String registrarSolicitud(String id_s, String id_e) {
+        Equiposolicitud_proyectoEntity pse = new Equiposolicitud_proyectoEntity();
+        pse.setEquipoId(Long.parseLong(id_e));
+        pse.setSolicitud_proyectoId(Long.parseLong(id_s));
+        createEquiposolicitud_proyectoEntity(pse);
+        return "Solicitud enviada";
+    }
 
 }
