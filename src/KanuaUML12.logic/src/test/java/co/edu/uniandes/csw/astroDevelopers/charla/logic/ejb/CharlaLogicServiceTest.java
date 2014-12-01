@@ -304,6 +304,73 @@ public class CharlaLogicServiceTest {
             
         }
         
+        @Test
+        public void searchCharlasTest1(){
+            
+                CharlaDTO ldto=new CharlaDTO();
+                String name = generateRandom(String.class);
+		ldto.setName(name);
+		ldto.setTitulo(generateRandom(String.class));
+		ldto.setInformacion(generateRandom(String.class));
+		ldto.setLink(generateRandom(String.class));
+		ldto.setFechaEvento(generateRandomDate());
+		ldto.setImagen(generateRandom(String.class));
+		ldto.setPublicacion(generateRandomDate());
+                CharlaDTO ldto2=new CharlaDTO();
+		ldto2.setName(generateRandom(String.class));
+		ldto2.setTitulo(generateRandom(String.class));
+		ldto2.setInformacion(generateRandom(String.class));
+		ldto2.setLink(generateRandom(String.class));
+		ldto2.setFechaEvento(generateRandomDate());
+		ldto2.setImagen(generateRandom(String.class));
+		ldto2.setPublicacion(generateRandomDate());
+                
+		CharlaDTO result1=charlaLogicService.createCharla(ldto);
+                CharlaDTO result2=charlaLogicService.createCharla(ldto2);
+                
+		Assert.assertNotNull(result1);
+                Assert.assertNotNull(result2);
+            
+		String resultado1=charlaMasterLogicService.buscarCharlas(name);
+                for(int i = 0; i < 10; i++)
+                    System.out.println(resultado1);
+                Assert.assertTrue(name.length() > 0);
+            
+        }
+        
+        @Test
+        public void searchCharlasTest2(){
+            
+                CharlaDTO ldto=new CharlaDTO();
+		ldto.setName(generateRandom(String.class));
+		ldto.setTitulo(generateRandom(String.class));
+		ldto.setInformacion(generateRandom(String.class));
+		ldto.setLink(generateRandom(String.class));
+		ldto.setFechaEvento(generateRandomDate());
+		ldto.setImagen(generateRandom(String.class));
+		ldto.setPublicacion(generateRandomDate());
+                CharlaDTO ldto2=new CharlaDTO();
+		ldto2.setName(generateRandom(String.class));
+		ldto2.setTitulo(generateRandom(String.class));
+		ldto2.setInformacion(generateRandom(String.class));
+		ldto2.setLink(generateRandom(String.class));
+		ldto2.setFechaEvento(generateRandomDate());
+		ldto2.setImagen(generateRandom(String.class));
+		ldto2.setPublicacion(generateRandomDate());
+                
+		CharlaDTO result1=charlaLogicService.createCharla(ldto);
+                CharlaDTO result2=charlaLogicService.createCharla(ldto2);
+                
+		Assert.assertNotNull(result1);
+                Assert.assertNotNull(result2);
+            
+		String resultado1=charlaMasterLogicService.buscarCharlas("cumbamba");
+                for(int i = 0; i < 10; i++)
+                    System.out.println(resultado1);
+                Assert.assertTrue("".equals(resultado1));
+            
+        }
+        
 	@Test
 	public void getCharlasTest(){
 		List<CharlaDTO> list=charlaLogicService.getCharlas();

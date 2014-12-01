@@ -207,6 +207,32 @@ Assert.assertEquals(parseDate(dto.getFechaEvento()), resp.getFechaEvento());
 		Assert.assertEquals(dto.getImagen(), resp.getImagen());	
 Assert.assertEquals(parseDate(dto.getPublicacion()), resp.getPublicacion());
 	}
+        
+        @Test
+	public void charlaBusqueda(){
+		CharlaDTO dto=new CharlaDTO();
+		dto.setName(generateRandom(String.class));
+		dto.setTitulo(generateRandom(String.class));
+		dto.setInformacion(generateRandom(String.class));
+		dto.setLink(generateRandom(String.class));
+                dto.setFechaEvento(generateRandomDate());
+		dto.setImagen(generateRandom(String.class));
+                dto.setPublicacion(generateRandomDate());
+		
+		CharlaDTO result=charlaPersistence.createCharla(dto);
+		
+		Assert.assertNotNull(result);
+		
+		CharlaEntity entity=em.find(CharlaEntity.class, result.getId());
+		
+		Assert.assertEquals(dto.getName(), entity.getName());
+		Assert.assertEquals(dto.getTitulo(), entity.getTitulo());
+		Assert.assertEquals(dto.getInformacion(), entity.getInformacion());
+		Assert.assertEquals(dto.getLink(), entity.getLink());
+                Assert.assertEquals(parseDate(dto.getFechaEvento()), entity.getFechaEvento());	
+		Assert.assertEquals(dto.getImagen(), entity.getImagen());
+                Assert.assertEquals(parseDate(dto.getPublicacion()), entity.getPublicacion());
+	}
 	
 	
 	
