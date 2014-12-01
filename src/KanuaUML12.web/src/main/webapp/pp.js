@@ -72,7 +72,6 @@ app.controller('mc', function($scope, $http, $log, $location) {
         xhr.ontimeout = function () {
             console.error("The request for " + url + " timed out.");
         };
-        // Talleres
         $scope.busquedas = ans;
     };
 })
