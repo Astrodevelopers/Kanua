@@ -332,6 +332,7 @@ public class ProyectoLogicServiceTest {
                 Assert.assertNotNull(resultag);
                 
 		String resultado1=proyectoMasterLogicService.buscarProyectosPorTag("holaholaholahola"+i);
+                
                 Assert.assertEquals("",resultado1);
                 Proyectotag_proyectoEntity chtag=new Proyectotag_proyectoEntity(result.getId(),resultag.getId());
                 System.out.println("000***********************************  ");
