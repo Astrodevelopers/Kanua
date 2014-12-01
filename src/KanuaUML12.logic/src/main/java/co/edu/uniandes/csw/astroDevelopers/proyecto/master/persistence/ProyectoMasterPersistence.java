@@ -127,10 +127,8 @@ public class ProyectoMasterPersistence extends _ProyectoMasterPersistence  imple
         
         ArrayList<String> toReturn = new ArrayList<String>();
         
-        Query q = entityManager.createQuery("select u from ProyectoEntity u inner join Proyectotag_proyectoEntity s "
-                + "on s.proyectoId = u.id inner join TagEntity t "
-                + "on t.id = s.tag_proyectoId"
-                + " where t.name like :value or "
+        Query q = entityManager.createQuery("select u from ProyectoEntity u "
+                + " where u.name like :value or "
                 + "u.descripcion like :value or u.name like :value");
         
         q.setParameter("value", "%"+tag+"%");
