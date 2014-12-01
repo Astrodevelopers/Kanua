@@ -35,6 +35,10 @@ import javax.inject.Singleton;
 import co.edu.uniandes.csw.astroDevelopers.solicitud.logic.api.ISolicitudLogicService;
 @Singleton
 public class SolicitudMockLogicService extends _SolicitudMockLogicService implements ISolicitudLogicService {
+
+    public String crearSolicitud(String name, String lname, String email, String link, String rol, String comment) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     //
 	
 }
