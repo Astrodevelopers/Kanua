@@ -51,6 +51,9 @@ public class NoticiaMasterLogicService extends _NoticiaMasterLogicService implem
         for (String word : news) {
             wordList.append(word + ",");
         }
-        return new String(wordList.deleteCharAt(wordList.length() - 1));        
+        if(news.size()!= 0)
+            return new String(wordList.deleteCharAt(wordList.length() - 1)); 
+        else
+            return "";
     }
 }
