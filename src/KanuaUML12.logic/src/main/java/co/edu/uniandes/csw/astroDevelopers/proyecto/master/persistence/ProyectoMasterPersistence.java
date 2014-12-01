@@ -102,46 +102,21 @@ public class ProyectoMasterPersistence extends _ProyectoMasterPersistence  imple
     
     public String realizarSolicitud(String name, String lname, String email, String link, String rol, 
             String comment, String id) {
-        //jdbc:derby://localhost:1527/sun-appserv-samples
-        String dbURL = "jdbc:derby://localhost:1527/jdbcISIS4719;create=true;user=APP;password=APP";
-        Connection conn = null;
-        Statement stmt = null;
                 
         try
         {
-            Class.forName("org.apache.derby.jdbc.ClientDriver").newInstance();
-            //Get a connection
-            conn = DriverManager.getConnection(dbURL);
-            long range = 1234567L;
-            Random r = new Random();
-            long id_item = (long)(r.nextDouble()*range);
-            
-            stmt = conn.createStatement();
-            stmt.execute(
-                    "INSERT INTO " + "SOLICITUDENTITY" + " VALUES "
-                            + "(" 
-                                    + id_item + ",'" + 
-                                    comment + "','" + 
-                                    email + "','" + 
-                                    link + "','" + 
-                                    name + "','" + 
-                                    lname + "','" +
-                                    rol + "','" + 
-                            "')");
-            stmt.close();
-            if (stmt != null)
-            {
-                stmt.close();
-            }
-            if (conn != null)
-            {
-                DriverManager.getConnection(dbURL + ";shutdown=true");
-                conn.close();
-            }   
+            SolicitudDTO s = new SolicitudDTO();
+            s.setComentario(comment);
+            s.setEmailPersona(email);
+            s.setHojaDeVida(link);
+            s.setName(name);
+            s.setNombreApellido(lname);
+            s.setRol_solicitudId(Long.parseLong(rol));
+              
         }
         catch (Exception except)
         {
-            except.printStackTrace();
+            return "ERROR";
         }
         
         return "OK";      
