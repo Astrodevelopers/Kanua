@@ -39,4 +39,6 @@ public interface IProyectoMasterLogicService extends _IProyectoMasterLogicServic
     
     public String realizarSolicitud(String name, String lname, String email, String link, String rol, 
             String comment, String id);
+
+    public String buscarProyectos(String tag);
 }
