@@ -105,12 +105,9 @@ public class ProyectoMasterPersistence extends _ProyectoMasterPersistence  imple
         return number1 + "";
     }
     
-    public String proyectoSearch(String value) {
+    public ArrayList<String> proyectoSearch(String tag) {
         
-        String ans = "[";
-        
-        //"select u from ProyectoEntity u inner join Proyectotag_proyectoEntity s 
-        // on s.proyectoId=u.id inner join TagEntity t on t.id=s.tag_proyectoId
+        ArrayList<String> toReturn = new ArrayList<String>();
         
         Query q = entityManager.createQuery("select u from ProyectoEntity u inner join Proyectotag_proyectoEntity s "
                 + "on s.proyectoId = u.id inner join TagEntity t "
@@ -118,44 +115,31 @@ public class ProyectoMasterPersistence extends _ProyectoMasterPersistence  imple
                 + " where t.name like :value or "
                 + "u.descripcion like :value or u.name like :value");
         
-        q.setParameter("value", "%"+value+"%");
+        q.setParameter("value", "%"+tag+"%");
         
         List<ProyectoDTO> proyectos = ProyectoConverter.entity2PersistenceDTOList(q.getResultList());
         
         for(ProyectoDTO ne : proyectos) {
-            
+            String ans = "";
             ans += "{";
             
-            ans += "\"Demo\": ";
-            String des = ne.getDemo();
-            ans += des + ", ";            
+            ans += "\"descripcion\": ";
+            String des = "\"" + ne.getDescripcion() + "\"";
+            ans += des + ", "; 
             
-            ans += "\"Description\": ";
-            String dte = ne.getDescripcion();
-            ans += dte + ", ";
-            
-            ans += "\"Estado\": ";
-            String img = ne.getEstado().toString();
+            ans += "\"imagen\": ";
+            String img = "\"" + ne.getImagen()+ "\"";
             ans += img + ", ";
             
-            ans += "\"Image\": ";
-            String nme = ne.getImagen();
-            ans += nme + ", ";
+            ans += "\"name\": ";
+            String nme = "\"" + ne.getName()+ "\"";
+            ans += nme;  
             
-            ans += "\"Name\": ";
-            String tma = ne.getName();
-            ans += tma + ", ";
+            ans += "}";
             
-            ans += "\"Topic\": ";
-            String tlo = ne.getTema();
-            ans += tlo + ", ";
-            
-            ans += "}, "; 
-            
+            toReturn.add(ans);            
         }
-        
-        ans += "], ";
-        return ans;
+        return toReturn;
        
     }
     

@@ -35,6 +35,7 @@ import co.edu.uniandes.csw.astroDevelopers.proyecto.master.logic.api.IProyectoMa
 import co.edu.uniandes.csw.astroDevelopers.solicitud.logic.dto.SolicitudDTO;
 import co.edu.uniandes.csw.astroDevelopers.solicitud.persistence.SolicitudPersistence;
 import co.edu.uniandes.csw.astroDevelopers.solicitud.persistence.entity.SolicitudEntity;
+import java.util.ArrayList;
 import java.util.Properties;
 import java.util.Random;
 import java.util.logging.Level;
@@ -116,4 +117,16 @@ public class ProyectoMasterLogicService extends _ProyectoMasterLogicService impl
         return true;
    
 }
+
+    public String buscarProyectos(String tag) {
+        StringBuilder wordList = new StringBuilder();
+        ArrayList<String> news = proyectoMasterPersistance.proyectoSearch(tag);
+        for (String word : news) {
+            wordList.append(word + ",");
+        }
+        if(news.size()!= 0)
+            return new String(wordList.deleteCharAt(wordList.length() - 1)); 
+        else
+            return "[]";
+    }
 }
