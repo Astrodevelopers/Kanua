@@ -49,4 +49,8 @@ public class ProyectoMasterMockLogicService extends _ProyectoMasterMockLogicServ
         return "";
     }
     
+    public String buscarProyecto(String tag) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
