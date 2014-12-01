@@ -34,5 +34,7 @@ package co.edu.uniandes.csw.astroDevelopers.charla.master.logic.api;
 public interface ICharlaMasterLogicService extends _ICharlaMasterLogicService {
     public String buscarCharlaPorTag(String tag);
 
+    public String buscarCharlas(String tag);
+
         
 }
