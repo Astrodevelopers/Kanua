@@ -41,4 +41,8 @@ import javax.enterprise.inject.Default;
 @LocalBean
 public class EquipoMasterLogicService extends _EquipoMasterLogicService implements IEquipoMasterLogicService {
 
+    public String registrarSolicitud(String id_s, String id_e) {
+        return equipoMasterPersistance.registrarSolicitud(id_s, id_e);        
+    }
+
 }
