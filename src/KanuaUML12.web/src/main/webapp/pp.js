@@ -17,7 +17,7 @@ app.controller('proyectos', function($scope, $http, $log, $location) {
 });
 
 app.controller('mc', function($scope, $http, $log, $location) {
-    $scope.busquedas = [{imagen: 'https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xpf1/v/t1.0-1/p100x100/10409378_10152842279159313_3427085901855005094_n.jpg?oh=a8648d0f87237ac6bcf95ee336c093bb&oe=55080C6F&__gda__=1427656215_df9680e74b0e64815119facc856645a3', name: 'Nombre', descripcion: 'Descripcion'}];
+    $scope.busquedas = [];
 
     $scope.query = '';
     $scope.ifr = true;
@@ -32,11 +32,10 @@ app.controller('mc', function($scope, $http, $log, $location) {
     };
 
     $scope.getCosas = function() {
-        $http.get('/KanuaUML12.web/webresources/NoticiaMaster/buscarNoticias').success(function(data) {
-            alert(data);
-            alert(JSON.stringify(data));
+        $http.get('/KanuaUML12.web/webresources/NoticiaMaster/buscarNoticias?tag=' + $scope.query).success(function(data) {
             $scope.busquedas = data;
         }).error(function(data) {
+            alert('Error en la solicitud');
             $log.log(data);
         });
     };
