@@ -46,9 +46,15 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class CharlaMasterService extends _CharlaMasterService {
 
-@GET
+    @GET
     @Path("/buscarCharlaPorTag")
     public String buscarCharlaPorTag(@QueryParam("tag") String tag) {
         return charlaLogicService.buscarCharlaPorTag(tag);        
+    }
+    
+    @GET
+    @Path("/buscarCharlas")
+    public String buscarCharlas(@QueryParam("tag") String tag) {
+        return charlaLogicService.buscarCharlas(tag);        
     }
 }
