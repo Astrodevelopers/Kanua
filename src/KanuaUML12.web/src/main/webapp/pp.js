@@ -51,7 +51,6 @@ app.controller('mc', function($scope, $http, $log, $location) {
         request.open('GET', '/KanuaUML12.web/webresources/ProyectoMaster/buscarProyectos?tag=' + $scope.query, false);  // `false` makes the request synchronous
         request.send(null);
         if (request.status === 200) {
-            alert(request.responseText);
             ans = ans.concat(JSON.parse(request.responseText));
         }
         else
@@ -65,7 +64,6 @@ app.controller('mc', function($scope, $http, $log, $location) {
         request.open('GET', '/KanuaUML12.web/webresources/CharlaMaster/buscarCharlas?tag=' + $scope.query, false);  // `false` makes the request synchronous
         request.send(null);
         if (request.status === 200) {
-            alert(request.responseText);
             ans = ans.concat(JSON.parse(request.responseText));
         }
         else
