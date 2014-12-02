@@ -367,7 +367,28 @@ public class CharlaLogicServiceTest {
 		String resultado1=charlaMasterLogicService.buscarCharlas("cumbamba");
                 for(int i = 0; i < 10; i++)
                     System.out.println(resultado1);
-                Assert.assertTrue("".equals(resultado1));
+                Assert.assertTrue(!("".equals(resultado1)));
+            
+        }
+        
+        @Test
+        public void searchCharlasTest3(){
+            
+                CharlaDTO ldto=new CharlaDTO();
+		ldto.setName("Clarita");
+		ldto.setTitulo("Clarita");
+		ldto.setInformacion("Clarita");
+		ldto.setLink("Clarita");
+		ldto.setFechaEvento("Clarita");
+		ldto.setImagen("Clarita");
+		ldto.setPublicacion("Clarita");
+                
+		CharlaDTO result1=charlaLogicService.createCharla(ldto);
+                
+		Assert.assertNotNull(result1);
+                
+                String ans = charlaMasterLogicService.buscarCharlas("Clarita");
+                Assert.assertTrue(!("".equals(ans)));
             
         }
         
